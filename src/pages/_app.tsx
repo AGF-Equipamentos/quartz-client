@@ -1,25 +1,16 @@
 import { AppProps } from 'next/app'
-import Head from 'next/head'
+import { ChakraProvider } from '@chakra-ui/react'
+import { theme } from 'styles/theme'
 
-import GlobalStyles from 'styles/global'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
 function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Head>
-        <title>Rick and Morty - React Avançado Boilerplate</title>
-        <link rel="shortcut icon" href="/img/icon-512.png" />
-        <link rel="apple-touch-icon" href="/img/icon-512.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#06092B" />
-        <meta
-          name="description"
-          content="A Ricky and Morty site made with React Avançado Boilerplate"
-        />
-      </Head>
-      <GlobalStyles />
+    <ChakraProvider theme={theme}>
       <Component {...pageProps} />
-    </>
+    </ChakraProvider>
   )
 }
 

@@ -1,5 +1,9 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context'
-import GlobalStyles from '../src/styles/global'
+import { theme } from '../src/styles/theme'
+
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
 import * as nextImage from 'next/image'
 
@@ -13,14 +17,8 @@ Object.defineProperty(nextImage, 'default', {
 export const parameters = {
   nextRouter: {
     Provider: RouterContext.Provider
-  }
+  },
+  chakra: {
+    theme,
+  },
 }
-
-export const decorators = [
-  (Story) => (
-    <>
-      <GlobalStyles />
-      <Story />
-    </>
-  )
-]

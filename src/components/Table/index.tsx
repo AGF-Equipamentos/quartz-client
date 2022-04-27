@@ -1,6 +1,23 @@
 /* eslint-disable react/jsx-key */
 import * as React from 'react'
-import { Table, Thead, Tbody, Tr, Th, Td, chakra } from '@chakra-ui/react'
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  chakra,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Button,
+  Select,
+  HStack,
+  Box
+} from '@chakra-ui/react'
 import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
 import { useTable, Column, usePagination, useSortBy } from 'react-table'
 
@@ -36,21 +53,6 @@ export default function DataTable<Data extends object>({
 
   return (
     <>
-      <pre>
-        <code>
-          {/* {JSON.stringify(
-            {
-              pageIndex,
-              pageSize,
-              pageCount,
-              canNextPage,
-              canPreviousPage
-            },
-            null,
-            2
-          )} */}
-        </code>
-      </pre>
       <Table {...getTableProps()}>
         <Thead>
           {headerGroups.map((headerGroup) => (
@@ -93,55 +95,97 @@ export default function DataTable<Data extends object>({
           })}
         </Tbody>
       </Table>
-      <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
+
+      <HStack spacing={['6', '8']} mx={['6', '8']} pr={['6', '8']} py="1">
+        <Box>
+          <Button
+            colorScheme="gray"
+            variant="outline"
+            onClick={() => gotoPage(0)}
+            disabled={!canPreviousPage}
+            size="xs"
+          >
+            {'<<'}
+          </Button>
+          <Button
+            colorScheme="gray"
+            variant="outline"
+            onClick={() => previousPage()}
+            disabled={!canPreviousPage}
+            size="xs"
+          >
+            {'<'}
+          </Button>
+          <Button
+            colorScheme="gray"
+            variant="outline"
+            onClick={() => nextPage()}
+            disabled={!canNextPage}
+            size="xs"
+          >
+            {'>'}
+          </Button>
+          <Button
+            colorScheme="gray"
+            variant="outline"
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+            size="xs"
+          >
+            {'>>'}
+          </Button>
+        </Box>
         <span>
-          Page{' '}
+          Página{' '}
           <strong>
-            {pageIndex + 1} of {pageOptions.length}
+            {pageIndex + 1} de {pageOptions.length}
           </strong>{' '}
         </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            type="number"
+        <Box>| Ir para a página: </Box>
+        <Box>
+          <NumberInput
+            min={0}
+            size="xs"
             defaultValue={pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
+            onChange={(valueString) => {
+              const page = valueString ? Number(valueString) - 1 : 0
               gotoPage(page)
             }}
             style={{
-              width: '100px',
               color: 'white',
               background: '#2D3748'
             }}
-          />
-        </span>{' '}
-        <select
-          value={pageSize}
-          style={{ color: 'white', background: '#2D3748' }}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
+          >
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </Box>
+        <Box>
+          <Select
+            // h="15px"
+            size="sm"
+            variant="flushed"
+            value={pageSize}
+            style={{ color: 'white' }}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value))
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option
+                key={pageSize}
+                value={pageSize}
+                style={{ backgroundColor: 'black' }}
+              >
+                Show {pageSize}
+              </option>
+            ))}
+          </Select>
+        </Box>
+      </HStack>
     </>
   )
 }

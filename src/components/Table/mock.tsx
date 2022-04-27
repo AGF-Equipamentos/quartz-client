@@ -1,4 +1,5 @@
 import { Column } from 'react-table'
+import { Badge } from '@chakra-ui/react'
 
 type UnitConversion = {
   number: string
@@ -304,7 +305,6 @@ const columns: Column<UnitConversion>[] = [
     Header: 'Tags',
     accessor: 'tags'
   },
-
   {
     Header: 'Mês',
     accessor: 'month'

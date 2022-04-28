@@ -1,5 +1,5 @@
 import { Column } from 'react-table'
-import { Badge } from '@chakra-ui/react'
+//import { Badge } from '@chakra-ui/react'
 
 type UnitConversion = {
   number: string

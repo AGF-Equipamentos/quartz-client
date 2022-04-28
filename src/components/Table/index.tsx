@@ -13,13 +13,31 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Button,
   Select,
-  HStack,
-  Box
+  Box,
+  IconButton,
+  Flex,
+  Stack,
+  Text
 } from '@chakra-ui/react'
-import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons'
-import { useTable, Column, usePagination, useSortBy } from 'react-table'
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  TriangleDownIcon,
+  TriangleUpIcon,
+  UnlockIcon,
+  LockIcon
+} from '@chakra-ui/icons'
+import {
+  useTable,
+  Column,
+  usePagination,
+  useSortBy,
+  useGroupBy,
+  useExpanded
+} from 'react-table'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -44,24 +62,36 @@ export default function DataTable<Data extends object>({
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize }
+    state: { pageIndex, pageSize, groupBy, expanded }
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
+    useGroupBy,
     useSortBy,
+    useExpanded,
     usePagination
   )
 
   return (
     <>
-      <Table {...getTableProps()}>
+      <pre>
+        <code>{JSON.stringify({ groupBy, expanded }, null, 2)}</code>
+      </pre>
+      <Table colorScheme="whiteAlpha" {...getTableProps()}>
         <Thead>
           {headerGroups.map((headerGroup) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <Th
+                  color="gray.300"
+                  width="8"
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   isNumeric={column.isNumeric}
                 >
+                  {column.canGroupBy ? (
+                    <chakra.span {...column.getGroupByToggleProps()}>
+                      {column.isGrouped ? '🛑 ' : '👊 '}
+                    </chakra.span>
+                  ) : null}
                   {column.render('Header')}
                   <chakra.span pl="4">
                     {column.isSorted ? (
@@ -87,7 +117,18 @@ export default function DataTable<Data extends object>({
                     {...cell.getCellProps()}
                     isNumeric={cell.column.isNumeric}
                   >
-                    {cell.render('Cell')}
+                    {cell.isGrouped ? (
+                      <>
+                        <span {...row.getToggleRowExpandedProps()}>
+                          {row.isExpanded ? '👇' : '👉'}
+                        </span>
+                        {cell.render('Cell')} ({row.subRows.length})
+                      </>
+                    ) : cell.isAggregated ? (
+                      cell.render('Aggregated')
+                    ) : cell.isPlaceholder ? null : (
+                      cell.render('Cell')
+                    )}
                   </Td>
                 ))}
               </Tr>
@@ -96,64 +137,79 @@ export default function DataTable<Data extends object>({
         </Tbody>
       </Table>
 
-      <HStack spacing={['6', '8']} mx={['6', '8']} pr={['6', '8']} py="1">
-        <Box>
-          <Button
+      <Flex
+        direction={['column', 'column', 'row']}
+        alignItems="center"
+        justifyContent="space-between"
+        gap={['4', '4', '0']}
+        mt="8"
+      >
+        <Stack direction="row" alignItems="center">
+          <IconButton
             colorScheme="gray"
             variant="outline"
+            aria-label="Primeira pagina"
             onClick={() => gotoPage(0)}
             disabled={!canPreviousPage}
             size="xs"
-          >
-            {'<<'}
-          </Button>
-          <Button
+            _hover={{
+              bg: 'gray.500'
+            }}
+            icon={<ArrowLeftIcon boxSize={2} />}
+          />
+          <IconButton
             colorScheme="gray"
             variant="outline"
             onClick={() => previousPage()}
             disabled={!canPreviousPage}
             size="xs"
-          >
-            {'<'}
-          </Button>
-          <Button
+            aria-label="Próxima pagina"
+            _hover={{
+              bg: 'gray.500'
+            }}
+            icon={<ChevronLeftIcon boxSize={4} />}
+          />
+          <IconButton
             colorScheme="gray"
             variant="outline"
             onClick={() => nextPage()}
             disabled={!canNextPage}
             size="xs"
-          >
-            {'>'}
-          </Button>
-          <Button
+            aria-label="Pagina anterior"
+            _hover={{
+              bg: 'gray.500'
+            }}
+            icon={<ChevronRightIcon boxSize={4} />}
+          />
+          <IconButton
             colorScheme="gray"
             variant="outline"
             onClick={() => gotoPage(pageCount - 1)}
             disabled={!canNextPage}
             size="xs"
-          >
-            {'>>'}
-          </Button>
-        </Box>
-        <span>
-          Página{' '}
-          <strong>
-            {pageIndex + 1} de {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <Box>| Ir para a página: </Box>
-        <Box>
+            aria-label="Última pagina"
+            _hover={{
+              bg: 'gray.500'
+            }}
+            icon={<ArrowRightIcon boxSize={2} />}
+          />
+          <Box>
+            Página{' '}
+            <strong>
+              {pageIndex + 1} de {pageOptions.length}
+            </strong>
+          </Box>
+        </Stack>
+        <Stack direction="row" alignItems="center">
+          <Text>Ir para a pagina:</Text>
           <NumberInput
-            min={0}
-            size="xs"
+            min={1}
+            size="sm"
+            w="24"
             defaultValue={pageIndex + 1}
             onChange={(valueString) => {
               const page = valueString ? Number(valueString) - 1 : 0
               gotoPage(page)
-            }}
-            style={{
-              color: 'white',
-              background: '#2D3748'
             }}
           >
             <NumberInputField />
@@ -162,14 +218,11 @@ export default function DataTable<Data extends object>({
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
-        </Box>
-        <Box>
           <Select
-            // h="15px"
             size="sm"
-            variant="flushed"
+            w="24"
+            minW="24"
             value={pageSize}
-            style={{ color: 'white' }}
             onChange={(e) => {
               setPageSize(Number(e.target.value))
             }}
@@ -180,12 +233,22 @@ export default function DataTable<Data extends object>({
                 value={pageSize}
                 style={{ backgroundColor: 'black' }}
               >
-                Show {pageSize}
+                {pageSize} Itens
               </option>
             ))}
           </Select>
-        </Box>
-      </HStack>
+        </Stack>
+      </Flex>
     </>
   )
+  // function roundedMedian(leafValues) {
+  //   let min = leafValues[0] || 0
+  //   let max = leafValues[0] || 0
+
+  //   leafValues.forEach((value) => {
+  //     min = Math.min(min, value)
+  //     max = Math.max(max, value)
+  //   })
+  //   return Math.round((min + max) / 2)
+  // }
 }

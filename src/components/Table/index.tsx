@@ -89,7 +89,11 @@ export default function DataTable<Data extends object>({
                 >
                   {column.canGroupBy ? (
                     <chakra.span {...column.getGroupByToggleProps()}>
-                      {column.isGrouped ? '🛑 ' : '👊 '}
+                      {column.isGrouped ? (
+                        <UnlockIcon aria-label="sorted descending" />
+                      ) : (
+                        <LockIcon aria-label="sorted descending" />
+                      )}
                     </chakra.span>
                   ) : null}
                   {column.render('Header')}

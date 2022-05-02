@@ -18,7 +18,8 @@ import {
   IconButton,
   Flex,
   Stack,
-  Text
+  Text,
+  HStack
 } from '@chakra-ui/react'
 import {
   ArrowLeftIcon,
@@ -28,7 +29,9 @@ import {
   TriangleDownIcon,
   TriangleUpIcon,
   UnlockIcon,
-  LockIcon
+  LockIcon,
+  ArrowForwardIcon,
+  ArrowDownIcon
 } from '@chakra-ui/icons'
 import {
   useTable,
@@ -62,7 +65,7 @@ export default function DataTable<Data extends object>({
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize, groupBy, expanded }
+    state: { pageIndex, pageSize }
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
     useGroupBy,
@@ -73,11 +76,43 @@ export default function DataTable<Data extends object>({
 
   return (
     <>
-      <pre>
-        <code>{JSON.stringify({ groupBy, expanded }, null, 2)}</code>
-      </pre>
       <Table colorScheme="whiteAlpha" {...getTableProps()}>
         <Thead>
+          {/* <Stack direction="row" alignItems="center">
+            <chakra.span
+              style={{
+                display: 'inline-block',
+                background: '#38A169',
+                padding: '0.5rem ',
+                color: 'white'
+              }}
+            >
+              Agrupados
+            </chakra.span>
+
+            <chakra.span
+              style={{
+                display: 'inline-block',
+                background: '#ED8936',
+                padding: '0.5rem ',
+                color: 'white'
+              }}
+            >
+              Agregados
+            </chakra.span>
+
+            <chakra.span
+              style={{
+                display: 'inline-block',
+                background: '#E53E3E',
+                padding: '0.5rem ',
+                color: 'white'
+              }}
+            >
+              Repetidos
+            </chakra.span>
+          </Stack> */}
+
           {headerGroups.map((headerGroup) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -96,7 +131,9 @@ export default function DataTable<Data extends object>({
                       )}
                     </chakra.span>
                   ) : null}
+
                   {column.render('Header')}
+
                   <chakra.span pl="4">
                     {column.isSorted ? (
                       column.isSortedDesc ? (
@@ -120,12 +157,25 @@ export default function DataTable<Data extends object>({
                   <Td
                     {...cell.getCellProps()}
                     isNumeric={cell.column.isNumeric}
+                    style={{
+                      background: cell.isGrouped
+                        ? '#38A169'
+                        : cell.isAggregated
+                        ? '#ED8936'
+                        : cell.isPlaceholder
+                        ? '#E53E3E'
+                        : ''
+                    }}
                   >
                     {cell.isGrouped ? (
                       <>
-                        <span {...row.getToggleRowExpandedProps()}>
-                          {row.isExpanded ? '👇' : '👉'}
-                        </span>
+                        <chakra.span {...row.getToggleRowExpandedProps()}>
+                          {row.isExpanded ? (
+                            <ArrowDownIcon />
+                          ) : (
+                            <ArrowForwardIcon />
+                          )}
+                        </chakra.span>
                         {cell.render('Cell')} ({row.subRows.length})
                       </>
                     ) : cell.isAggregated ? (
@@ -152,7 +202,7 @@ export default function DataTable<Data extends object>({
           <IconButton
             colorScheme="gray"
             variant="outline"
-            aria-label="Primeira pagina"
+            aria-label="Primeira página"
             onClick={() => gotoPage(0)}
             disabled={!canPreviousPage}
             size="xs"
@@ -167,7 +217,7 @@ export default function DataTable<Data extends object>({
             onClick={() => previousPage()}
             disabled={!canPreviousPage}
             size="xs"
-            aria-label="Próxima pagina"
+            aria-label="Próxima página"
             _hover={{
               bg: 'gray.500'
             }}
@@ -179,7 +229,7 @@ export default function DataTable<Data extends object>({
             onClick={() => nextPage()}
             disabled={!canNextPage}
             size="xs"
-            aria-label="Pagina anterior"
+            aria-label="Página anterior"
             _hover={{
               bg: 'gray.500'
             }}
@@ -191,7 +241,7 @@ export default function DataTable<Data extends object>({
             onClick={() => gotoPage(pageCount - 1)}
             disabled={!canNextPage}
             size="xs"
-            aria-label="Última pagina"
+            aria-label="Última página"
             _hover={{
               bg: 'gray.500'
             }}
@@ -245,11 +295,11 @@ export default function DataTable<Data extends object>({
       </Flex>
     </>
   )
-  // function roundedMedian(leafValues) {
-  //   let min = leafValues[0] || 0
-  //   let max = leafValues[0] || 0
+  // function roundedMedian(leafValue) {
+  //   let min = leafValue[0] || 0
+  //   let max = leafValue[0] || 0
 
-  //   leafValues.forEach((value) => {
+  //   leafValue.forEach((value) => {
   //     min = Math.min(min, value)
   //     max = Math.max(max, value)
   //   })

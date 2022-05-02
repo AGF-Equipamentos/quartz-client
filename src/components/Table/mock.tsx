@@ -295,39 +295,57 @@ const data = [
 const columns: Column<UnitConversion>[] = [
   {
     Header: 'Número',
-    accessor: 'number'
+    accessor: 'number',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Fornecedor',
-    accessor: 'provider'
+    accessor: 'provider',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names `
   },
   {
     Header: 'Tags',
-    accessor: 'tags'
+    accessor: 'tags',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Mês',
-    accessor: 'month'
+    accessor: 'month',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Observação',
-    accessor: 'observation'
+    accessor: 'observation',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Entrega',
-    accessor: 'delivery'
+    accessor: 'delivery',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Status',
-    accessor: 'status'
+    accessor: 'status',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Comprador',
-    accessor: 'bought'
+    accessor: 'bought',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Aprovado',
-    accessor: 'approved'
+    accessor: 'approved',
+    aggregate: 'uniqueCount',
+    Aggregated: ({ value }) => `${value} Unique Names`
   },
   {
     Header: 'Ações'

@@ -1,4 +1,5 @@
-/* eslint-disable react/jsx-key */
+import { Icon } from '@chakra-ui/icons'
+import { FiEdit } from 'react-icons/fi' /* eslint-disable react/jsx-key */
 import * as React from 'react'
 import {
   Table,
@@ -18,8 +19,10 @@ import {
   IconButton,
   Flex,
   Stack,
-  Text,
-  HStack
+  Text
+
+  // HStack,
+  // VStack
 } from '@chakra-ui/react'
 import {
   ArrowLeftIcon,
@@ -28,8 +31,8 @@ import {
   ChevronRightIcon,
   TriangleDownIcon,
   TriangleUpIcon,
-  UnlockIcon,
-  LockIcon,
+  ViewOffIcon,
+  ViewIcon,
   ArrowForwardIcon,
   ArrowDownIcon
 } from '@chakra-ui/icons'
@@ -41,6 +44,7 @@ import {
   useGroupBy,
   useExpanded
 } from 'react-table'
+import { clearLine } from 'readline'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -125,24 +129,37 @@ export default function DataTable<Data extends object>({
                   {column.canGroupBy ? (
                     <chakra.span {...column.getGroupByToggleProps()}>
                       {column.isGrouped ? (
-                        <UnlockIcon aria-label="sorted descending" />
+                        <IconButton
+                          color="white"
+                          variant="link"
+                          size="xs"
+                          aria-label="Página anterior"
+                          icon={<ViewOffIcon boxSize={3} />}
+                        />
                       ) : (
-                        <LockIcon aria-label="sorted descending" />
+                        <IconButton
+                          color="white"
+                          variant="link"
+                          size="xs"
+                          aria-label="Página anterior"
+                          icon={<ViewIcon boxSize={3} />}
+                        />
                       )}
                     </chakra.span>
                   ) : null}
 
                   {column.render('Header')}
-
-                  <chakra.span pl="4">
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <TriangleDownIcon aria-label="sorted descending" />
-                      ) : (
-                        <TriangleUpIcon aria-label="sorted ascending" />
-                      )
-                    ) : null}
-                  </chakra.span>
+                  <Stack direction="row" alignItems="center">
+                    <chakra.span pl="4">
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <TriangleDownIcon aria-label="sorted descending" />
+                        ) : (
+                          <TriangleUpIcon aria-label="sorted ascending" />
+                        )
+                      ) : null}
+                    </chakra.span>
+                  </Stack>
                 </Th>
               ))}
             </Tr>
@@ -167,22 +184,25 @@ export default function DataTable<Data extends object>({
                         : ''
                     }}
                   >
-                    {cell.isGrouped ? (
-                      <>
-                        <chakra.span {...row.getToggleRowExpandedProps()}>
-                          {row.isExpanded ? (
-                            <ArrowDownIcon />
-                          ) : (
-                            <ArrowForwardIcon />
-                          )}
-                        </chakra.span>
-                        {cell.render('Cell')} ({row.subRows.length})
-                      </>
-                    ) : cell.isAggregated ? (
-                      cell.render('Aggregated')
-                    ) : cell.isPlaceholder ? null : (
-                      cell.render('Cell')
-                    )}
+                    <Stack direction="row" alignItems="center">
+                      {cell.isGrouped ? (
+                        <>
+                          <chakra.span {...row.getToggleRowExpandedProps()}>
+                            {row.isExpanded ? (
+                              <ArrowDownIcon />
+                            ) : (
+                              <ArrowForwardIcon />
+                            )}
+                          </chakra.span>
+                          {cell.render('Cell')} ({row.subRows.length})
+                        </>
+                      ) : cell.isAggregated ? (
+                        cell.render('Aggregated')
+                      ) : cell.isPlaceholder ? null : (
+                        cell.render('Cell')
+                      )}
+                      {/* <Icon as={FiEdit}></Icon> */}
+                    </Stack>
                   </Td>
                 ))}
               </Tr>

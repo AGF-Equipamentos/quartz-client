@@ -1,5 +1,6 @@
 import { Column } from 'react-table'
-//import { Badge } from '@chakra-ui/react'
+import { Icon } from '@chakra-ui/icons'
+import { FiEdit } from 'react-icons/fi'
 
 type UnitConversion = {
   number: string
@@ -297,58 +298,59 @@ const columns: Column<UnitConversion>[] = [
     Header: 'Número',
     accessor: 'number',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value} Names`
   },
   {
     Header: 'Fornecedor',
     accessor: 'provider',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names `
+    Aggregated: ({ value }) => `${value}  Names `
   },
   {
     Header: 'Tags',
     accessor: 'tags',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value} Names`
   },
   {
     Header: 'Mês',
     accessor: 'month',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value}  Names`
   },
   {
     Header: 'Observação',
     accessor: 'observation',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value} Names`
   },
   {
     Header: 'Entrega',
     accessor: 'delivery',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value}  Names`
   },
   {
     Header: 'Status',
     accessor: 'status',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value}  Names`
   },
   {
     Header: 'Comprador',
     accessor: 'bought',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value}  Names`
   },
   {
     Header: 'Aprovado',
     accessor: 'approved',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Unique Names`
+    Aggregated: ({ value }) => `${value}  Names`
   },
   {
     Header: 'Ações'
   }
 ]
+
 export { data, columns }

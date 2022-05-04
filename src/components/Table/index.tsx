@@ -1,5 +1,6 @@
 import { Icon } from '@chakra-ui/icons'
-import { FiEdit } from 'react-icons/fi' /* eslint-disable react/jsx-key */
+import { FiMaximize2, FiMinimize2 } from 'react-icons/fi'
+/* eslint-disable react/jsx-key */
 import * as React from 'react'
 import {
   Table,
@@ -20,9 +21,6 @@ import {
   Flex,
   Stack,
   Text
-
-  // HStack,
-  // VStack
 } from '@chakra-ui/react'
 import {
   ArrowLeftIcon,
@@ -31,8 +29,6 @@ import {
   ChevronRightIcon,
   TriangleDownIcon,
   TriangleUpIcon,
-  ViewOffIcon,
-  ViewIcon,
   ArrowForwardIcon,
   ArrowDownIcon
 } from '@chakra-ui/icons'
@@ -44,7 +40,7 @@ import {
   useGroupBy,
   useExpanded
 } from 'react-table'
-import { clearLine } from 'readline'
+//import { clearLine } from 'readline'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -82,41 +78,6 @@ export default function DataTable<Data extends object>({
     <>
       <Table colorScheme="whiteAlpha" {...getTableProps()}>
         <Thead>
-          {/* <Stack direction="row" alignItems="center">
-            <chakra.span
-              style={{
-                display: 'inline-block',
-                background: '#38A169',
-                padding: '0.5rem ',
-                color: 'white'
-              }}
-            >
-              Agrupados
-            </chakra.span>
-
-            <chakra.span
-              style={{
-                display: 'inline-block',
-                background: '#ED8936',
-                padding: '0.5rem ',
-                color: 'white'
-              }}
-            >
-              Agregados
-            </chakra.span>
-
-            <chakra.span
-              style={{
-                display: 'inline-block',
-                background: '#E53E3E',
-                padding: '0.5rem ',
-                color: 'white'
-              }}
-            >
-              Repetidos
-            </chakra.span>
-          </Stack> */}
-
           {headerGroups.map((headerGroup) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
@@ -126,31 +87,34 @@ export default function DataTable<Data extends object>({
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   isNumeric={column.isNumeric}
                 >
-                  {column.canGroupBy ? (
-                    <chakra.span {...column.getGroupByToggleProps()}>
-                      {column.isGrouped ? (
-                        <IconButton
-                          color="white"
-                          variant="link"
-                          size="xs"
-                          aria-label="Página anterior"
-                          icon={<ViewOffIcon boxSize={3} />}
-                        />
-                      ) : (
-                        <IconButton
-                          color="white"
-                          variant="link"
-                          size="xs"
-                          aria-label="Página anterior"
-                          icon={<ViewIcon boxSize={3} />}
-                        />
-                      )}
-                    </chakra.span>
-                  ) : null}
+                  <Box h="10" display="flex" alignItems="center">
+                    {column.canGroupBy ? (
+                      <chakra.span
+                        display="flex"
+                        alignItems="center"
+                        {...column.getGroupByToggleProps()}
+                      >
+                        {column.isGrouped ? (
+                          <IconButton
+                            color="white"
+                            variant="link"
+                            size="xs"
+                            aria-label="Minimizar"
+                            icon={<Icon as={FiMinimize2} boxSize={3} />}
+                          />
+                        ) : (
+                          <IconButton
+                            color="white"
+                            variant="link"
+                            aria-label="Expandir"
+                            icon={<Icon as={FiMaximize2} boxSize={3} />}
+                          />
+                        )}
+                      </chakra.span>
+                    ) : null}
 
-                  {column.render('Header')}
-                  <Stack direction="row" alignItems="center">
-                    <chakra.span pl="4">
+                    {column.render('Header')}
+                    <chakra.span display="flex" alignItems="center" pl="4">
                       {column.isSorted ? (
                         column.isSortedDesc ? (
                           <TriangleDownIcon aria-label="sorted descending" />
@@ -159,7 +123,7 @@ export default function DataTable<Data extends object>({
                         )
                       ) : null}
                     </chakra.span>
-                  </Stack>
+                  </Box>
                 </Th>
               ))}
             </Tr>
@@ -174,24 +138,28 @@ export default function DataTable<Data extends object>({
                   <Td
                     {...cell.getCellProps()}
                     isNumeric={cell.column.isNumeric}
-                    style={{
-                      background: cell.isGrouped
-                        ? '#38A169'
+                    bg={
+                      cell.isGrouped
+                        ? 'gray.700'
                         : cell.isAggregated
-                        ? '#ED8936'
+                        ? 'gray.800'
                         : cell.isPlaceholder
-                        ? '#E53E3E'
+                        ? 'gray.900'
                         : ''
-                    }}
+                    }
                   >
                     <Stack direction="row" alignItems="center">
                       {cell.isGrouped ? (
                         <>
-                          <chakra.span {...row.getToggleRowExpandedProps()}>
+                          <chakra.span
+                            display="flex"
+                            alignItems="center"
+                            {...row.getToggleRowExpandedProps()}
+                          >
                             {row.isExpanded ? (
-                              <ArrowDownIcon />
+                              <ArrowDownIcon pr="2px" />
                             ) : (
-                              <ArrowForwardIcon />
+                              <ArrowForwardIcon pr="2px" />
                             )}
                           </chakra.span>
                           {cell.render('Cell')} ({row.subRows.length})
@@ -315,14 +283,4 @@ export default function DataTable<Data extends object>({
       </Flex>
     </>
   )
-  // function roundedMedian(leafValue) {
-  //   let min = leafValue[0] || 0
-  //   let max = leafValue[0] || 0
-
-  //   leafValue.forEach((value) => {
-  //     min = Math.min(min, value)
-  //     max = Math.max(max, value)
-  //   })
-  //   return Math.round((min + max) / 2)
-  // }
 }

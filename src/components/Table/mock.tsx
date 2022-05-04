@@ -1,6 +1,7 @@
 import { Column } from 'react-table'
-import { Icon } from '@chakra-ui/icons'
-import { FiEdit } from 'react-icons/fi'
+import { EditIcon } from '@chakra-ui/icons'
+import { AccordionDescendantsProvider, Badge } from '@chakra-ui/react'
+import { access } from 'fs'
 
 type UnitConversion = {
   number: string
@@ -298,58 +299,60 @@ const columns: Column<UnitConversion>[] = [
     Header: 'Número',
     accessor: 'number',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Names`
+    Aggregated: ({ value }) => `${value} Número`
   },
   {
     Header: 'Fornecedor',
     accessor: 'provider',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value}  Names `
+    Aggregated: ({ value }) => `${value}  Fornecedores`
   },
   {
     Header: 'Tags',
     accessor: 'tags',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Names`
+    // Cell: ({ cell: { tags } }) => <Badge accessor={tags} />,
+    Aggregated: ({ value }) => `${value} Tags`
   },
   {
     Header: 'Mês',
     accessor: 'month',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value}  Names`
+    Aggregated: ({ value }) => `${value}  Mês`
   },
   {
     Header: 'Observação',
     accessor: 'observation',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value} Names`
+    Aggregated: ({ value }) => `${value} Obeservações`
   },
   {
     Header: 'Entrega',
     accessor: 'delivery',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value}  Names`
+    Aggregated: ({ value }) => `${value}  Entregas`
   },
   {
     Header: 'Status',
     accessor: 'status',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value}  Names`
+    Aggregated: ({ value }) => `${value}  Status`
   },
   {
     Header: 'Comprador',
     accessor: 'bought',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value}  Names`
+    Aggregated: ({ value }) => `${value}  Compradores`
   },
   {
     Header: 'Aprovado',
     accessor: 'approved',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value}  Names`
+    Aggregated: ({ value }) => `${value}  Aprovados`
   },
   {
-    Header: 'Ações'
+    Header: 'Ações',
+    Cell: <EditIcon />
   }
 ]
 

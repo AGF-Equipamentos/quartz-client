@@ -1,7 +1,6 @@
 import { Column } from 'react-table'
 import { EditIcon } from '@chakra-ui/icons'
-import { AccordionDescendantsProvider, Badge } from '@chakra-ui/react'
-import { access } from 'fs'
+import { Badge } from '@chakra-ui/react'
 
 type UnitConversion = {
   number: string
@@ -311,8 +310,10 @@ const columns: Column<UnitConversion>[] = [
     Header: 'Tags',
     accessor: 'tags',
     aggregate: 'uniqueCount',
-    // Cell: ({ cell: { tags } }) => <Badge accessor={tags} />,
-    Aggregated: ({ value }) => `${value} Tags`
+    Aggregated: ({ value }) => `${value} Tags`,
+    Cell: ({ cell: { value } }) => (
+      <Badge colorScheme="green">{`${value}`}</Badge>
+    )
   },
   {
     Header: 'Mês',

@@ -1,5 +1,6 @@
 import { Icon } from '@chakra-ui/icons'
 import { FiFilter, FiMaximize2, FiMinimize2 } from 'react-icons/fi'
+
 /* eslint-disable react/jsx-key */
 import * as React from 'react'
 import {
@@ -21,17 +22,7 @@ import {
   Flex,
   Stack,
   Text,
-  Heading,
-  ModalOverlay,
-  Button,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  useDisclosure,
-  Input,
-  FormLabel
+  Heading
 } from '@chakra-ui/react'
 import {
   ArrowLeftIcon,
@@ -52,6 +43,7 @@ import {
   useExpanded,
   useFilters
 } from 'react-table'
+import FilterModal from './Modal'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -76,8 +68,7 @@ export default function DataTable<Data extends object>({
     nextPage,
     previousPage,
     setPageSize,
-    //  setFilter,
-
+    // setAllFilters,
     state: { pageIndex, pageSize }
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
@@ -88,79 +79,28 @@ export default function DataTable<Data extends object>({
     usePagination
   )
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [showFilterModal, setShowFilterModal] = React.useState(false)
 
-  // const [filterInput, setFilterInput] = React.useState('')
-
-  // const handleFilterChange = (e) => {
-  //   const value = e.target.value || undefined
-  //   setFilter('number', value)
-  //   setFilterInput(value)
-  // }
+  async function handleOpenFilter() {
+    setShowFilterModal(true)
+  }
+  async function handleCloseFilter() {
+    setShowFilterModal(false)
+  }
 
   return (
     <>
+      <FilterModal isOpen={showFilterModal} handleClose={handleCloseFilter} />
+
       <Flex justifyContent="space-between">
         <Heading>Titulo</Heading>
         <IconButton
           color="white"
           variant="link"
-          onClick={onOpen}
+          onClick={handleOpenFilter}
           aria-label="Filtrar"
           icon={<Icon as={FiFilter} boxSize="14px" />}
         />
-
-        <Modal isOpen={isOpen} onClose={onClose} size="lg">
-          <ModalOverlay />
-          <ModalContent bg="gray.900">
-            <ModalHeader>Filtro</ModalHeader>
-            <ModalBody>
-              <FormLabel>Número</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite...."
-                // value={filterInput}
-                // onChange={handleFilterChange}
-              />
-
-              <FormLabel mt={4}>Fornecedor</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Tags</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Mês</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Observação</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Entrega</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Status</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Status</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Comprador</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-
-              <FormLabel mt={4}>Aprovado</FormLabel>
-              <Input variant="outline" placeholder="Digite..." size="sm" />
-            </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
-                {' '}
-                Fechar
-              </Button>
-              <Button colorScheme="yellow">Filtrar </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
       </Flex>
       <Table colorScheme="whiteAlpha" {...getTableProps()}>
         <Thead>

@@ -68,7 +68,8 @@ export default function DataTable<Data extends object>({
     nextPage,
     previousPage,
     setPageSize,
-    // setAllFilters,
+    //setAllFilters,
+    handleFilter,
     state: { pageIndex, pageSize }
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
@@ -90,7 +91,12 @@ export default function DataTable<Data extends object>({
 
   return (
     <>
-      <FilterModal isOpen={showFilterModal} handleClose={handleCloseFilter} />
+      <FilterModal
+        isOpen={showFilterModal}
+        handleClose={handleCloseFilter}
+        //setAllFilters={setAllFilters}
+        handleFilter={handleFilter}
+      />
 
       <Flex justifyContent="space-between">
         <Heading>Titulo</Heading>

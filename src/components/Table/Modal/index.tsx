@@ -10,8 +10,39 @@ import {
   ModalFooter,
   Button
 } from '@chakra-ui/react'
+import { useState } from 'react'
 
-const FilterModal = ({ isOpen, handleClose }) => {
+type FilterModalProps = {
+  isOpen: boolean
+  handleClose(): void
+  // setAllFilters: any
+  handleFilter: any
+}
+
+const FilterModal: React.FC<FilterModalProps> = ({
+  isOpen,
+  handleClose,
+  // setAllFilters
+  handleFilter
+}) => {
+  const [filterModal, setFilterModal] = useState('')
+
+  const handleFilterModal = (e) => {
+    const value = e.target.value || undefined
+
+    handleFilter(
+      { id: 'number', value: value },
+      { id: 'procider', value: value }
+      // { id: 'tags', value: value },
+      // { id: 'month', value: value },
+      // { id: 'observation', value: value },
+      // { id: 'delivery', value: value },
+      // { id: 'status', value: value },
+      // { id: 'bought', value: value },
+      // { id: 'approved', value: value }
+    )
+    setFilterModal(value)
+  }
   return (
     <>
       <Flex justifyContent="space-between">
@@ -21,10 +52,24 @@ const FilterModal = ({ isOpen, handleClose }) => {
             <ModalHeader>Filtro</ModalHeader>
             <ModalBody>
               <FormLabel>Número</FormLabel>
-              <Input size="sm" variant="outline" placeholder="Digite..." />
+              <Input
+                size="sm"
+                variant="outline"
+                placeholder="Digite..."
+                // value={filterModal}
+                // onChange={handleFilterModal}
+                onChange={(e) => handleFilterModal(e.target.value)}
+              />
 
               <FormLabel mt={4}>Fornecedor</FormLabel>
-              <Input size="sm" variant="outline" placeholder="Digite..." />
+              <Input
+                size="sm"
+                variant="outline"
+                placeholder="Digite..."
+                // value={filterModal}
+                // onChange={handleFilterModal}
+                onChange={(e) => handleFilterModal(e.target.value)}
+              />
 
               <FormLabel mt={4}>Tags</FormLabel>
               <Input size="sm" variant="outline" placeholder="Digite..." />
@@ -52,7 +97,9 @@ const FilterModal = ({ isOpen, handleClose }) => {
                 Fechar{' '}
               </Button>
 
-              <Button colorScheme="yellow">Filtrar</Button>
+              <Button colorScheme="yellow" onClick={handleFilterModal}>
+                Filtrar
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

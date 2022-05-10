@@ -282,12 +282,23 @@ const data = [
   },
   {
     number: '025',
-    provider: 'Bruno',
+    provider: 'Carlos',
     tags: 'pedido CE39p',
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
     status: 'Cotação feita',
+    bought: 'Ronaldo',
+    approved: 'Sim'
+  },
+  {
+    number: '002',
+    provider: 'Carlos',
+    tags: 'pedido CE39p',
+    month: 'Janeiro',
+    observation: 'Foiiiii',
+    delivery: '2022-03-28T16:37:45.333Z',
+    status: 'Cotação não aprovada',
     bought: 'Ronaldo',
     approved: 'Sim'
   }

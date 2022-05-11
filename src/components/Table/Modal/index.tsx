@@ -8,14 +8,15 @@ import {
   FormLabel,
   Input,
   ModalFooter,
-  Button
+  Button,
+  Stack
 } from '@chakra-ui/react'
 
 import { Filters } from 'react-table'
-// import { Box } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
-// import { yupResolver } from '@hookform/resolvers/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -23,6 +24,9 @@ type FilterModalProps = {
   handleFilter: (
     updater: Filters<object> | ((filters: Filters<object>) => Filters<object>)
   ) => void
+}
+
+type FilterFormData = {
   number: string
   provider: string
   tags: string
@@ -34,127 +38,132 @@ type FilterModalProps = {
   approved: string
 }
 
+const schema = yup.object().shape({
+  number: yup.string(),
+  provider: yup.string(),
+  tags: yup.string(),
+  month: yup.string(),
+  observation: yup.string(),
+  delivery: yup.string(),
+  status: yup.string(),
+  bought: yup.string(),
+  approved: yup.string()
+})
+
 const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
   handleClose,
   handleFilter
 }) => {
-  const FilterUserFormSchema = yup.object().shape({
-    number: yup.string(),
-    provider: yup.string(),
-    tags: yup.string(),
-    month: yup.string(),
-    observation: yup.string(),
-    delivery: yup.string(),
-    status: yup.string(),
-    bought: yup.string(),
-    approved: yup.string()
+  const { register, handleSubmit, formState } = useForm<FilterFormData>({
+    resolver: yupResolver(schema)
   })
 
-  // const { register, handleSubmit, formState } = useForm<FilterModalProps>({
-  //   resolver: yupResolver(FilterUserFormSchema)
-  // })
+  // const { errors } = formState
 
-  const handleFilterModal: SubmitHandler<FilterModalProps> = async (value) => {
+  const handleFilterModal: SubmitHandler<FilterFormData> = async (values) => {
     handleFilter(
-      Object.keys(value).map((key) => ({
+      Object.keys(values).map((key) => ({
         id: key,
-        value: value[key as keyof FilterModalProps]
+        value: values[key as keyof FilterFormData]
       }))
     )
+    // console.log(
+    //   Object.keys(values).map((key) => ({
+    //     id: key,
+    //     value: values[key as keyof FilterFormData]
+    //   }))
+    // )
+    handleClose()
   }
   return (
     <>
-      <Flex justifyContent="space-between">
-        <Modal isOpen={isOpen} onClose={handleClose} size="lg">
-          <ModalOverlay />
-          <ModalContent bg="gray.900">
-            <ModalHeader>Filtro</ModalHeader>
-            <ModalBody>
-              {/* <Box as="form" onSubmit={handleSubmit(handleFilterModal)}> */}
-              <FormLabel>Número</FormLabel>
-              <Input
-                // type="number"
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('number')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
+      <Modal isOpen={isOpen} onClose={handleClose} size="lg">
+        <ModalOverlay />
+        <ModalContent bg="gray.900">
+          <ModalHeader>Filtro</ModalHeader>
+          <Box as="form" onSubmit={handleSubmit(handleFilterModal)}>
+            <Flex direction="column">
+              <ModalBody>
+                <Stack direction="row">
+                  <FormLabel>Número</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('number')}
+                  />
 
-              <FormLabel mt={4}>Fornecedor</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('provider')}
-                //onChange={(e) => setFilterProvider(e.target.value)}
-              />
+                  <FormLabel>Fornecedor</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('provider')}
+                  />
+                </Stack>
+                <Stack direction="row" mt={4}>
+                  <FormLabel>Tags</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('tags')}
+                  />
 
-              <FormLabel mt={4}>Tags</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('tags')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
+                  <FormLabel>Mês</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('month')}
+                  />
+                </Stack>
+                <Stack direction="row" mt={4}>
+                  <FormLabel>Observação</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('observation')}
+                  />
 
-              <FormLabel mt={4}>Mês</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('month')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
+                  <FormLabel>Entrega</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('delivery')}
+                  />
+                </Stack>
+                <Stack direction="row" mt={4}>
+                  <FormLabel>Status</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('status')}
+                  />
 
-              <FormLabel mt={4}>Observação</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('observation')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
-
-              <FormLabel mt={4}>Entrega</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('delivery')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
-
-              <FormLabel mt={4}>Status</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('status')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
-
-              <FormLabel mt={4}>Comprado</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('bought')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
-
-              <FormLabel mt={4}>Aprovado</FormLabel>
-              <Input
-                size="sm"
-                variant="outline"
-                placeholder="Digite..."
-                //{...register('approved')}
-                // onChange={(e) => setFilterModal(e.target.value)}
-              />
-              {/* </Box> */}
-            </ModalBody>
+                  <FormLabel>Comprado</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('bought')}
+                  />
+                </Stack>
+                <Stack alignItems="center" mt={4}>
+                  <FormLabel>Aprovado</FormLabel>
+                  <Input
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('approved')}
+                  />
+                </Stack>
+              </ModalBody>
+            </Flex>
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={handleClose}>
                 Fechar{' '}
@@ -162,15 +171,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
               <Button
                 colorScheme="yellow"
-                //isLoading={formState.isSubmitting}
+                isLoading={formState.isSubmitting}
                 type="submit"
               >
                 Filtrar
               </Button>
             </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Flex>
+          </Box>
+        </ModalContent>
+      </Modal>
     </>
   )
 }

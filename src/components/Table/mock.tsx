@@ -23,7 +23,7 @@ const data = [
     month: 'Maio',
     observation: 'Deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Aguardando cotação',
+    status: 'Aguardando aprovação',
     bought: 'Arthur',
     approved: 'Sim'
   },
@@ -34,7 +34,7 @@ const data = [
     month: 'Junho',
     observation: 'Não deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação feita',
+    status: 'Aguardando envio do fornecedor',
     bought: 'Kevin',
     approved: 'Não'
   },
@@ -45,7 +45,7 @@ const data = [
     month: 'Julho',
     observation: 'Deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Aguardando cotação',
+    status: 'Aguardando confirmação',
     bought: 'Alana',
     approved: 'Sim'
   },
@@ -56,7 +56,7 @@ const data = [
     month: 'Agosto',
     observation: 'Tá quase dando certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Aguardando cotação',
+    status: 'Confirmado',
     bought: 'Bruna',
     approved: 'Não'
   },
@@ -67,7 +67,7 @@ const data = [
     month: 'Setembro',
     observation: 'Não deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação feita',
+    status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -78,7 +78,7 @@ const data = [
     month: 'Setembro',
     observation: 'Não deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação feita',
+    status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -89,7 +89,7 @@ const data = [
     month: 'Setembro',
     observation: 'Não deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação feita',
+    status: 'Aguardando envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -100,7 +100,7 @@ const data = [
     month: 'Setembro',
     observation: 'Não deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação feita',
+    status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -111,7 +111,7 @@ const data = [
     month: 'Setembro',
     observation: 'Não deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação feita',
+    status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -122,7 +122,7 @@ const data = [
     month: 'Setembro',
     observation: 'Não deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação feita',
+    status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -133,7 +133,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -144,7 +144,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -155,7 +155,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -166,7 +166,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -177,7 +177,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -188,7 +188,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -199,7 +199,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando o envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -210,7 +210,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -221,7 +221,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -232,7 +232,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -243,7 +243,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -254,7 +254,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -265,7 +265,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -276,7 +276,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -287,7 +287,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Deu certo',
     delivery: '16/04/2022',
-    status: 'Cotação feita',
+    status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -298,7 +298,7 @@ const data = [
     month: 'Janeiro',
     observation: 'Foiiiii',
     delivery: '2022-03-28T16:37:45.333Z',
-    status: 'Cotação não aprovada',
+    status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
   }

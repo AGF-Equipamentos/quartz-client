@@ -1,17 +1,14 @@
 import {
-  Flex,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   FormLabel,
-  Input,
   ModalFooter,
   Button,
   Stack,
-  Select,
-  VStack
+  Select
 } from '@chakra-ui/react'
 
 import { Filters } from 'react-table'
@@ -19,6 +16,7 @@ import { Box } from '@chakra-ui/react'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Input from 'components/Input'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -80,218 +78,187 @@ const FilterModal: React.FC<FilterModalProps> = ({
         <ModalContent bg="gray.900">
           <ModalHeader>Filtro</ModalHeader>
           <Box as="form" onSubmit={handleSubmit(handleFilterModal)}>
-            <Flex direction="row" justifyContent="space-evenly">
-              <ModalBody>
-                <Stack direction="row" justifyContent="space-evenly">
-                  <Box>
-                    <FormLabel>Número</FormLabel>
-                    <Input
-                      focusBorderColor="yellow.500"
-                      size="sm"
-                      variant="outline"
-                      placeholder="Digite..."
-                      {...register('number')}
-                    />
-                  </Box>
-                  <Box>
-                    <FormLabel>Fornecedor</FormLabel>
-                    <Input
-                      focusBorderColor="yellow.500"
-                      size="sm"
-                      variant="outline"
-                      placeholder="Digite..."
-                      {...register('provider')}
-                    />
-                  </Box>
-                </Stack>
-                <Stack direction="row" mt={4} justifyContent="space-evenly">
-                  <Box>
-                    <FormLabel>Tags</FormLabel>
-                    <Input
-                      focusBorderColor="yellow.500"
-                      size="sm"
-                      variant="outline"
-                      placeholder="Digite..."
-                      {...register('tags')}
-                    />
-                  </Box>
-                  <Box w="40%">
-                    <FormLabel>Mês</FormLabel>
-                    <Select
-                      {...register('month')}
-                      size="sm"
-                      focusBorderColor="yellow.500"
+            <ModalBody>
+              <Stack direction="row" justifyContent="space-evenly">
+                <Input
+                  label="Número"
+                  focusBorderColor="yellow.500"
+                  size="sm"
+                  variant="outline"
+                  placeholder="Digite..."
+                  {...register('number')}
+                />
+                <Input
+                  label="Fornecedor"
+                  focusBorderColor="yellow.500"
+                  size="sm"
+                  variant="outline"
+                  placeholder="Digite..."
+                  {...register('provider')}
+                />
+              </Stack>
+              <Stack direction="row" mt={4} justifyContent="space-evenly">
+                <Input
+                  label="Tags"
+                  focusBorderColor="yellow.500"
+                  size="sm"
+                  variant="outline"
+                  placeholder="Digite..."
+                  {...register('tags')}
+                />
+                <Box w="40%">
+                  <FormLabel>Mês</FormLabel>
+                  <Select
+                    {...register('month')}
+                    size="sm"
+                    focusBorderColor="yellow.500"
+                  >
+                    <option
+                      style={{ backgroundColor: 'black' }}
+                      value="janeiro"
                     >
-                      <option
-                        style={{ backgroundColor: 'black' }}
-                        value="janeiro"
-                      >
-                        Janeiro
-                      </option>
-                      <option
-                        style={{ backgroundColor: 'black' }}
-                        value="fevereiro"
-                      >
-                        Fevereiro
-                      </option>
-                      <option
-                        value="março"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Março
-                      </option>
-                      <option
-                        value="abril"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Abril
-                      </option>
-                      <option value="maio" style={{ backgroundColor: 'black' }}>
-                        Maio
-                      </option>
-                      <option
-                        value="junho"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Junho
-                      </option>
-                      <option
-                        value="julho"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Julho
-                      </option>
-                      <option
-                        value="agosto"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Agosto
-                      </option>
-                      <option
-                        value="setembro"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Setembro
-                      </option>
-                      <option
-                        value="outubro"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Outubro
-                      </option>
-                      <option
-                        value="novembro"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Novembro
-                      </option>
-                      <option
-                        value="dezembro"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Dezembro
-                      </option>
-                    </Select>
-                  </Box>
-                </Stack>
-                <Stack direction="row" mt={4} justifyContent="space-evenly">
-                  <Box w="40%">
-                    <FormLabel>Aprovado</FormLabel>
-                    <Select
-                      focusBorderColor="yellow.500"
-                      size="sm"
-                      {...register('approved')}
+                      Janeiro
+                    </option>
+                    <option
+                      style={{ backgroundColor: 'black' }}
+                      value="fevereiro"
                     >
-                      <option value="sim" style={{ backgroundColor: 'black ' }}>
-                        Sim
-                      </option>
-                      <option value="não" style={{ backgroundColor: 'black' }}>
-                        Não
-                      </option>
-                    </Select>
-                  </Box>
-                  <Box w="40%">
-                    <FormLabel>Entrega</FormLabel>
-                    <Input
-                      focusBorderColor="yellow.500"
-                      type="date"
-                      size="sm"
-                      variant="outline"
-                      placeholder="Digite..."
-                      {...register('delivery')}
-                    />
-                  </Box>
-                </Stack>
-                <Stack direction="row" mt={4} justifyContent="space-evenly">
-                  <Box w="40%">
-                    <FormLabel>Status</FormLabel>
-                    <Select
-                      focusBorderColor="yellow.500"
-                      size="sm"
-                      {...register('status')}
+                      Fevereiro
+                    </option>
+                    <option value="março" style={{ backgroundColor: 'black' }}>
+                      Março
+                    </option>
+                    <option value="abril" style={{ backgroundColor: 'black' }}>
+                      Abril
+                    </option>
+                    <option value="maio" style={{ backgroundColor: 'black' }}>
+                      Maio
+                    </option>
+                    <option value="junho" style={{ backgroundColor: 'black' }}>
+                      Junho
+                    </option>
+                    <option value="julho" style={{ backgroundColor: 'black' }}>
+                      Julho
+                    </option>
+                    <option value="agosto" style={{ backgroundColor: 'black' }}>
+                      Agosto
+                    </option>
+                    <option
+                      value="setembro"
+                      style={{ backgroundColor: 'black' }}
                     >
-                      <option
-                        value="Aguardando aprovação"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Aguardando aprovação
-                      </option>
-                      <option
-                        value="Aguardando envio do fornecedor "
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Aguardando o envio do fornecedor
-                      </option>
-                      <option
-                        value=" Aguardando confirmação"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Aguardando confirmação
-                      </option>
-                      <option
-                        value="Confirmado"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Confirmado
-                      </option>
-                      <option
-                        value="Atrassado"
-                        style={{ backgroundColor: 'black' }}
-                      >
-                        Atrassado
-                      </option>
-                    </Select>
-                  </Box>
-                  <Box>
-                    <FormLabel>Comprado</FormLabel>
-                    <Input
-                      focusBorderColor="yellow.500"
-                      placeholder="Digite..."
-                      size="sm"
-                      variant="outline"
-                      {...register('bought')}
-                    />
-                  </Box>
-                </Stack>
-                <Stack
-                  direction="row"
-                  mt={4}
-                  justifyContent="flex-start"
-                  // padding={2}
-                >
-                  <Box>
-                    <FormLabel>Observação</FormLabel>
-                    <Input
-                      focusBorderColor="yellow.500"
-                      size="sm"
-                      variant="outline"
-                      placeholder="Digite..."
-                      {...register('observation')}
-                    />
-                  </Box>
-                </Stack>
-              </ModalBody>
-            </Flex>
+                      Setembro
+                    </option>
+                    <option
+                      value="outubro"
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Outubro
+                    </option>
+                    <option
+                      value="novembro"
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Novembro
+                    </option>
+                    <option
+                      value="dezembro"
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Dezembro
+                    </option>
+                  </Select>
+                </Box>
+              </Stack>
+              <Stack direction="row" mt={4} justifyContent="space-evenly">
+                <Box w="40%">
+                  <FormLabel>Aprovado</FormLabel>
+                  <Select
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('approved')}
+                  >
+                    <option value="sim" style={{ backgroundColor: 'black ' }}>
+                      Sim
+                    </option>
+                    <option value="não" style={{ backgroundColor: 'black' }}>
+                      Não
+                    </option>
+                  </Select>
+                </Box>
+                <Box w="40%">
+                  <Input
+                    label="Entrega"
+                    focusBorderColor="yellow.500"
+                    type="date"
+                    size="sm"
+                    variant="outline"
+                    placeholder="Digite..."
+                    {...register('delivery')}
+                  />
+                </Box>
+              </Stack>
+              <Stack direction="row" mt={4} justifyContent="space-evenly">
+                <Box w="40%">
+                  <FormLabel>Status</FormLabel>
+                  <Select
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('status')}
+                  >
+                    <option
+                      value="Aguardando aprovação"
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Aguardando aprovação
+                    </option>
+                    <option
+                      value="Aguardando envio do fornecedor "
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Aguardando o envio do fornecedor
+                    </option>
+                    <option
+                      value=" Aguardando confirmação"
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Aguardando confirmação
+                    </option>
+                    <option
+                      value="Confirmado"
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Confirmado
+                    </option>
+                    <option
+                      value="Atrassado"
+                      style={{ backgroundColor: 'black' }}
+                    >
+                      Atrassado
+                    </option>
+                  </Select>
+                </Box>
+                <Input
+                  label="Comprador"
+                  focusBorderColor="yellow.500"
+                  placeholder="Digite..."
+                  size="sm"
+                  variant="outline"
+                  {...register('bought')}
+                />
+              </Stack>
+              <Stack direction="row" justifyContent="space-evenly">
+                <Input
+                  label="Observação"
+                  focusBorderColor="yellow.500"
+                  size="sm"
+                  variant="outline"
+                  placeholder="Digite..."
+                  {...register('observation')}
+                />
+              </Stack>
+            </ModalBody>
+
             <ModalFooter>
               <Button bg="#718096" mr={3} onClick={handleClose}>
                 Fechar{' '}

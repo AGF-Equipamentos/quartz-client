@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import Input from '.'
 
 describe('<Input />', () => {
-  it('should render witch passed values', () => {
+  it('should render with passed values', () => {
     render(<Input name="teste" label="Deu certo" />)
 
     expect(screen.getByLabelText('Deu certo')).toBeInTheDocument()

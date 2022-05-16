@@ -30,9 +30,19 @@ describe('<Dropdown />', () => {
     render(<Dropdown name="teste" label="Deu certo" items={items} />)
 
     expect(screen.getByRole('option', { name: 'Janeiro' })).toBeInTheDocument()
+    expect(screen.getByRole('option', { name: 'Janeiro' })).toHaveAttribute(
+      'value',
+      '0'
+    )
+
     expect(
       screen.getByRole('option', { name: 'Fevereiro' })
     ).toBeInTheDocument()
+    expect(screen.getByRole('option', { name: 'Fevereiro' })).toHaveAttribute(
+      'value',
+      '1'
+    )
+
     expect(
       screen.queryByRole('option', { name: 'Março' })
     ).not.toBeInTheDocument()
@@ -48,5 +58,13 @@ describe('<Dropdown />', () => {
 
     // @ts-expect-error type error on react-testing-library
     expect(screen.getByRole('option', { name: 'Janeiro' }).selected).toBe(true)
+  })
+
+  it('should render the chakra styles', () => {
+    const { container } = render(
+      <Dropdown name="teste" label="Deu certo" items={items} />
+    )
+
+    expect(container.firstChild).toMatchSnapshot()
   })
 })

@@ -17,6 +17,7 @@ import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Input from 'components/Input'
+import Dropdown from 'components/Dropdown'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -168,28 +169,72 @@ const FilterModal: React.FC<FilterModalProps> = ({
                       Dezembro
                     </option>
                   </Select>
+
+                  {/* <Dropdown
+                    {...register('month')}
+                    label="Mês"
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    items={[
+                      {
+                        label: 'Janeiro',
+                        value: 0
+                      },
+                      {
+                        label: 'Fevereiro',
+                        value: 1
+                      },
+                      {
+                        label: 'Março',
+                        value: 2
+                      },
+                      {
+                        label: 'Abril',
+                        value: 3
+                      },
+                      {
+                        label: 'Maio',
+                        value: 4
+                      },
+                      {
+                        label: 'Junho',
+                        value: 5
+                      },
+                      {
+                        label: 'Julho',
+                        value: 6
+                      },
+                      {
+                        label: 'Agosto',
+                        value: 7
+                      }
+
+                    ]}
+                  /> */}
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="40%">
-                  <FormLabel>Aprovado</FormLabel>
-                  <Select
+                  {/* <Dropdown
+                    label="Aprovado"
                     focusBorderColor="yellow.500"
                     size="sm"
+                    items={[
+                      {
+                        label: 'Sim',
+                        value: 0
+                      },
+                      {
+                        label: 'Não',
+                        value: 1
+                      }
+                    ]}
                     {...register('approved')}
-                  >
-                    <option value="sim" style={{ backgroundColor: 'black ' }}>
-                      Sim
-                    </option>
-                    <option value="não" style={{ backgroundColor: 'black' }}>
-                      Não
-                    </option>
-                  </Select>
+                  /> */}
                 </Box>
                 <Box w="40%">
                   <Input
                     label="Entrega"
-                    focusBorderColor="yellow.500"
                     type="date"
                     size="sm"
                     variant="outline"
@@ -206,7 +251,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     size="sm"
                     {...register('status')}
                   >
-                    <option
+                    {/* <option
                       value="Aguardando aprovação"
                       style={{ backgroundColor: 'black' }}
                     >
@@ -235,7 +280,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                       style={{ backgroundColor: 'black' }}
                     >
                       Atrassado
-                    </option>
+                    </option> */}
                   </Select>
                 </Box>
                 <Input
@@ -260,7 +305,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
             </ModalBody>
 
             <ModalFooter>
-              <Button bg="#718096" mr={3} onClick={handleClose}>
+              <Button bg="gray.500" mr={3} onClick={handleClose}>
                 Fechar{' '}
               </Button>
 

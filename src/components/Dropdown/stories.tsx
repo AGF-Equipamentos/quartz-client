@@ -8,7 +8,7 @@ export default {
 
 export const Default: Story<DropdownProps> = (args) => <Dropdown {...args} />
 Default.args = {
-  name: 'Vai dar certo',
+  name: 'Mês',
   label: 'Mês',
   items: [
     {

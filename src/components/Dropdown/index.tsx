@@ -2,7 +2,7 @@ import { Box, FormLabel, FormControl, Select } from '@chakra-ui/react'
 export type DropdownProps = {
   name: string
   label?: string
-  items?: {
+  items: {
     label: string
     value: number
   }[]

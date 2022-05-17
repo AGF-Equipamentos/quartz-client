@@ -297,7 +297,7 @@ const data = [
     tags: 'pedido CE39p',
     month: 'Janeiro',
     observation: 'Foiiiii',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '17/05/2022',
     status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'

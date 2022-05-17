@@ -3,6 +3,7 @@ import {
   Select as ChakraSelect,
   SelectProps as ChakraSelectProps
 } from '@chakra-ui/react'
+import { forwardRef, ForwardRefRenderFunction } from 'react'
 
 export type SelectProps = {
   name: string
@@ -12,11 +13,14 @@ export type SelectProps = {
     value: number
   }[]
 } & ChakraSelectProps
-const Dropdown = ({ name, label, items, ...rest }: SelectProps) => (
+const DropdownBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
+  { name, label, items, ...rest },
+  ref
+) => (
   <Box>
     <FormControl>
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <ChakraSelect name={name} id={name} {...rest}>
+      <ChakraSelect name={name} id={name} {...rest} ref={ref}>
         {items?.map((items) => (
           <option key={items.value} value={items.value}>
             {items.label}
@@ -27,4 +31,4 @@ const Dropdown = ({ name, label, items, ...rest }: SelectProps) => (
   </Box>
 )
 
-export default Dropdown
+export const Dropdown = forwardRef(DropdownBase)

@@ -4,11 +4,9 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  FormLabel,
   ModalFooter,
   Button,
-  Stack,
-  Select
+  Stack
 } from '@chakra-ui/react'
 
 import { Filters } from 'react-table'
@@ -16,8 +14,8 @@ import { Box } from '@chakra-ui/react'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import Input from 'components/Input'
-import Dropdown from 'components/Dropdown'
+import { Input } from 'components/Input'
+import { Dropdown } from 'components/Dropdown'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -51,6 +49,80 @@ const schema = yup.object().shape({
   approved: yup.string()
 })
 
+const OptionsMonth = [
+  {
+    label: 'Janeiro',
+    value: 0
+  },
+  {
+    label: 'Fevereiro',
+    value: 1
+  },
+  {
+    label: 'Março',
+    value: 2
+  },
+  {
+    label: 'Abril',
+    value: 3
+  },
+  {
+    label: 'Maio',
+    value: 4
+  },
+  {
+    label: 'Junho',
+    value: 5
+  },
+  {
+    label: 'Julho',
+    value: 6
+  },
+  {
+    label: 'Agosto',
+    value: 7
+  },
+  {
+    label: 'Setembro',
+    value: 8
+  },
+  {
+    label: 'Outubro',
+    value: 9
+  },
+  {
+    label: 'Novembro',
+    value: 10
+  },
+  {
+    label: 'Dezembro',
+    value: 11
+  }
+]
+
+const OptionsStatus = [
+  {
+    label: 'Aguardando aprovação',
+    value: 0
+  },
+  {
+    label: 'Aguardando envio fornecedor',
+    value: 1
+  },
+  {
+    label: 'Aguardando confirmação',
+    value: 2
+  },
+  {
+    label: 'Confirmado',
+    value: 3
+  },
+  {
+    label: 'Atrassado',
+    value: 4
+  }
+]
+
 const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
   handleClose,
@@ -69,6 +141,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
         value: values[key as keyof FilterFormData]
       }))
     )
+    //console.log(values)
 
     handleClose()
   }
@@ -85,7 +158,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   label="Número"
                   focusBorderColor="yellow.500"
                   size="sm"
-                  variant="outline"
                   placeholder="Digite..."
                   {...register('number')}
                 />
@@ -93,7 +165,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   label="Fornecedor"
                   focusBorderColor="yellow.500"
                   size="sm"
-                  variant="outline"
                   placeholder="Digite..."
                   {...register('provider')}
                 />
@@ -103,119 +174,22 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   label="Tags"
                   focusBorderColor="yellow.500"
                   size="sm"
-                  variant="outline"
                   placeholder="Digite..."
                   {...register('tags')}
                 />
                 <Box w="40%">
-                  <FormLabel>Mês</FormLabel>
-                  <Select
-                    {...register('month')}
-                    size="sm"
-                    focusBorderColor="yellow.500"
-                  >
-                    <option
-                      style={{ backgroundColor: 'black' }}
-                      value="janeiro"
-                    >
-                      Janeiro
-                    </option>
-                    <option
-                      style={{ backgroundColor: 'black' }}
-                      value="fevereiro"
-                    >
-                      Fevereiro
-                    </option>
-                    <option value="março" style={{ backgroundColor: 'black' }}>
-                      Março
-                    </option>
-                    <option value="abril" style={{ backgroundColor: 'black' }}>
-                      Abril
-                    </option>
-                    <option value="maio" style={{ backgroundColor: 'black' }}>
-                      Maio
-                    </option>
-                    <option value="junho" style={{ backgroundColor: 'black' }}>
-                      Junho
-                    </option>
-                    <option value="julho" style={{ backgroundColor: 'black' }}>
-                      Julho
-                    </option>
-                    <option value="agosto" style={{ backgroundColor: 'black' }}>
-                      Agosto
-                    </option>
-                    <option
-                      value="setembro"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Setembro
-                    </option>
-                    <option
-                      value="outubro"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Outubro
-                    </option>
-                    <option
-                      value="novembro"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Novembro
-                    </option>
-                    <option
-                      value="dezembro"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Dezembro
-                    </option>
-                  </Select>
-
-                  {/* <Dropdown
-                    {...register('month')}
+                  <Dropdown
                     label="Mês"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    items={[
-                      {
-                        label: 'Janeiro',
-                        value: 0
-                      },
-                      {
-                        label: 'Fevereiro',
-                        value: 1
-                      },
-                      {
-                        label: 'Março',
-                        value: 2
-                      },
-                      {
-                        label: 'Abril',
-                        value: 3
-                      },
-                      {
-                        label: 'Maio',
-                        value: 4
-                      },
-                      {
-                        label: 'Junho',
-                        value: 5
-                      },
-                      {
-                        label: 'Julho',
-                        value: 6
-                      },
-                      {
-                        label: 'Agosto',
-                        value: 7
-                      }
-
-                    ]}
-                  /> */}
+                    items={OptionsMonth}
+                    {...register('month')}
+                  />
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="40%">
-                  {/* <Dropdown
+                  <Dropdown
                     label="Aprovado"
                     focusBorderColor="yellow.500"
                     size="sm"
@@ -230,14 +204,13 @@ const FilterModal: React.FC<FilterModalProps> = ({
                       }
                     ]}
                     {...register('approved')}
-                  /> */}
+                  />
                 </Box>
                 <Box w="40%">
                   <Input
                     label="Entrega"
                     type="date"
                     size="sm"
-                    variant="outline"
                     placeholder="Digite..."
                     {...register('delivery')}
                   />
@@ -245,50 +218,19 @@ const FilterModal: React.FC<FilterModalProps> = ({
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="40%">
-                  <FormLabel>Status</FormLabel>
-                  <Select
+                  <Dropdown
+                    label="Status"
                     focusBorderColor="yellow.500"
                     size="sm"
+                    items={OptionsStatus}
                     {...register('status')}
-                  >
-                    {/* <option
-                      value="Aguardando aprovação"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Aguardando aprovação
-                    </option>
-                    <option
-                      value="Aguardando envio do fornecedor "
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Aguardando o envio do fornecedor
-                    </option>
-                    <option
-                      value=" Aguardando confirmação"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Aguardando confirmação
-                    </option>
-                    <option
-                      value="Confirmado"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Confirmado
-                    </option>
-                    <option
-                      value="Atrassado"
-                      style={{ backgroundColor: 'black' }}
-                    >
-                      Atrassado
-                    </option> */}
-                  </Select>
+                  />
                 </Box>
                 <Input
                   label="Comprador"
                   focusBorderColor="yellow.500"
                   placeholder="Digite..."
                   size="sm"
-                  variant="outline"
                   {...register('bought')}
                 />
               </Stack>
@@ -297,7 +239,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   label="Observação"
                   focusBorderColor="yellow.500"
                   size="sm"
-                  variant="outline"
                   placeholder="Digite..."
                   {...register('observation')}
                 />

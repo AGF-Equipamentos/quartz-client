@@ -1,7 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
 import DataTable, { DataTableProps } from '.'
 import { data, columns } from './mock'
-// import columns from './index'
 export default {
   title: 'Table',
   component: DataTable

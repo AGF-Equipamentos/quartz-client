@@ -10,7 +10,7 @@ export type SelectProps = {
   label?: string
   items: {
     label: string
-    value: number
+    value: number | string
   }[]
 } & ChakraSelectProps
 const DropdownBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (

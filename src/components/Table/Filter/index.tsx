@@ -31,7 +31,7 @@ type FilterFormData = {
   tags: string
   month: string
   observation: string
-  delivery: string
+  delivery: Date
   status: string
   bought: string
   approved: string
@@ -52,51 +52,51 @@ const schema = yup.object().shape({
 const OptionsMonth = [
   {
     label: 'Janeiro',
-    value: 0
-  },
-  {
-    label: 'Fevereiro',
     value: 1
   },
   {
-    label: 'Março',
+    label: 'Fevereiro',
     value: 2
   },
   {
-    label: 'Abril',
+    label: 'Março',
     value: 3
   },
   {
-    label: 'Maio',
+    label: 'Abril',
     value: 4
   },
   {
-    label: 'Junho',
+    label: 'Maio',
     value: 5
   },
   {
-    label: 'Julho',
+    label: 'Junho',
     value: 6
   },
   {
-    label: 'Agosto',
+    label: 'Julho',
     value: 7
   },
   {
-    label: 'Setembro',
+    label: 'Agosto',
     value: 8
   },
   {
-    label: 'Outubro',
+    label: 'Setembro',
     value: 9
   },
   {
-    label: 'Novembro',
+    label: 'Outubro',
     value: 10
   },
   {
-    label: 'Dezembro',
+    label: 'Novembro',
     value: 11
+  },
+  {
+    label: 'Dezembro',
+    value: 12
   }
 ]
 
@@ -141,10 +141,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
         value: values[key as keyof FilterFormData]
       }))
     )
-    //console.log(values)
+    console.log(values)
 
     handleClose()
   }
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={handleClose} size="lg">
@@ -154,34 +155,38 @@ const FilterModal: React.FC<FilterModalProps> = ({
           <Box as="form" onSubmit={handleSubmit(handleFilterModal)}>
             <ModalBody>
               <Stack direction="row" justifyContent="space-evenly">
-                <Input
-                  label="Número"
-                  focusBorderColor="yellow.500"
-                  size="sm"
-                  placeholder="Digite..."
-                  {...register('number')}
-                />
-                <Input
-                  label="Fornecedor"
-                  focusBorderColor="yellow.500"
-                  size="sm"
-                  placeholder="Digite..."
-                  {...register('provider')}
-                />
+                <Box w="40%">
+                  <Input
+                    label="Número"
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('number')}
+                  />
+                </Box>
+                <Box w="40%">
+                  <Input
+                    label="Fornecedor"
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('provider')}
+                  />
+                </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
-                <Input
-                  label="Tags"
-                  focusBorderColor="yellow.500"
-                  size="sm"
-                  placeholder="Digite..."
-                  {...register('tags')}
-                />
+                <Box w="40%">
+                  <Input
+                    label="Tags"
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('tags')}
+                  />
+                </Box>
                 <Box w="40%">
                   <Dropdown
                     label="Mês"
                     focusBorderColor="yellow.500"
                     size="sm"
+                    placeholder="Selecione uma opção"
                     items={OptionsMonth}
                     {...register('month')}
                   />
@@ -190,6 +195,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="40%">
                   <Dropdown
+                    placeholder="Selecione uma opção"
                     label="Aprovado"
                     focusBorderColor="yellow.500"
                     size="sm"
@@ -211,7 +217,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Entrega"
                     type="date"
                     size="sm"
-                    placeholder="Digite..."
                     {...register('delivery')}
                   />
                 </Box>
@@ -219,6 +224,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="40%">
                   <Dropdown
+                    placeholder="Selecione uma opção"
                     label="Status"
                     focusBorderColor="yellow.500"
                     size="sm"
@@ -226,22 +232,24 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     {...register('status')}
                   />
                 </Box>
-                <Input
-                  label="Comprador"
-                  focusBorderColor="yellow.500"
-                  placeholder="Digite..."
-                  size="sm"
-                  {...register('bought')}
-                />
+                <Box w="40%">
+                  <Input
+                    label="Comprador"
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('bought')}
+                  />
+                </Box>
               </Stack>
-              <Stack direction="row" justifyContent="space-evenly">
-                <Input
-                  label="Observação"
-                  focusBorderColor="yellow.500"
-                  size="sm"
-                  placeholder="Digite..."
-                  {...register('observation')}
-                />
+              <Stack direction="row" mt={4} justifyContent="space-evenly">
+                <Box w="40%">
+                  <Input
+                    label="Observação"
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('observation')}
+                  />
+                </Box>
               </Stack>
             </ModalBody>
 
@@ -251,9 +259,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
               </Button>
 
               <Button
+                type="submit"
                 colorScheme="yellow"
                 isLoading={formState.isSubmitting}
-                type="submit"
               >
                 Filtrar
               </Button>

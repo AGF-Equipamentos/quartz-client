@@ -1,6 +1,8 @@
 import { Column } from 'react-table'
 import { EditIcon } from '@chakra-ui/icons'
 import { Badge } from '@chakra-ui/react'
+// import { useState } from 'react'
+import * as React from 'react'
 
 type UnitConversion = {
   number: string
@@ -8,19 +10,23 @@ type UnitConversion = {
   tags: string
   month: string
   observation: string
-  delivery: string
+  delivery: Date
   status: string
   bought: string
   approved: string
 }
 
-const data = [
+// const [showEditModal, setShowEditModal] = React.useState(false)
+
+// async function handleOpenEdit() {
+//   setShowEditModal(true)
+// }
+
+const dataWithoutMonth = [
   {
     number: '001',
     provider: 'Ronaldo',
-    // tags: ['MF75P2', 'MF50P2'],
     tags: 'pedido CE26p',
-    month: 'Maio',
     observation: 'Deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
     status: 'Aguardando aprovação',
@@ -31,9 +37,8 @@ const data = [
     number: '002',
     provider: 'Alana',
     tags: 'pedido CE26p',
-    month: 'Junho',
     observation: 'Não deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-03-29T16:37:45.333Z',
     status: 'Aguardando envio do fornecedor',
     bought: 'Kevin',
     approved: 'Não'
@@ -42,9 +47,8 @@ const data = [
     number: '003',
     provider: 'Arthur',
     tags: 'pedido CE27p',
-    month: 'Julho',
     observation: 'Deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-03-30T16:37:45.333Z',
     status: 'Aguardando confirmação',
     bought: 'Alana',
     approved: 'Sim'
@@ -53,9 +57,8 @@ const data = [
     number: '004',
     provider: 'Kevin',
     tags: 'pedido CE28p',
-    month: 'Agosto',
     observation: 'Tá quase dando certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-03-31T16:37:45.333Z',
     status: 'Confirmado',
     bought: 'Bruna',
     approved: 'Não'
@@ -64,9 +67,8 @@ const data = [
     number: '005',
     provider: 'Bruna',
     tags: 'pedido CE29p',
-    month: 'Setembro',
     observation: 'Não deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-04-01T16:37:45.333Z',
     status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -75,9 +77,8 @@ const data = [
     number: '006',
     provider: 'Isabela',
     tags: 'pedido CE29p',
-    month: 'Setembro',
     observation: 'Não deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-04-02T16:37:45.333Z',
     status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -86,9 +87,8 @@ const data = [
     number: '007',
     provider: 'Gustavo',
     tags: 'pedido CE29p',
-    month: 'Setembro',
     observation: 'Não deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-04-03T16:37:45.333Z',
     status: 'Aguardando envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -97,9 +97,8 @@ const data = [
     number: '008',
     provider: 'Ana Laura',
     tags: 'pedido CE29p',
-    month: 'Setembro',
     observation: 'Não deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-04-04T16:37:45.333Z',
     status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -108,9 +107,8 @@ const data = [
     number: '009',
     provider: 'Maria Laura',
     tags: 'pedido CE29p',
-    month: 'Setembro',
     observation: 'Não deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-04-05T16:37:45.333Z',
     status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -119,9 +117,8 @@ const data = [
     number: '010',
     provider: 'Gabriel',
     tags: 'pedido CE29p',
-    month: 'Setembro',
     observation: 'Não deu certo',
-    delivery: '2022-03-28T16:37:45.333Z',
+    delivery: '2022-04-06T16:37:45.333Z',
     status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -130,9 +127,8 @@ const data = [
     number: '011',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-07T16:37:45.333Z',
     status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -141,9 +137,8 @@ const data = [
     number: '012',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-08T16:37:45.333Z',
     status: 'Aguardando envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -152,9 +147,8 @@ const data = [
     number: '013',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-09T16:37:45.333Z',
     status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -163,9 +157,8 @@ const data = [
     number: '014',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-10T16:37:45.333Z',
     status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -174,9 +167,8 @@ const data = [
     number: '015',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-11T16:37:45.333Z',
     status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -185,9 +177,8 @@ const data = [
     number: '016',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-12T16:37:45.333Z',
     status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -196,9 +187,8 @@ const data = [
     number: '017',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-13T16:37:45.333Z',
     status: 'Aguardando o envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -207,9 +197,8 @@ const data = [
     number: '018',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-14T16:37:45.333Z',
     status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -218,9 +207,8 @@ const data = [
     number: '019',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-15T16:37:45.333Z',
     status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -229,9 +217,8 @@ const data = [
     number: '020',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-16T16:37:45.333Z',
     status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -240,9 +227,8 @@ const data = [
     number: '021',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-17T16:37:45.333Z',
     status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -251,9 +237,8 @@ const data = [
     number: '022',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-18T16:37:45.333Z',
     status: 'Aguardando envio do fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -262,9 +247,8 @@ const data = [
     number: '023',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-19T16:37:45.333Z',
     status: 'Aguardando confirmação',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -273,9 +257,8 @@ const data = [
     number: '024',
     provider: 'Bruno',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-20T16:37:45.333Z',
     status: 'Confirmado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -284,9 +267,8 @@ const data = [
     number: '025',
     provider: 'Carlos',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Deu certo',
-    delivery: '16/04/2022',
+    delivery: '2022-04-21T16:37:45.333Z',
     status: 'Atrassado',
     bought: 'Ronaldo',
     approved: 'Sim'
@@ -295,14 +277,18 @@ const data = [
     number: '002',
     provider: 'Carlos',
     tags: 'pedido CE39p',
-    month: 'Janeiro',
     observation: 'Foiiiii',
-    delivery: '17/05/2022',
+    delivery: '2022-04-22T16:37:45.333Z',
     status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
   }
 ]
+
+const data = dataWithoutMonth.map((data) => ({
+  ...data,
+  month: new Date(data.delivery).getMonth() + 1
+}))
 
 const columns: Column<UnitConversion>[] = [
   {
@@ -330,7 +316,13 @@ const columns: Column<UnitConversion>[] = [
     Header: 'Mês',
     accessor: 'month',
     aggregate: 'uniqueCount',
-    Aggregated: ({ value }) => `${value}  Mês`
+    Aggregated: ({ value }) => `${value}  Meses`,
+    Cell: ({ cell: { value } }) =>
+      new Date(new Date().getFullYear(), Number(value) - 1)
+        .toLocaleDateString('pt-BR', {
+          month: 'short'
+        })
+        .toUpperCase()
   },
   {
     Header: 'Observação',
@@ -342,6 +334,12 @@ const columns: Column<UnitConversion>[] = [
     Header: 'Entrega',
     accessor: 'delivery',
     aggregate: 'uniqueCount',
+    Cell: ({ cell: { value } }) =>
+      new Date(value).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }),
     Aggregated: ({ value }) => `${value}  Entregas`
   },
   {

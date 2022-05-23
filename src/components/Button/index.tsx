@@ -10,9 +10,7 @@ export type ButtonProps = {
 
 const Button = ({ text, ...rest }: ButtonProps) => (
   <Box>
-    <ChakraButton {...rest} colorScheme="yellow">
-      {text}
-    </ChakraButton>
+    <ChakraButton {...rest}>{text}</ChakraButton>
   </Box>
 )
 

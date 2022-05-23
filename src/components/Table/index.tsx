@@ -41,10 +41,10 @@ import {
   useSortBy,
   useGroupBy,
   useExpanded,
-  useFilters
+  useFilters,
+  Row
 } from 'react-table'
 import FilterModal from './Filter'
-// import EditModal from './Edit'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -81,7 +81,6 @@ export default function DataTable<Data extends object>({
   )
 
   const [showFilterModal, setShowFilterModal] = React.useState(false)
-  // const [showEditModal, setShowEditModal] = React.useState(false)
 
   async function handleOpenFilter() {
     setShowFilterModal(true)
@@ -90,13 +89,6 @@ export default function DataTable<Data extends object>({
     setShowFilterModal(false)
   }
 
-  // async function handleOpenEdit() {
-  //   setShowEditModal(true)
-  // }
-  // async function handleCloseEdit() {
-  //   setShowEditModal(false)
-  // }
-
   return (
     <>
       <FilterModal
@@ -104,7 +96,6 @@ export default function DataTable<Data extends object>({
         handleClose={handleCloseFilter}
         handleFilter={setAllFilters}
       />
-      {/* <EditModal isOpen={showEditModal} handleClose={handleCloseEdit} /> */}
 
       <Flex justifyContent="space-between">
         <Heading>Titulo</Heading>

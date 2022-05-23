@@ -5,7 +5,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   Stack
 } from '@chakra-ui/react'
 
@@ -16,6 +15,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Input } from 'components/Input'
 import { Dropdown } from 'components/Dropdown'
+import Button from 'components/Button'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -106,7 +106,7 @@ const OptionsStatus = [
     value: 0
   },
   {
-    label: 'Aguardando envio fornecedor',
+    label: 'Aguardando envio ao fornecedor',
     value: 1
   },
   {
@@ -184,7 +184,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 <Box w="40%">
                   <Dropdown
                     label="Mês"
-                    focusBorderColor="yellow.500"
                     size="sm"
                     placeholder="Selecione uma opção"
                     items={OptionsMonth}
@@ -197,7 +196,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   <Dropdown
                     placeholder="Selecione uma opção"
                     label="Aprovado"
-                    focusBorderColor="yellow.500"
                     size="sm"
                     items={[
                       {
@@ -226,7 +224,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   <Dropdown
                     placeholder="Selecione uma opção"
                     label="Status"
-                    focusBorderColor="yellow.500"
                     size="sm"
                     items={OptionsStatus}
                     {...register('status')}
@@ -254,17 +251,19 @@ const FilterModal: React.FC<FilterModalProps> = ({
             </ModalBody>
 
             <ModalFooter>
-              <Button bg="gray.500" mr={3} onClick={handleClose}>
-                Fechar{' '}
-              </Button>
+              <Button
+                bg="gray.500"
+                mr={3}
+                text="Fechar "
+                onClick={handleClose}
+              />
 
               <Button
                 type="submit"
+                text="Filtrar"
                 colorScheme="yellow"
                 isLoading={formState.isSubmitting}
-              >
-                Filtrar
-              </Button>
+              />
             </ModalFooter>
           </Box>
         </ModalContent>

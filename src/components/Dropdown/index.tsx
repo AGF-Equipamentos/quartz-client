@@ -20,7 +20,13 @@ const DropdownBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps> = (
   <Box>
     <FormControl>
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <ChakraSelect name={name} id={name} {...rest} ref={ref}>
+      <ChakraSelect
+        name={name}
+        id={name}
+        {...rest}
+        ref={ref}
+        focusBorderColor="yellow.500"
+      >
         {items?.map((items) => (
           <option key={items.value} value={items.value}>
             {items.label}

@@ -1,8 +1,42 @@
 const mock = [
   {
-    column: {
-      Header: 'Número'
-    },
-    value: '001'
+    id: 'number',
+    value: '010'
+  },
+  {
+    id: 'provider',
+    value: 'Gabriel'
+  },
+  {
+    id: 'tags',
+    value: 'pedido CE29p'
+  },
+  {
+    id: 'month',
+    value: 4
+  },
+  {
+    id: 'observation',
+    value: 'Não deu certo'
+  },
+  {
+    id: 'delivery',
+    value: '2022-04-06T16:37:45.333Z'
+  },
+  {
+    id: 'status',
+    value: 'Atrassado'
+  },
+  {
+    id: 'bought',
+    value: 'Ronaldo'
+  },
+  {
+    id: 'approved',
+    value: 'Sim'
+  },
+  {
+    id: 'Ações'
   }
 ]
+export default mock

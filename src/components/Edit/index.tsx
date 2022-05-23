@@ -2,7 +2,16 @@ import { Box, Divider, Flex, Heading, HStack, Stack } from '@chakra-ui/react'
 import { Input } from 'components/Input'
 import { Dropdown } from 'components/Dropdown'
 import Button from 'components/Button'
+// import { SubmitHandler, useForm } from 'react-hook-form'
+// import { yupResolver } from '@hookform/resolvers/yup'
+// import * as yup from 'yup'
+// import mock from 'components/Edit/mock'
 
+// type EditFormData = {
+//   tags: string
+//   status: string
+//   observation: string
+// }
 const OptionsStatus = [
   {
     label: 'Aguardando envio ao fornecedor',
@@ -17,6 +26,16 @@ const OptionsStatus = [
     value: 2
   }
 ]
+
+// const schema = yup.object().shape({
+//   tags: yup.string(),
+//   status: yup.string(),
+//   observation: yup.string()
+// })
+
+// const { register, handleSubmit, formState } = useForm<EditFormData>({
+//   resolver: yupResolver(schema)
+// })
 
 const Edit = () => (
   <Box as="form">

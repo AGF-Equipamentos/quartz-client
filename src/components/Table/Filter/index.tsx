@@ -141,7 +141,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
         value: values[key as keyof FilterFormData]
       }))
     )
-    console.log(values)
+    // console.log(values)
 
     handleClose()
   }

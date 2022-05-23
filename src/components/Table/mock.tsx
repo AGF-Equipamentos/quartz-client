@@ -1,9 +1,8 @@
 import { Column, Row } from 'react-table'
-import { EditIcon } from '@chakra-ui/icons'
+// import { EditIcon } from '@chakra-ui/icons'
 import { Badge } from '@chakra-ui/react'
 
 import * as React from 'react'
-// import EditModal from './Edit'
 
 type UnitConversion = {
   number: string
@@ -16,24 +15,6 @@ type UnitConversion = {
   bought: string
   approved: string
 }
-
-// const MockEdit = (isOpen, handleClose) => {
-//   const [showEditModal, setShowEditModal] = React.useState(false)
-
-//   async function handleOpenEdit() {
-//     setShowEditModal(true)
-//   }
-//   async function handleCloseEdit() {
-//     setShowEditModal(false)
-//   }
-
-//   return (
-//     <>
-//       <EditModal isOpen={showEditModal} handleClose={handleCloseEdit} />
-//     </>
-//   )
-// }
-// export default MockEdit
 
 const dataWithoutMonth = [
   {
@@ -375,7 +356,16 @@ const columns: Column<UnitConversion>[] = [
   },
   {
     Header: 'Ações',
-    Cell: ({ row }: { row: Row<object> }) => <div>{console.log(row.cells)}</div>
+    Cell: ({ row }: { row: Row<object> }) => (
+      <div>
+        {console.log(
+          row.cells.map((cell) => ({
+            id: cell.column.id,
+            value: cell.value
+          }))
+        )}
+      </div>
+    )
   }
 ]
 

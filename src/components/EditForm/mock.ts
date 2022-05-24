@@ -1,4 +1,4 @@
-const mock = [
+const editFormMock = [
   {
     id: 'number',
     value: '010'
@@ -25,7 +25,7 @@ const mock = [
   },
   {
     id: 'status',
-    value: 'Atrassado'
+    value: 'Confirmado'
   },
   {
     id: 'bought',
@@ -34,9 +34,7 @@ const mock = [
   {
     id: 'approved',
     value: 'Sim'
-  },
-  {
-    id: 'Ações'
   }
 ]
-export default mock
+
+export default editFormMock

@@ -118,7 +118,7 @@ const OptionsStatus = [
     value: 3
   },
   {
-    label: 'Atrassado',
+    label: 'Atrasado',
     value: 4
   }
 ]

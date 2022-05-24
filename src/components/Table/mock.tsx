@@ -33,7 +33,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE26p',
     observation: 'Não deu certo',
     delivery: '2022-03-29T16:37:45.333Z',
-    status: 'Aguardando envio do fornecedor',
+    status: 'Aguardando envio ao fornecedor',
     bought: 'Kevin',
     approved: 'Não'
   },
@@ -63,7 +63,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE29p',
     observation: 'Não deu certo',
     delivery: '2022-04-01T16:37:45.333Z',
-    status: 'Atrassado',
+    status: 'Atrasado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -83,7 +83,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE29p',
     observation: 'Não deu certo',
     delivery: '2022-04-03T16:37:45.333Z',
-    status: 'Aguardando envio do fornecedor',
+    status: 'Aguardando envio ao fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -113,7 +113,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE29p',
     observation: 'Não deu certo',
     delivery: '2022-04-06T16:37:45.333Z',
-    status: 'Atrassado',
+    status: 'Atrasado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -133,7 +133,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE39p',
     observation: 'Deu certo',
     delivery: '2022-04-08T16:37:45.333Z',
-    status: 'Aguardando envio do fornecedor',
+    status: 'Aguardando envio ao fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -163,7 +163,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE39p',
     observation: 'Deu certo',
     delivery: '2022-04-11T16:37:45.333Z',
-    status: 'Atrassado',
+    status: 'Atrasado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -183,7 +183,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE39p',
     observation: 'Deu certo',
     delivery: '2022-04-13T16:37:45.333Z',
-    status: 'Aguardando o envio do fornecedor',
+    status: 'Aguardando envio ao fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -213,7 +213,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE39p',
     observation: 'Deu certo',
     delivery: '2022-04-16T16:37:45.333Z',
-    status: 'Atrassado',
+    status: 'Atrasado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -233,7 +233,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE39p',
     observation: 'Deu certo',
     delivery: '2022-04-18T16:37:45.333Z',
-    status: 'Aguardando envio do fornecedor',
+    status: 'Aguardando envio ao fornecedor',
     bought: 'Ronaldo',
     approved: 'Sim'
   },
@@ -263,7 +263,7 @@ const dataWithoutMonth = [
     tags: 'pedido CE39p',
     observation: 'Deu certo',
     delivery: '2022-04-21T16:37:45.333Z',
-    status: 'Atrassado',
+    status: 'Atrasado',
     bought: 'Ronaldo',
     approved: 'Sim'
   },

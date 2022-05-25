@@ -56,8 +56,11 @@ describe('<Dropdown />', () => {
       screen.getByRole('option', { name: 'Janeiro' })
     )
 
-    // @ts-expect-error type error on react-testing-library
-    expect(screen.getByRole('option', { name: 'Janeiro' }).selected).toBe(true)
+    const option = screen.getByRole('option', {
+      name: 'Janeiro'
+    }) as HTMLOptionElement
+
+    expect(option.selected).toBe(true)
   })
 
   it('should render the chakra styles', () => {

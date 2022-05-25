@@ -23,8 +23,6 @@ const OptionsStatus = [
 ]
 
 type EditFormProps = {
-  name: string
-  label: string
   formDefaultValues: {
     id: string
     value: string | number | undefined

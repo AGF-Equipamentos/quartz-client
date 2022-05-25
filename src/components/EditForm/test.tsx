@@ -1,18 +1,20 @@
 import { render, screen } from '@testing-library/react'
-import Input from '.'
-
-const defaultValue = [{ id: 'teste', value: 'teste01' }]
+// import Input from '.'
+import EditForm from '.'
+import editFormMock from './mock'
 
 describe('<Edit />', () => {
-  it('should render the label of the Input', () => {
-    render(
-      <Input
-        formDefaultValues={defaultValue}
-        name="InputStatus_Observation"
-        label="Status_Observation"
-      />
-    )
+  it('should render the "defaultValues" of the Input of the tags and the observation and the dropdown', () => {
+    render(<EditForm formDefaultValues={editFormMock} />)
 
-    expect(screen.getByLabelText('Status_Observation')).toBeInTheDocument()
+    const tagsInput = screen.getByLabelText('Tags') as HTMLInputElement
+    const statusDropdown = screen.getByLabelText('Status') as HTMLSelectElement
+    const observationInput = screen.getByLabelText(
+      'Observação'
+    ) as HTMLInputElement
+
+    expect(tagsInput.value).toBe('pedido CE29p')
+    expect(statusDropdown.value).toBe('Confirmado')
+    expect(observationInput.value).toBe('Não deu certo')
   })
 })

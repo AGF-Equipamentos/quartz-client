@@ -41,8 +41,9 @@ import {
   useSortBy,
   useGroupBy,
   useExpanded,
-  useFilters,
-  Row
+  useFilters
+  // useRowSelect
+  // Row
 } from 'react-table'
 import FilterModal from './Filter'
 
@@ -78,6 +79,16 @@ export default function DataTable<Data extends object>({
     useSortBy,
     useExpanded,
     usePagination
+
+    // (hooks) => {
+    //   hooks.visibleColumns.push((columns) => [
+    //     {
+    //       id: 'selection',
+
+    //       Header: ({ getToggleAllRowsSelectedProps }) => <div></div>
+    //     }
+    //   ])
+    // }
   )
 
   const [showFilterModal, setShowFilterModal] = React.useState(false)

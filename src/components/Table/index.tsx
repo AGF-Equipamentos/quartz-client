@@ -1,5 +1,22 @@
 import { Icon } from '@chakra-ui/icons'
-import { FiFilter, FiMaximize2, FiMinimize2 } from 'react-icons/fi'
+import {
+  FiFilter,
+  FiMaximize2,
+  FiMinimize2,
+  FiAlertTriangle,
+  FiSend,
+  FiClock,
+  FiCheckCircle,
+  FiAlertOctagon,
+  FiChevronDown,
+  FiChevronUp,
+  FiArrowDown,
+  FiArrowRight,
+  FiChevronsLeft,
+  FiChevronsRight,
+  FiChevronLeft,
+  FiChevronRight
+} from 'react-icons/fi'
 
 /* eslint-disable react/jsx-key */
 import * as React from 'react'
@@ -22,18 +39,10 @@ import {
   Flex,
   Stack,
   Text,
-  Heading
+  Heading,
+  Tooltip
 } from '@chakra-ui/react'
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  TriangleDownIcon,
-  TriangleUpIcon,
-  ArrowForwardIcon,
-  ArrowDownIcon
-} from '@chakra-ui/icons'
+
 import {
   useTable,
   Column,
@@ -41,7 +50,8 @@ import {
   useSortBy,
   useGroupBy,
   useExpanded,
-  useFilters
+  useFilters,
+  Row
   // useRowSelect
   // Row
 } from 'react-table'
@@ -50,6 +60,61 @@ import FilterModal from './Filter'
 export type DataTableProps<Data extends object> = {
   data: Data[]
   columns: Column<Data>[]
+}
+
+type IconStatusProps = {
+  status: string
+}
+
+const IconStatus = ({ status }: IconStatusProps) => {
+  switch (status) {
+    case 'Aguardando aprovação':
+      return (
+        <Tooltip hasArrow label="Aguardando aprovação">
+          <span>
+            <Icon as={FiAlertTriangle} color="yellow.300" />
+          </span>
+        </Tooltip>
+      )
+      break
+    case 'Aguardando envio ao fornecedor':
+      return (
+        <Tooltip hasArrow label="Aguardando envio ao fornecedor">
+          <span>
+            <Icon as={FiSend} color="orange.400" />
+          </span>
+        </Tooltip>
+      )
+      break
+    case 'Aguardando confirmação':
+      return (
+        <Tooltip hasArrow label="Aguardando confirmação">
+          <span>
+            <Icon as={FiClock} color="cyan.400" />
+          </span>
+        </Tooltip>
+      )
+      break
+    case 'Confirmado':
+      return (
+        <Tooltip hasArrow label="Confirmado">
+          <span>
+            <Icon as={FiCheckCircle} color="green.400" />
+          </span>
+        </Tooltip>
+      )
+      break
+    case 'Atrasado':
+      return (
+        <Tooltip hasArrow label="Atrasado">
+          <span>
+            <Icon as={FiAlertOctagon} color="red.500" />
+          </span>
+        </Tooltip>
+      )
+      break
+  }
+  return null
 }
 
 export default function DataTable<Data extends object>({
@@ -78,17 +143,23 @@ export default function DataTable<Data extends object>({
     useGroupBy,
     useSortBy,
     useExpanded,
-    usePagination
+    usePagination,
 
-    // (hooks) => {
-    //   hooks.visibleColumns.push((columns) => [
-    //     {
-    //       id: 'selection',
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => [
+        {
+          id: 'selection',
+          Header: '',
+          Cell: ({ row }: { row: Row<object> }) => {
+            // console.log(row.cells.filter(herder).value)
 
-    //       Header: ({ getToggleAllRowsSelectedProps }) => <div></div>
-    //     }
-    //   ])
-    // }
+            console.log(row)
+            return <IconStatus status="Aguardando aprovação" />
+          }
+        },
+        ...columns
+      ])
+    }
   )
 
   const [showFilterModal, setShowFilterModal] = React.useState(false)
@@ -158,9 +229,15 @@ export default function DataTable<Data extends object>({
                     <chakra.span display="flex" alignItems="center" pl="4">
                       {column.isSorted ? (
                         column.isSortedDesc ? (
-                          <TriangleDownIcon aria-label="sorted descending" />
+                          <Icon
+                            as={FiChevronDown}
+                            aria-label="sorted descending"
+                          />
                         ) : (
-                          <TriangleUpIcon aria-label="sorted ascending" />
+                          <Icon
+                            as={FiChevronUp}
+                            aria-label="sorted ascending"
+                          />
                         )
                       ) : null}
                     </chakra.span>
@@ -198,9 +275,9 @@ export default function DataTable<Data extends object>({
                             {...row.getToggleRowExpandedProps()}
                           >
                             {row.isExpanded ? (
-                              <ArrowDownIcon pr="2px" />
+                              <Icon as={FiArrowDown} pr="2px" />
                             ) : (
-                              <ArrowForwardIcon pr="2px" />
+                              <Icon as={FiArrowRight} pr="2px" />
                             )}
                           </chakra.span>
                           {cell.render('Cell')} ({row.subRows.length})
@@ -237,7 +314,7 @@ export default function DataTable<Data extends object>({
             _hover={{
               bg: 'gray.500'
             }}
-            icon={<ArrowLeftIcon boxSize={2} />}
+            icon={<Icon as={FiChevronsLeft} boxSize={4} />}
           />
           <IconButton
             colorScheme="gray"
@@ -249,7 +326,7 @@ export default function DataTable<Data extends object>({
             _hover={{
               bg: 'gray.500'
             }}
-            icon={<ChevronLeftIcon boxSize={4} />}
+            icon={<Icon as={FiChevronLeft} boxSize={4} />}
           />
           <IconButton
             colorScheme="gray"
@@ -261,7 +338,7 @@ export default function DataTable<Data extends object>({
             _hover={{
               bg: 'gray.500'
             }}
-            icon={<ChevronRightIcon boxSize={4} />}
+            icon={<Icon as={FiChevronRight} boxSize={4} />}
           />
           <IconButton
             colorScheme="gray"
@@ -273,7 +350,7 @@ export default function DataTable<Data extends object>({
             _hover={{
               bg: 'gray.500'
             }}
-            icon={<ArrowRightIcon boxSize={2} />}
+            icon={<Icon as={FiChevronsRight} boxSize={4} />}
           />
           <Box>
             Página{' '}

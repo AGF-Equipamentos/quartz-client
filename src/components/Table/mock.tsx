@@ -1,5 +1,5 @@
 import { Column, Row } from 'react-table'
-import { EditIcon } from '@chakra-ui/icons'
+// import { EditIcon } from '@chakra-ui/icons'
 import { Badge } from '@chakra-ui/react'
 
 import * as React from 'react'
@@ -355,17 +355,17 @@ const columns: Column<UnitConversion>[] = [
     Aggregated: ({ value }) => `${value}  Aprovados`
   },
   {
-    Header: 'Ações',
-    Cell: ({ row }: { row: Row<object> }) => (
-      <div>
-        {console.log(
-          row.cells.map((cell) => ({
-            id: cell.column.id,
-            value: cell.value
-          }))
-        )}
-      </div>
-    )
+    Header: 'Ações'
+    // Cell: ({ row }: { row: Row<object> }) => (
+    //   <div>
+    //     {console.log(
+    //       row.cells.map((cell) => ({
+    //         id: cell.column.id,
+    //         value: cell.value
+    //       }))
+    //     )}
+    //   </div>
+    // )
   }
 ]
 

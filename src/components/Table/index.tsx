@@ -56,6 +56,7 @@ import {
   // Row
 } from 'react-table'
 import FilterModal from './Filter'
+import { object } from 'yup'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -151,9 +152,13 @@ export default function DataTable<Data extends object>({
           id: 'selection',
           Header: '',
           Cell: ({ row }: { row: Row<object> }) => {
-            // console.log(row.cells.filter(herder).value)
+            // console.log(
+            //   row.cells.array.find(function (column) {
+            //     return column.Header === 'Status'
+            //   }).value
+            // )
 
-            console.log(row)
+            // console.log(row.cells)
             return <IconStatus status="Aguardando aprovação" />
           }
         },

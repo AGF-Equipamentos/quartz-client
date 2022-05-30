@@ -1,4 +1,4 @@
-import { Column, Row } from 'react-table'
+import { Column } from 'react-table'
 // import { EditIcon } from '@chakra-ui/icons'
 import { Badge } from '@chakra-ui/react'
 

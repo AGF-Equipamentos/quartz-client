@@ -56,7 +56,6 @@ import {
   // Row
 } from 'react-table'
 import FilterModal from './Filter'
-import { object } from 'yup'
 
 export type DataTableProps<Data extends object> = {
   data: Data[]
@@ -69,15 +68,6 @@ type IconStatusProps = {
 
 const IconStatus = ({ status }: IconStatusProps) => {
   switch (status) {
-    case 'Aguardando aprovação':
-      return (
-        <Tooltip hasArrow label="Aguardando aprovação">
-          <span>
-            <Icon as={FiAlertTriangle} color="yellow.300" />
-          </span>
-        </Tooltip>
-      )
-      break
     case 'Aguardando envio ao fornecedor':
       return (
         <Tooltip hasArrow label="Aguardando envio ao fornecedor">
@@ -86,7 +76,6 @@ const IconStatus = ({ status }: IconStatusProps) => {
           </span>
         </Tooltip>
       )
-      break
     case 'Aguardando confirmação':
       return (
         <Tooltip hasArrow label="Aguardando confirmação">
@@ -95,7 +84,6 @@ const IconStatus = ({ status }: IconStatusProps) => {
           </span>
         </Tooltip>
       )
-      break
     case 'Confirmado':
       return (
         <Tooltip hasArrow label="Confirmado">
@@ -104,7 +92,6 @@ const IconStatus = ({ status }: IconStatusProps) => {
           </span>
         </Tooltip>
       )
-      break
     case 'Atrasado':
       return (
         <Tooltip hasArrow label="Atrasado">
@@ -113,9 +100,15 @@ const IconStatus = ({ status }: IconStatusProps) => {
           </span>
         </Tooltip>
       )
-      break
+    default:
+      return (
+        <Tooltip hasArrow label="Aguardando aprovação">
+          <span>
+            <Icon as={FiAlertTriangle} color="yellow.300" />
+          </span>
+        </Tooltip>
+      )
   }
-  return null
 }
 
 export default function DataTable<Data extends object>({
@@ -152,14 +145,14 @@ export default function DataTable<Data extends object>({
           id: 'selection',
           Header: '',
           Cell: ({ row }: { row: Row<object> }) => {
-            // console.log(
-            //   row.cells.array.find(function (column) {
-            //     return column.Header === 'Status'
-            //   }).value
-            // )
-
-            // console.log(row.cells)
-            return <IconStatus status="Aguardando aprovação" />
+            return (
+              <IconStatus
+                status={
+                  row.cells.find((value) => value.column.Header === 'Status')
+                    ?.value
+                }
+              />
+            )
           }
         },
         ...columns

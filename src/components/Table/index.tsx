@@ -21,7 +21,7 @@ import {
 /* eslint-disable react/jsx-key */
 import * as React from 'react'
 import {
-  Table,
+  Table as ChakraTable,
   Thead,
   Tbody,
   Tr,
@@ -56,10 +56,12 @@ import {
   // Row
 } from 'react-table'
 import FilterModal from './Filter'
+import { Order } from 'components/OrdersTable'
+// import { ColumnOrderState } from '@tanstack/react-table'
 
-export type DataTableProps<Data extends object> = {
-  data: Data[]
-  columns: Column<Data>[]
+export type TableProps = {
+  data: Order[]
+  columns: Column<Order>[]
 }
 
 type IconStatusProps = {
@@ -111,10 +113,7 @@ const IconStatus = ({ status }: IconStatusProps) => {
   }
 }
 
-export default function DataTable<Data extends object>({
-  data,
-  columns
-}: DataTableProps<Data>) {
+export default function Table({ data, columns }: TableProps) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -159,6 +158,8 @@ export default function DataTable<Data extends object>({
       ])
     }
   )
+  // const [columnVisibility, setColumnVisibility] = React.useState({})
+  // const [columnOder, setColumnOrder] = React.useState<ColumnOrderState>([])
 
   const [showFilterModal, setShowFilterModal] = React.useState(false)
 
@@ -187,7 +188,7 @@ export default function DataTable<Data extends object>({
           icon={<Icon as={FiFilter} boxSize="14px" />}
         />
       </Flex>
-      <Table colorScheme="whiteAlpha" {...getTableProps()}>
+      <ChakraTable colorScheme="whiteAlpha" {...getTableProps()}>
         <Thead>
           {headerGroups.map((headerGroup) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
@@ -292,7 +293,7 @@ export default function DataTable<Data extends object>({
             )
           })}
         </Tbody>
-      </Table>
+      </ChakraTable>
 
       <Flex
         direction={['column', 'column', 'row']}

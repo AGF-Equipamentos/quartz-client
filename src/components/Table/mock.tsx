@@ -369,4 +369,4 @@ const columns: Column<UnitConversion>[] = [
   }
 ]
 
-export { data, columns }
+export { data, columns, dataWithoutMonth }

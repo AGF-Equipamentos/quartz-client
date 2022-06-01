@@ -1,7 +1,15 @@
 import { Column } from 'react-table'
 // import { EditIcon } from '@chakra-ui/icons'
-import { Badge } from '@chakra-ui/react'
+import { Badge, Tooltip } from '@chakra-ui/react'
 import Table from 'components/Table'
+import {
+  FiSend,
+  FiClock,
+  FiCheckCircle,
+  FiAlertTriangle,
+  FiAlertOctagon
+} from 'react-icons/fi'
+import { Icon } from '@chakra-ui/icons'
 
 export type Order = {
   number: string
@@ -15,8 +23,57 @@ export type Order = {
   approved: string
 }
 
-type OrdersTableProps = {
+export type OrdersTableProps = {
   orders: Omit<Order, 'month'>[]
+}
+
+type IconStatusProps = {
+  status: string
+}
+
+const IconStatus = ({ status }: IconStatusProps) => {
+  switch (status) {
+    case 'Aguardando envio ao fornecedor':
+      return (
+        <Tooltip hasArrow label="Aguardando envio ao fornecedor">
+          <span>
+            <Icon as={FiSend} color="orange.400" />
+          </span>
+        </Tooltip>
+      )
+    case 'Aguardando confirmação':
+      return (
+        <Tooltip hasArrow label="Aguardando confirmação">
+          <span>
+            <Icon as={FiClock} color="cyan.400" />
+          </span>
+        </Tooltip>
+      )
+    case 'Confirmado':
+      return (
+        <Tooltip hasArrow label="Confirmado">
+          <span>
+            <Icon as={FiCheckCircle} color="green.400" />
+          </span>
+        </Tooltip>
+      )
+    case 'Atrasado':
+      return (
+        <Tooltip hasArrow label="Atrasado">
+          <span>
+            <Icon as={FiAlertOctagon} color="red.500" />
+          </span>
+        </Tooltip>
+      )
+    default:
+      return (
+        <Tooltip hasArrow label="Aguardando aprovação">
+          <span>
+            <Icon as={FiAlertTriangle} color="yellow.300" />
+          </span>
+        </Tooltip>
+      )
+  }
 }
 
 function OrdersTable({ orders }: OrdersTableProps) {
@@ -26,6 +83,20 @@ function OrdersTable({ orders }: OrdersTableProps) {
   }))
 
   const columns: Column<Order>[] = [
+    {
+      Header: 'Status',
+      accessor: 'status',
+      aggregate: 'uniqueCount',
+      Aggregated: ({ value }) => `${value} Status`,
+
+      Cell: ({ cell: { row } }) => (
+        <IconStatus
+          status={
+            row.cells.find((value) => value.column.Header === 'Status')?.value
+          }
+        />
+      )
+    },
     {
       Header: 'Número',
       accessor: 'number',
@@ -77,12 +148,7 @@ function OrdersTable({ orders }: OrdersTableProps) {
           year: 'numeric'
         })
     },
-    {
-      Header: 'Status',
-      accessor: 'status',
-      aggregate: 'uniqueCount',
-      Aggregated: ({ value }) => `${value} Status`
-    },
+
     {
       Header: 'Comprador',
       accessor: 'bought',

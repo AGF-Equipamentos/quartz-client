@@ -3,11 +3,11 @@ import {
   FiFilter,
   FiMaximize2,
   FiMinimize2,
-  FiAlertTriangle,
-  FiSend,
-  FiClock,
-  FiCheckCircle,
-  FiAlertOctagon,
+  // FiAlertTriangle,
+  // FiSend,
+  // FiClock,
+  // FiCheckCircle,
+  // FiAlertOctagon,
   FiChevronDown,
   FiChevronUp,
   FiArrowDown,
@@ -39,8 +39,8 @@ import {
   Flex,
   Stack,
   Text,
-  Heading,
-  Tooltip
+  Heading
+  // Tooltip
 } from '@chakra-ui/react'
 
 import {
@@ -50,67 +50,14 @@ import {
   useSortBy,
   useGroupBy,
   useExpanded,
-  useFilters,
-  Row
-  // useRowSelect
-  // Row
+  useFilters
 } from 'react-table'
 import FilterModal from './Filter'
 import { Order } from 'components/OrdersTable'
-// import { ColumnOrderState } from '@tanstack/react-table'
 
 export type TableProps = {
   data: Order[]
   columns: Column<Order>[]
-}
-
-type IconStatusProps = {
-  status: string
-}
-
-const IconStatus = ({ status }: IconStatusProps) => {
-  switch (status) {
-    case 'Aguardando envio ao fornecedor':
-      return (
-        <Tooltip hasArrow label="Aguardando envio ao fornecedor">
-          <span>
-            <Icon as={FiSend} color="orange.400" />
-          </span>
-        </Tooltip>
-      )
-    case 'Aguardando confirmação':
-      return (
-        <Tooltip hasArrow label="Aguardando confirmação">
-          <span>
-            <Icon as={FiClock} color="cyan.400" />
-          </span>
-        </Tooltip>
-      )
-    case 'Confirmado':
-      return (
-        <Tooltip hasArrow label="Confirmado">
-          <span>
-            <Icon as={FiCheckCircle} color="green.400" />
-          </span>
-        </Tooltip>
-      )
-    case 'Atrasado':
-      return (
-        <Tooltip hasArrow label="Atrasado">
-          <span>
-            <Icon as={FiAlertOctagon} color="red.500" />
-          </span>
-        </Tooltip>
-      )
-    default:
-      return (
-        <Tooltip hasArrow label="Aguardando aprovação">
-          <span>
-            <Icon as={FiAlertTriangle} color="yellow.300" />
-          </span>
-        </Tooltip>
-      )
-  }
 }
 
 export default function Table({ data, columns }: TableProps) {
@@ -136,30 +83,12 @@ export default function Table({ data, columns }: TableProps) {
     useGroupBy,
     useSortBy,
     useExpanded,
-    usePagination,
+    usePagination
 
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => [
-        {
-          id: 'selection',
-          Header: '',
-          Cell: ({ row }: { row: Row<object> }) => {
-            return (
-              <IconStatus
-                status={
-                  row.cells.find((value) => value.column.Header === 'Status')
-                    ?.value
-                }
-              />
-            )
-          }
-        },
-        ...columns
-      ])
-    }
+    // (hooks) => {
+    //   hooks.visibleColumns.push((columns) => [
+    //     {
   )
-  // const [columnVisibility, setColumnVisibility] = React.useState({})
-  // const [columnOder, setColumnOrder] = React.useState<ColumnOrderState>([])
 
   const [showFilterModal, setShowFilterModal] = React.useState(false)
 

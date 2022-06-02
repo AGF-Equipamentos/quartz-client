@@ -10,6 +10,7 @@ import {
   FiAlertOctagon
 } from 'react-icons/fi'
 import { Icon } from '@chakra-ui/icons'
+// import orders from './mock'
 
 export type Order = {
   number: string
@@ -88,14 +89,7 @@ function OrdersTable({ orders }: OrdersTableProps) {
       accessor: 'status',
       aggregate: 'uniqueCount',
       Aggregated: ({ value }) => `${value} Status`,
-
-      Cell: ({ cell: { row } }) => (
-        <IconStatus
-          status={
-            row.cells.find((value) => value.column.Header === 'Status')?.value
-          }
-        />
-      )
+      Cell: ({ cell: { value } }) => <IconStatus status={value} />
     },
     {
       Header: 'Número',
@@ -114,9 +108,12 @@ function OrdersTable({ orders }: OrdersTableProps) {
       accessor: 'tags',
       aggregate: 'uniqueCount',
       Aggregated: ({ value }) => `${value} Tags`,
-      Cell: ({ cell: { value } }) => (
-        <Badge colorScheme="green">{`${value}`}</Badge>
-      )
+      Cell: ({ cell: { value } }) =>
+        value.split(';').map((value) => (
+          <>
+            <Badge colorScheme="green">{`${value}`}</Badge>
+          </>
+        ))
     },
     {
       Header: 'Mês',

@@ -3,11 +3,6 @@ import {
   FiFilter,
   FiMaximize2,
   FiMinimize2,
-  // FiAlertTriangle,
-  // FiSend,
-  // FiClock,
-  // FiCheckCircle,
-  // FiAlertOctagon,
   FiChevronDown,
   FiChevronUp,
   FiArrowDown,
@@ -40,7 +35,6 @@ import {
   Stack,
   Text,
   Heading
-  // Tooltip
 } from '@chakra-ui/react'
 
 import {
@@ -84,10 +78,6 @@ export default function Table({ data, columns }: TableProps) {
     useSortBy,
     useExpanded,
     usePagination
-
-    // (hooks) => {
-    //   hooks.visibleColumns.push((columns) => [
-    //     {
   )
 
   const [showFilterModal, setShowFilterModal] = React.useState(false)
@@ -313,13 +303,10 @@ export default function Table({ data, columns }: TableProps) {
             onChange={(e) => {
               setPageSize(Number(e.target.value))
             }}
+            focusBorderColor="yellow.500"
           >
             {[10, 20, 30, 40, 50].map((pageSize) => (
-              <option
-                key={pageSize}
-                value={pageSize}
-                style={{ backgroundColor: 'black' }}
-              >
+              <option key={pageSize} value={pageSize}>
                 {pageSize} Itens
               </option>
             ))}

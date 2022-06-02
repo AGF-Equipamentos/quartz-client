@@ -2,7 +2,7 @@ const orders = [
   {
     number: '001',
     provider: 'Ronaldo',
-    tags: 'pedido CE26p',
+    tags: 'pedido CE26p;pedidoMF75P2',
     observation: 'Deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
     status: 'Aguardando aprovação',
@@ -12,7 +12,7 @@ const orders = [
   {
     number: '002',
     provider: 'Alana',
-    tags: 'pedido CE26p',
+    tags: 'pedido CE26p;pedidoMF75P2',
     observation: 'Não deu certo',
     delivery: '2022-03-29T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
@@ -22,7 +22,7 @@ const orders = [
   {
     number: '003',
     provider: 'Arthur',
-    tags: 'pedido CE27p',
+    tags: 'pedido CE27p;pedidoMF75P2',
     observation: 'Deu certo',
     delivery: '2022-03-30T16:37:45.333Z',
     status: 'Aguardando confirmação',
@@ -32,7 +32,7 @@ const orders = [
   {
     number: '004',
     provider: 'Kevin',
-    tags: 'pedido CE28p',
+    tags: 'pedido CE28p;pedidoMF75P2',
     observation: 'Tá quase dando certo',
     delivery: '2022-03-31T16:37:45.333Z',
     status: 'Confirmado',
@@ -42,7 +42,7 @@ const orders = [
   {
     number: '005',
     provider: 'Bruna',
-    tags: 'pedido CE29p',
+    tags: 'pedido CE29p;pedidoMF75P2',
     observation: 'Não deu certo',
     delivery: '2022-04-01T16:37:45.333Z',
     status: 'Atrasado',
@@ -52,7 +52,7 @@ const orders = [
   {
     number: '006',
     provider: 'Isabela',
-    tags: 'pedido CE29p',
+    tags: 'pedido CE29p;pedidoMF75P2',
     observation: 'Não deu certo',
     delivery: '2022-04-02T16:37:45.333Z',
     status: 'Aguardando aprovação',
@@ -62,7 +62,7 @@ const orders = [
   {
     number: '007',
     provider: 'Gustavo',
-    tags: 'pedido CE29p',
+    tags: 'pedido CE29p;pedidoMF75P2',
     observation: 'Não deu certo',
     delivery: '2022-04-03T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
@@ -72,7 +72,7 @@ const orders = [
   {
     number: '008',
     provider: 'Ana Laura',
-    tags: 'pedido CE29p',
+    tags: 'pedido CE29p;pedidoMF75P2',
     observation: 'Não deu certo',
     delivery: '2022-04-04T16:37:45.333Z',
     status: 'Aguardando confirmação',

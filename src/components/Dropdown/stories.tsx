@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
-import Dropdown, { SelectProps } from '.'
+import { Dropdown, SelectProps } from '.'
 
 export default {
   title: 'Dropdown',

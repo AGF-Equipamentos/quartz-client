@@ -16,6 +16,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Input } from 'components/Input'
 import { Dropdown } from 'components/Dropdown'
 import Button from 'components/Button'
+import { TagsInput } from 'components/TagsInput'
+import { monthOptions } from 'utils/options/monthOptions'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -25,7 +27,7 @@ type FilterModalProps = {
   ) => void
 }
 
-type FilterFormData = {
+export type FilterFormData = {
   number: string
   provider: string
   tags: string
@@ -48,57 +50,6 @@ const schema = yup.object().shape({
   bought: yup.string(),
   approved: yup.string()
 })
-
-const OptionsMonth = [
-  {
-    label: 'Janeiro',
-    value: 1
-  },
-  {
-    label: 'Fevereiro',
-    value: 2
-  },
-  {
-    label: 'Março',
-    value: 3
-  },
-  {
-    label: 'Abril',
-    value: 4
-  },
-  {
-    label: 'Maio',
-    value: 5
-  },
-  {
-    label: 'Junho',
-    value: 6
-  },
-  {
-    label: 'Julho',
-    value: 7
-  },
-  {
-    label: 'Agosto',
-    value: 8
-  },
-  {
-    label: 'Setembro',
-    value: 9
-  },
-  {
-    label: 'Outubro',
-    value: 10
-  },
-  {
-    label: 'Novembro',
-    value: 11
-  },
-  {
-    label: 'Dezembro',
-    value: 12
-  }
-]
 
 const OptionsStatus = [
   {
@@ -128,9 +79,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
   handleClose,
   handleFilter
 }) => {
-  const { register, handleSubmit, formState } = useForm<FilterFormData>({
-    resolver: yupResolver(schema)
-  })
+  const { register, handleSubmit, formState, setValue, getValues } =
+    useForm<FilterFormData>({
+      resolver: yupResolver(schema)
+    })
 
   //const { errors } = formState
 
@@ -152,10 +104,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
         <ModalOverlay />
         <ModalContent bg="gray.900">
           <ModalHeader>Filtro</ModalHeader>
-          <Box as="form" onSubmit={handleSubmit(handleFilterModal)}>
+          <Box as="form">
             <ModalBody>
               <Stack direction="row" justifyContent="space-evenly">
-                <Box w="40%">
+                <Box w="50%">
                   <Input
                     label="Número"
                     focusBorderColor="yellow.500"
@@ -163,7 +115,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     {...register('number')}
                   />
                 </Box>
-                <Box w="40%">
+                <Box w="50%">
                   <Input
                     label="Fornecedor"
                     focusBorderColor="yellow.500"
@@ -173,26 +125,37 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
-                <Box w="40%">
-                  <Input
-                    label="Tags"
-                    focusBorderColor="yellow.500"
-                    size="sm"
+                <Box w="100%">
+                  <TagsInput
+                    defaultTags={
+                      getValues('tags') ? getValues('tags')?.split(';') : []
+                    }
+                    setValue={setValue}
                     {...register('tags')}
                   />
                 </Box>
-                <Box w="40%">
+              </Stack>
+              <Stack direction="row" mt={4} justifyContent="space-evenly">
+                <Box w="50%">
+                  <Input
+                    label="Observação"
+                    focusBorderColor="yellow.500"
+                    size="sm"
+                    {...register('observation')}
+                  />
+                </Box>
+                <Box w="50%">
                   <Dropdown
                     label="Mês"
                     size="sm"
                     placeholder="Selecione uma opção"
-                    items={OptionsMonth}
+                    items={monthOptions}
                     {...register('month')}
                   />
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
-                <Box w="40%">
+                <Box w="50%">
                   <Dropdown
                     placeholder="Selecione uma opção"
                     label="Aprovado"
@@ -210,7 +173,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     {...register('approved')}
                   />
                 </Box>
-                <Box w="40%">
+                <Box w="50%">
                   <Input
                     label="Entrega"
                     type="date"
@@ -220,7 +183,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
-                <Box w="40%">
+                <Box w="50%">
                   <Dropdown
                     placeholder="Selecione uma opção"
                     label="Status"
@@ -229,22 +192,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     {...register('status')}
                   />
                 </Box>
-                <Box w="40%">
+                <Box w="50%">
                   <Input
                     label="Comprador"
                     focusBorderColor="yellow.500"
                     size="sm"
                     {...register('bought')}
-                  />
-                </Box>
-              </Stack>
-              <Stack direction="row" mt={4} justifyContent="space-evenly">
-                <Box w="40%">
-                  <Input
-                    label="Observação"
-                    focusBorderColor="yellow.500"
-                    size="sm"
-                    {...register('observation')}
                   />
                 </Box>
               </Stack>
@@ -259,10 +212,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
               />
 
               <Button
-                type="submit"
+                type="button"
                 text="Filtrar"
                 colorScheme="yellow"
                 isLoading={formState.isSubmitting}
+                onClick={handleSubmit(handleFilterModal)}
               />
             </ModalFooter>
           </Box>

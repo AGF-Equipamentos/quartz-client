@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import { Story, Meta } from '@storybook/react/types-6-0'
-import TagsInput from '.'
+import { TagsInput } from '.'
 
 export default {
   title: 'TagsInput',
@@ -9,6 +9,8 @@ export default {
 
 export const Default: Story = () => (
   <Box maxW="720px">
-    <TagsInput />
+    <TagsInput
+    // setValue={}
+    />
   </Box>
 )

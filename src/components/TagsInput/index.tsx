@@ -3,39 +3,70 @@ import {
   Tag,
   TagLabel,
   TagCloseButton,
-  HStack,
-  Grid,
-  SimpleGrid,
-  Flex
+  Flex,
+  Text,
+  forwardRef
 } from '@chakra-ui/react'
 import { Input } from 'components/Input'
+import { FilterFormData } from 'components/Table/Filter'
+import {
+  ForwardRefRenderFunction,
+  KeyboardEvent,
+  useEffect,
+  useState
+} from 'react'
+import { UseFormSetValue } from 'react-hook-form'
 
-const TagsInput = () => {
+type TagsInputProps = {
+  defaultTags?: string[]
+  setValue: UseFormSetValue<FilterFormData>
+}
+
+const TagsInputBase: ForwardRefRenderFunction<
+  HTMLInputElement,
+  TagsInputProps
+> = ({ defaultTags = [], setValue }, ref) => {
+  const [tags, setTags] = useState<string[]>(defaultTags)
+
+  function hanldeCreateTags(
+    e: KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement }
+  ) {
+    if (e.key !== 'Enter') return
+    const value = e.target.value
+    if (!value.trim()) return
+    setTags([...tags, value])
+    e.target.value = ''
+  }
+
+  function removeTag(index: number) {
+    setTags(tags.filter((_, i) => i !== index))
+  }
+
+  useEffect(() => {
+    setValue('tags', tags.join(';'))
+  }, [tags, setValue])
+
   return (
-    <Box borderRadius={8} bg="gray.700" p={['8']}>
-      <label>Tags</label>
-      {/* fazer as tags terem seu proprio tamanho */}
-      <Grid templateColumns="repeat(auto-fit, 120px)">
-        {[
-          'pedido MF75P2',
-          'MF75P2',
-          'pedido',
-          'MF75P2',
-          'pedido',
-          'MF75P2',
-          'pedido',
-          'MF75P2',
-          'pedido MF75P2'
-        ].map((tag) => (
-          <Tag colorScheme="green" key={tag}>
+    <Box borderRadius={8} bg="gray.700" p={4}>
+      <Text mb={2}>Tags</Text>
+      <input type="text" hidden ref={ref} />
+      <Flex flexWrap="wrap" gap="10px">
+        {tags.map((tag, index) => (
+          <Tag colorScheme="green" key={index}>
             <TagLabel>{tag}</TagLabel>
-            <TagCloseButton />
+            <TagCloseButton onClick={() => removeTag(index)} />
           </Tag>
         ))}
-        <Input variant="unstyled" name="tags" mt="5" />
-      </Grid>
+        <Input
+          variant="unstyled"
+          maxW="120px"
+          name="tags"
+          placeholder="Adicionar Tag..."
+          onKeyDown={hanldeCreateTags}
+        />
+      </Flex>
     </Box>
   )
 }
 
-export default TagsInput
+export const TagsInput = forwardRef(TagsInputBase)

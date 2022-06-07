@@ -127,7 +127,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="100%">
                   <TagsInput
-                    defaultTags={
+                    initialTags={
                       getValues('tags') ? getValues('tags')?.split(';') : []
                     }
                     setValue={setValue}

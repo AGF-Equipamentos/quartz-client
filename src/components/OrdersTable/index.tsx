@@ -10,7 +10,6 @@ import {
   FiAlertOctagon
 } from 'react-icons/fi'
 import { Icon } from '@chakra-ui/icons'
-// import orders from './mock'
 
 export type Order = {
   number: string

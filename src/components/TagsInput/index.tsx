@@ -17,16 +17,16 @@ import {
 } from 'react'
 import { UseFormSetValue } from 'react-hook-form'
 
-type TagsInputProps = {
-  defaultTags?: string[]
+export type TagsInputProps = {
+  initialTags?: string[]
   setValue: UseFormSetValue<FilterFormData>
 }
 
 const TagsInputBase: ForwardRefRenderFunction<
   HTMLInputElement,
   TagsInputProps
-> = ({ defaultTags = [], setValue }, ref) => {
-  const [tags, setTags] = useState<string[]>(defaultTags)
+> = ({ initialTags = [], setValue }, ref) => {
+  const [tags, setTags] = useState<string[]>(initialTags)
 
   function hanldeCreateTags(
     e: KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement }
@@ -68,5 +68,4 @@ const TagsInputBase: ForwardRefRenderFunction<
     </Box>
   )
 }
-
 export const TagsInput = forwardRef(TagsInputBase)

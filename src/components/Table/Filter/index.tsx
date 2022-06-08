@@ -54,23 +54,23 @@ const schema = yup.object().shape({
 const OptionsStatus = [
   {
     label: 'Aguardando aprovação',
-    value: 0
+    value: 'Aguardando aprovação'
   },
   {
     label: 'Aguardando envio ao fornecedor',
-    value: 1
+    value: 'Aguardando envio ao fornecedor'
   },
   {
     label: 'Aguardando confirmação',
-    value: 2
+    value: 'Aguardando confirmação'
   },
   {
     label: 'Confirmado',
-    value: 3
+    value: 'Confirmado'
   },
   {
     label: 'Atrasado',
-    value: 4
+    value: 'Atrasado'
   }
 ]
 
@@ -88,6 +88,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   const handleFilterModal: SubmitHandler<FilterFormData> = async (values) => {
     handleFilter(
+      Object.keys(values).map((key) => ({
+        id: key,
+        value: values[key as keyof FilterFormData]
+      }))
+    )
+    console.log(
       Object.keys(values).map((key) => ({
         id: key,
         value: values[key as keyof FilterFormData]
@@ -127,7 +133,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="100%">
                   <TagsInput
-                    defaultTags={
+                    initialTags={
                       getValues('tags') ? getValues('tags')?.split(';') : []
                     }
                     setValue={setValue}
@@ -174,12 +180,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   />
                 </Box>
                 <Box w="50%">
-                  <Input
+                  {/* <Input
                     label="Entrega"
                     type="date"
                     size="sm"
                     {...register('delivery')}
-                  />
+                  /> */}
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">

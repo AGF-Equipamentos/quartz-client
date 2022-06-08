@@ -44,7 +44,8 @@ import {
   useSortBy,
   useGroupBy,
   useExpanded,
-  useFilters
+  useFilters,
+  useFlexLayout
 } from 'react-table'
 import FilterModal from './Filter'
 import { Order } from 'components/OrdersTable'
@@ -72,12 +73,17 @@ export default function Table({ data, columns }: TableProps) {
     setAllFilters,
     state: { pageIndex, pageSize }
   } = useTable(
-    { columns, data, initialState: { pageIndex: 0 } },
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0, pageSize: 5 }
+    },
     useFilters,
     useGroupBy,
     useSortBy,
     useExpanded,
-    usePagination
+    usePagination,
+    useFlexLayout
   )
 
   const [showFilterModal, setShowFilterModal] = React.useState(false)
@@ -113,8 +119,8 @@ export default function Table({ data, columns }: TableProps) {
             <Tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <Th
+                  p={2}
                   color="gray.300"
-                  width="8"
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   isNumeric={column.isNumeric}
                 >
@@ -144,7 +150,7 @@ export default function Table({ data, columns }: TableProps) {
                     ) : null}
 
                     {column.render('Header')}
-                    <chakra.span display="flex" alignItems="center" pl="4">
+                    <chakra.span display="flex" alignItems="center" pl={2}>
                       {column.isSorted ? (
                         column.isSortedDesc ? (
                           <Icon
@@ -174,6 +180,8 @@ export default function Table({ data, columns }: TableProps) {
                   <Td
                     {...cell.getCellProps()}
                     isNumeric={cell.column.isNumeric}
+                    // alignSelf="center"
+                    p={2}
                     bg={
                       cell.isGrouped
                         ? 'gray.700'
@@ -305,7 +313,7 @@ export default function Table({ data, columns }: TableProps) {
             }}
             focusBorderColor="yellow.500"
           >
-            {[10, 20, 30, 40, 50].map((pageSize) => (
+            {[5, 10, 15, 20].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
                 {pageSize} Itens
               </option>

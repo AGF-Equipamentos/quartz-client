@@ -1,13 +1,21 @@
 import { Column } from 'react-table'
 // import { EditIcon } from '@chakra-ui/icons'
-import { Badge, Tooltip } from '@chakra-ui/react'
+import {
+  Badge,
+  Center,
+  Flex,
+  IconButton,
+  Text,
+  Tooltip
+} from '@chakra-ui/react'
 import Table from 'components/Table'
 import {
   FiSend,
   FiClock,
   FiCheckCircle,
   FiAlertTriangle,
-  FiAlertOctagon
+  FiAlertOctagon,
+  FiEdit
 } from 'react-icons/fi'
 import { Icon } from '@chakra-ui/icons'
 // import orders from './mock'
@@ -88,78 +96,122 @@ function OrdersTable({ orders }: OrdersTableProps) {
       Header: 'Status',
       accessor: 'status',
       aggregate: 'uniqueCount',
+      width: 96,
       Aggregated: ({ value }) => `${value} Status`,
-      Cell: ({ cell: { value } }) => <IconStatus status={value} />
+      Cell: ({ cell: { value } }) => (
+        <Flex flex="1" direction="row" justifyContent="center">
+          {/* <Flex flex="1" justifyContent="center"> */}
+          <IconStatus status={value} />
+          {/* </Flex> */}
+        </Flex>
+      )
     },
     {
-      Header: 'Número',
+      Header: 'Núm',
       accessor: 'number',
       aggregate: 'uniqueCount',
+      width: 80,
       Aggregated: ({ value }) => `${value} Número`
     },
     {
       Header: 'Fornecedor',
       accessor: 'provider',
       aggregate: 'uniqueCount',
+      width: 120,
       Aggregated: ({ value }) => `${value} Fornecedores`
     },
     {
       Header: 'Tags',
       accessor: 'tags',
+      minWidth: 150,
       aggregate: 'uniqueCount',
       Aggregated: ({ value }) => `${value} Tags`,
-      Cell: ({ cell: { value } }) =>
-        value.split(';').map((value) => (
-          <>
-            <Badge colorScheme="green">{`${value}`}</Badge>
-          </>
-        ))
+      Cell: ({ cell: { value } }) => (
+        <Flex flexWrap="wrap" gap={2}>
+          {value.split(';').map((value, index) => (
+            <Badge key={index} colorScheme="green">{`${value}`}</Badge>
+          ))}
+        </Flex>
+      )
     },
     {
       Header: 'Mês',
       accessor: 'month',
       aggregate: 'uniqueCount',
+      width: 120,
       Aggregated: ({ value }) => `${value} Meses`,
-      Cell: ({ cell: { value } }) =>
-        new Date(new Date().getFullYear(), Number(value) - 1)
-          .toLocaleDateString('pt-BR', {
-            month: 'short'
-          })
-          .toUpperCase()
+      Cell: ({ row }) =>
+        row.original ? (
+          <Flex direction="column" align="center">
+            {new Date(new Date().getFullYear(), Number(row.original.month) - 1)
+              .toLocaleDateString('pt-BR', {
+                month: 'short'
+              })
+              .toUpperCase()}
+            <Text color="gray.300" fontSize="sm">
+              {new Date(row.original.delivery).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+              })}
+            </Text>
+          </Flex>
+        ) : (
+          new Date(new Date().getFullYear(), Number(row.groupByVal) - 1)
+            .toLocaleDateString('pt-BR', {
+              month: 'short'
+            })
+            .toUpperCase()
+        )
     },
+    // {
+    //   Header: 'Mês',
+    //   accessor: 'month',
+    //   aggregate: 'uniqueCount',
+    //   width: 120,
+    //   Aggregated: ({ value }) => `${value} Meses`,
+    //   Cell: ({ row }) => (
+    //     <p>{row.original ? row.original.month : row.groupByVal}</p>
+    //   )
+    // },
     {
       Header: 'Observação',
       accessor: 'observation',
       aggregate: 'uniqueCount',
+      width: 120,
       Aggregated: ({ value }) => `${value} Observações`
     },
-    {
-      Header: 'Entrega',
-      accessor: 'delivery',
-      aggregate: 'uniqueCount',
-      Aggregated: ({ value }) => `${value} Entregas`,
-      Cell: ({ cell: { value } }) =>
-        new Date(value).toLocaleDateString('pt-BR', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
-        })
-    },
+    // {
+    //   Header: 'Entrega',
+    //   accessor: 'delivery',
+    //   aggregate: 'uniqueCount',
+    //   width: 120,
+    //   Aggregated: ({ value }) => `${value} Entregas`,
+    //   Cell: ({ cell: { value } }) =>
+    //     new Date(value).toLocaleDateString('pt-BR', {
+    //       day: '2-digit',
+    //       month: '2-digit',
+    //       year: 'numeric'
+    //     })
+    // },
 
     {
       Header: 'Comprador',
       accessor: 'bought',
       aggregate: 'uniqueCount',
+      width: 120,
       Aggregated: ({ value }) => `${value} Compradores`
     },
     {
-      Header: 'Aprovado',
+      Header: 'Apr',
       accessor: 'approved',
       aggregate: 'uniqueCount',
+      width: 120,
       Aggregated: ({ value }) => `${value} Aprovados`
     },
     {
-      Header: 'Ações'
+      Header: 'Ações',
+      width: 60,
       // Cell: ({ row }: { row: Row<object> }) => (
       //   <div>
       //     {console.log(
@@ -170,6 +222,15 @@ function OrdersTable({ orders }: OrdersTableProps) {
       //     )}
       //   </div>
       // )
+      Cell: (
+        <IconButton
+          color="white"
+          p={0}
+          variant="link"
+          aria-label="Editar"
+          icon={<Icon as={FiEdit} boxSize="18px" />}
+        />
+      )
     }
   ]
   // console.log(data)

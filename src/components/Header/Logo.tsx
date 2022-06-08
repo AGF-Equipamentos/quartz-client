@@ -1,7 +1,7 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
-const Logo = () => (
-  <Box>
+export function Logo() {
+  return (
     <Text
       fontSize={['2xl', '3xl']}
       fontWeight="bold"
@@ -10,7 +10,5 @@ const Logo = () => (
     >
       Quartz
     </Text>
-  </Box>
-)
-
-export default Logo
+  )
+}

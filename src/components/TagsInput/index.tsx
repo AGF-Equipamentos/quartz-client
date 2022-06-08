@@ -5,9 +5,9 @@ import {
   TagCloseButton,
   Flex,
   Text,
-  forwardRef
+  forwardRef,
+  Input
 } from '@chakra-ui/react'
-import { Input } from 'components/Input'
 import { FilterFormData } from 'components/Table/Filter'
 import {
   ForwardRefRenderFunction,
@@ -17,16 +17,16 @@ import {
 } from 'react'
 import { UseFormSetValue } from 'react-hook-form'
 
-type TagsInputProps = {
-  defaultTags?: string[]
+export type TagsInputProps = {
+  initialTags?: string[]
   setValue: UseFormSetValue<FilterFormData>
 }
 
 const TagsInputBase: ForwardRefRenderFunction<
   HTMLInputElement,
   TagsInputProps
-> = ({ defaultTags = [], setValue }, ref) => {
-  const [tags, setTags] = useState<string[]>(defaultTags)
+> = ({ initialTags = [], setValue }, ref) => {
+  const [tags, setTags] = useState<string[]>(initialTags)
 
   function hanldeCreateTags(
     e: KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement }

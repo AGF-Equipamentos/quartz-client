@@ -14,7 +14,7 @@ const items = [
 ]
 
 describe('<Dropdown />', () => {
-  it('should render with passed value', () => {
+  it('should render with passed value in "label"', () => {
     render(<Dropdown name="teste" label="foi" items={items} />)
     expect(screen.getByLabelText('foi')).toBeInTheDocument()
   })
@@ -48,7 +48,7 @@ describe('<Dropdown />', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('should render the chakra styles', async () => {
+  it('should check the select scan snow and return option ', async () => {
     render(<Dropdown name="teste" label="Deu certo" items={items} />)
 
     await userEvent.selectOptions(

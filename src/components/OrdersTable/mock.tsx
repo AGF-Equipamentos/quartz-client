@@ -33,7 +33,8 @@ const ordersMock = [
     number: '004',
     provider: 'Arthur',
     tags: 'pedido CE28p;pedidoMF75P2',
-    observation: 'Tá quase dando certo',
+    observation:
+      'Basic text writing, including headings, body text, lists, and more.',
     delivery: '2022-03-31T16:37:45.333Z',
     status: 'Confirmado',
     bought: 'Bruna',
@@ -266,36 +267,6 @@ const ordersMock = [
     observation: 'Não deu certo',
     delivery: '2022-04-03T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Ronaldo',
-    approved: 'Sim'
-  },
-  {
-    number: '028',
-    provider: 'Gustavo',
-    tags: 'pedido CE29p;pedidoMF75P2',
-    observation: 'Não deu certo',
-    delivery: '2022-04-04T16:37:45.333Z',
-    status: 'Aguardando confirmação',
-    bought: 'Ronaldo',
-    approved: 'Sim'
-  },
-  {
-    number: '029',
-    provider: 'Isabela',
-    tags: 'pedidoMF75P2',
-    observation: 'Não deu certo',
-    delivery: '2022-04-02T16:37:45.333Z',
-    status: 'Aguardando aprovação',
-    bought: 'Ronaldo',
-    approved: 'Sim'
-  },
-  {
-    number: '010',
-    provider: 'Isabela',
-    tags: 'MF25P2',
-    observation: 'Não deu certo',
-    delivery: '2022-04-02T16:37:45.333Z',
-    status: 'Aguardando aprovação',
     bought: 'Ronaldo',
     approved: 'Sim'
   }

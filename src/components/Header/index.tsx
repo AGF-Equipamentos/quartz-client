@@ -36,10 +36,10 @@ export function Header() {
       )}
       <Logo />
 
-      {isWideVersion && <SearchBox />}
+      {/* {isWideVersion && <SearchBox />} */}
 
       <Flex align="center" ml="auto">
-        <NotificationsNav />
+        {/* <NotificationsNav /> */}
 
         <Profile showProfileData={isWideVersion} />
       </Flex>

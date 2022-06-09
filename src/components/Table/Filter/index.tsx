@@ -107,7 +107,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   return (
     <>
       <Modal isOpen={isOpen} onClose={handleClose} size="lg">
-        <ModalOverlay />
+        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(6px)" />
         <ModalContent bg="gray.900">
           <ModalHeader>Filtro</ModalHeader>
           <Box as="form">
@@ -169,23 +169,23 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     items={[
                       {
                         label: 'Sim',
-                        value: 0
+                        value: 'Sim'
                       },
                       {
                         label: 'Não',
-                        value: 1
+                        value: 'Não'
                       }
                     ]}
                     {...register('approved')}
                   />
                 </Box>
                 <Box w="50%">
-                  {/* <Input
+                  <Input
                     label="Entrega"
                     type="date"
                     size="sm"
                     {...register('delivery')}
-                  /> */}
+                  />
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">

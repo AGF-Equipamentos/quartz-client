@@ -34,7 +34,8 @@ import {
   Flex,
   Stack,
   Text,
-  Heading
+  Heading,
+  TableContainer
 } from '@chakra-ui/react'
 
 import {
@@ -45,7 +46,8 @@ import {
   useGroupBy,
   useExpanded,
   useFilters,
-  useFlexLayout
+  useFlexLayout,
+  useGlobalFilter
 } from 'react-table'
 import FilterModal from './Filter'
 import { Order } from 'components/OrdersTable'
@@ -76,7 +78,7 @@ export default function Table({ data, columns }: TableProps) {
     {
       columns,
       data,
-      initialState: { pageIndex: 0, pageSize: 5 }
+      initialState: { pageIndex: 0, pageSize: 5, hiddenColumns: ['approved'] }
     },
     useFilters,
     useGroupBy,
@@ -113,7 +115,11 @@ export default function Table({ data, columns }: TableProps) {
           icon={<Icon as={FiFilter} boxSize="14px" />}
         />
       </Flex>
-      <ChakraTable colorScheme="whiteAlpha" {...getTableProps()}>
+      <ChakraTable
+        variant="unstyled"
+        colorScheme="whiteAlpha"
+        {...getTableProps()}
+      >
         <Thead>
           {headerGroups.map((headerGroup) => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
@@ -175,12 +181,21 @@ export default function Table({ data, columns }: TableProps) {
           {page.map((row) => {
             prepareRow(row)
             return (
-              <Tr {...row.getRowProps()}>
+              <Tr
+                {...row.getRowProps()}
+                borderTop="1px"
+                borderColor="whiteAlpha.100"
+                _last={{
+                  borderBottom: '1px',
+                  borderColor: 'whiteAlpha.100'
+                }}
+              >
                 {row.cells.map((cell) => (
                   <Td
                     {...cell.getCellProps()}
                     isNumeric={cell.column.isNumeric}
-                    // alignSelf="center"
+                    alignSelf="center"
+                    mx="auto"
                     p={2}
                     bg={
                       cell.isGrouped
@@ -192,7 +207,7 @@ export default function Table({ data, columns }: TableProps) {
                         : ''
                     }
                   >
-                    <Stack direction="row" alignItems="center">
+                    <Stack>
                       {cell.isGrouped ? (
                         <>
                           <chakra.span

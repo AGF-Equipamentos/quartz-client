@@ -24,13 +24,11 @@ exports[`<Dropdown /> should render the chakra styles 1`] = `
         name="teste"
       >
         <option
-          style="background-color: black;"
           value="0"
         >
           Janeiro
         </option>
         <option
-          style="background-color: black;"
           value="1"
         >
           Fevereiro

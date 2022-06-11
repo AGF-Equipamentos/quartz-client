@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { Header } from 'components/Header'
 import { Sidebar } from 'components/Sidebar'
+import { FiAlertOctagon, FiAlertTriangle } from 'react-icons/fi'
 
 export type BaseProps = {
   children: React.ReactNode
@@ -36,10 +37,19 @@ const Base = ({ children }: BaseProps) => {
               </Text>
             </Box>
             <Flex mt="auto" ml="auto">
-              <Button size="sm" colorScheme="yellow">
+              <Button
+                size="sm"
+                colorScheme="yellow"
+                rightIcon={<FiAlertTriangle />}
+              >
                 Pausar
               </Button>
-              <Button ml={2} size="sm" colorScheme="red">
+              <Button
+                ml={2}
+                size="sm"
+                colorScheme="red"
+                rightIcon={<FiAlertOctagon />}
+              >
                 Finalizar
               </Button>
             </Flex>

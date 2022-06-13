@@ -1,6 +1,5 @@
 import { Column } from 'react-table'
-// import { EditIcon } from '@chakra-ui/icons'
-import { Badge, Tooltip } from '@chakra-ui/react'
+import { Badge, Box, Tooltip } from '@chakra-ui/react'
 import Table from 'components/Table'
 import {
   FiSend,
@@ -29,6 +28,24 @@ export type OrdersTableProps = {
 
 type IconStatusProps = {
   status: string
+}
+type BadgeApprovedProps = {
+  approved: string
+}
+
+const BadgeApproved = ({ approved }: BadgeApprovedProps) => {
+  if (approved === 'Sim')
+    return (
+      <Badge variant="subtle" colorScheme="green">
+        {approved}
+      </Badge>
+    )
+  else
+    return (
+      <Badge variant="subtle" colorScheme="red">
+        {approved}
+      </Badge>
+    )
 }
 
 const IconStatus = ({ status }: IconStatusProps) => {
@@ -90,6 +107,7 @@ function OrdersTable({ orders }: OrdersTableProps) {
       Aggregated: ({ value }) => `${value} Status`,
       Cell: ({ cell: { value } }) => <IconStatus status={value} />
     },
+
     {
       Header: 'Número',
       accessor: 'number',
@@ -155,7 +173,8 @@ function OrdersTable({ orders }: OrdersTableProps) {
       Header: 'Aprovado',
       accessor: 'approved',
       aggregate: 'uniqueCount',
-      Aggregated: ({ value }) => `${value} Aprovados`
+      Aggregated: ({ value }) => `${value} Aprovados`,
+      Cell: ({ cell: { value } }) => <BadgeApproved approved={value} />
     },
     {
       Header: 'Ações'

@@ -1,4 +1,4 @@
-import { fireEvent, queryByText, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { TagsInput } from '.'
 const Tags = ['CE25P', 'MF75P2', 'CE28P']
 
@@ -31,7 +31,6 @@ describe('<TagsInput />', () => {
     expect(screen.getByText('alana')).toBeInTheDocument()
   })
 
-  //  fazer o se for diferente de "entre"
   it('should not be possible to tighten another tacla be to be the "Enter"', () => {
     render(<TagsInput setValue={() => true} />)
 
@@ -42,16 +41,18 @@ describe('<TagsInput />', () => {
     expect(screen.queryByText('alana')).not.toBeInTheDocument()
   })
 
-  // fazer se o !value.trim()
   //usar o getAll, e usar a proriedade roHaveLength
   it('should not render empty', () => {
-    render(<TagsInput setValue={() => true} />)
+    render(<TagsInput setValue={() => true} initialTags={Tags} />)
 
     const TagInput = screen.getByPlaceholderText('Adicionar Tag...')
     fireEvent.change(TagInput, { target: { value: ' ' } })
 
     fireEvent.keyDown(TagInput, { key: 'Enter' })
-    expect(screen.queryByText(' ')).not.toBeInTheDocument()
+    // expect(screen.queryByText(' ')).not.toBeInTheDocument()
+
+    // const Tags = ['CE25P', 'MF75P2', 'CE28P']
+    // expect(screen.getAllByText('CE25P', 'MF75P2', 'CE28P')).toHaveLength(3)
   })
 
   // it('should create new tag', () => {

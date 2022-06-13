@@ -57,7 +57,7 @@ const orders = [
     delivery: '2022-04-02T16:37:45.333Z',
     status: 'Aguardando aprovação',
     bought: 'Ronaldo',
-    approved: 'Sim'
+    approved: 'Não'
   },
   {
     number: '007',
@@ -77,6 +77,16 @@ const orders = [
     delivery: '2022-04-04T16:37:45.333Z',
     status: 'Aguardando confirmação',
     bought: 'Ronaldo',
+    approved: 'Não'
+  },
+  {
+    number: '009',
+    provider: 'Ana Beatriz',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Deu certo',
+    delivery: '2022-04-04T16:37:45.333Z',
+    status: 'Confirmado',
+    bought: 'Alana',
     approved: 'Sim'
   }
 ]

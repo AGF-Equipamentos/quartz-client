@@ -54,23 +54,23 @@ const schema = yup.object().shape({
 const OptionsStatus = [
   {
     label: 'Aguardando aprovação',
-    value: 0
+    value: 'Aguardando aprovação'
   },
   {
     label: 'Aguardando envio ao fornecedor',
-    value: 1
+    value: 'Aguardando envio ao fornecedor'
   },
   {
     label: 'Aguardando confirmação',
-    value: 2
+    value: 'Aguardando confirmação'
   },
   {
     label: 'Confirmado',
-    value: 3
+    value: 'Confirmado'
   },
   {
     label: 'Atrasado',
-    value: 4
+    value: 'Atrasado'
   }
 ]
 
@@ -163,11 +163,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     items={[
                       {
                         label: 'Sim',
-                        value: 0
+                        value: 'Sim'
                       },
                       {
                         label: 'Não',
-                        value: 1
+                        value: 'Não'
                       }
                     ]}
                     {...register('approved')}

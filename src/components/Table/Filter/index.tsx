@@ -18,6 +18,7 @@ import { Dropdown } from 'components/Dropdown'
 import Button from 'components/Button'
 import { TagsInput } from 'components/TagsInput'
 import { monthOptions } from 'utils/options/monthOptions'
+import { optionsStatus } from 'utils/options/optionsStatus'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -50,29 +51,6 @@ const schema = yup.object().shape({
   bought: yup.string(),
   approved: yup.string()
 })
-
-const OptionsStatus = [
-  {
-    label: 'Aguardando aprovação',
-    value: 'Aguardando aprovação'
-  },
-  {
-    label: 'Aguardando envio ao fornecedor',
-    value: 'Aguardando envio ao fornecedor'
-  },
-  {
-    label: 'Aguardando confirmação',
-    value: 'Aguardando confirmação'
-  },
-  {
-    label: 'Confirmado',
-    value: 'Confirmado'
-  },
-  {
-    label: 'Atrasado',
-    value: 'Atrasado'
-  }
-]
 
 const FilterModal: React.FC<FilterModalProps> = ({
   isOpen,
@@ -188,7 +166,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     placeholder="Selecione uma opção"
                     label="Status"
                     size="sm"
-                    items={OptionsStatus}
+                    items={optionsStatus}
                     {...register('status')}
                   />
                 </Box>

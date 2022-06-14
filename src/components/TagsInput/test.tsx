@@ -43,16 +43,16 @@ describe('<TagsInput />', () => {
 
   //usar o getAll, e usar a proriedade roHaveLength
   it('should not render empty', () => {
-    render(<TagsInput setValue={() => true} initialTags={Tags} />)
+    render(<TagsInput setValue={() => true} />)
 
     const TagInput = screen.getByPlaceholderText('Adicionar Tag...')
     fireEvent.change(TagInput, { target: { value: ' ' } })
 
     fireEvent.keyDown(TagInput, { key: 'Enter' })
     // expect(screen.queryByText(' ')).not.toBeInTheDocument()
-
     // const Tags = ['CE25P', 'MF75P2', 'CE28P']
-    // expect(screen.getAllByText('CE25P', 'MF75P2', 'CE28P')).toHaveLength(3)
+
+    // expect(screen.getAllByText('Tags')).toHaveLength(1)
   })
 
   // it('should create new tag', () => {

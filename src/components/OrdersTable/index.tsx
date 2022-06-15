@@ -1,5 +1,5 @@
 import { Column } from 'react-table'
-import { Badge, Box, Tooltip } from '@chakra-ui/react'
+import { Badge, Tooltip, Container, Flex, Box, VStack } from '@chakra-ui/react'
 import Table from 'components/Table'
 import {
   FiSend,
@@ -18,7 +18,7 @@ export type Order = {
   observation: string
   delivery: string
   status: string
-  bought: string
+  buyer: string
   approved: string
 }
 
@@ -105,7 +105,11 @@ function OrdersTable({ orders }: OrdersTableProps) {
       accessor: 'status',
       aggregate: 'uniqueCount',
       Aggregated: ({ value }) => `${value} Status`,
-      Cell: ({ cell: { value } }) => <IconStatus status={value} />
+      Cell: ({ cell: { value } }) => (
+        <Container centerContent>
+          <IconStatus status={value} />
+        </Container>
+      )
     },
 
     {
@@ -165,7 +169,7 @@ function OrdersTable({ orders }: OrdersTableProps) {
 
     {
       Header: 'Comprador',
-      accessor: 'bought',
+      accessor: 'buyer',
       aggregate: 'uniqueCount',
       Aggregated: ({ value }) => `${value} Compradores`
     },

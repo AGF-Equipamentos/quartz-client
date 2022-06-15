@@ -6,7 +6,7 @@ const orders = [
     observation: 'Deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Arthur',
+    buyer: 'Arthur',
     approved: 'Sim'
   },
   {
@@ -16,7 +16,7 @@ const orders = [
     observation: 'Não deu certo',
     delivery: '2022-03-29T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Kevin',
+    buyer: 'Kevin',
     approved: 'Não'
   },
   {
@@ -26,7 +26,7 @@ const orders = [
     observation: 'Deu certo',
     delivery: '2022-03-30T16:37:45.333Z',
     status: 'Aguardando confirmação',
-    bought: 'Alana',
+    buyer: 'Alana',
     approved: 'Sim'
   },
   {
@@ -36,7 +36,7 @@ const orders = [
     observation: 'Tá quase dando certo',
     delivery: '2022-03-31T16:37:45.333Z',
     status: 'Confirmado',
-    bought: 'Bruna',
+    buyer: 'Bruna',
     approved: 'Não'
   },
   {
@@ -46,7 +46,7 @@ const orders = [
     observation: 'Não deu certo',
     delivery: '2022-04-01T16:37:45.333Z',
     status: 'Atrasado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -56,7 +56,7 @@ const orders = [
     observation: 'Não deu certo',
     delivery: '2022-04-02T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Não'
   },
   {
@@ -66,7 +66,7 @@ const orders = [
     observation: 'Não deu certo',
     delivery: '2022-04-03T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -76,7 +76,7 @@ const orders = [
     observation: 'Não deu certo',
     delivery: '2022-04-04T16:37:45.333Z',
     status: 'Aguardando confirmação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Não'
   },
   {
@@ -86,7 +86,7 @@ const orders = [
     observation: 'Deu certo',
     delivery: '2022-04-04T16:37:45.333Z',
     status: 'Confirmado',
-    bought: 'Alana',
+    buyer: 'Alana',
     approved: 'Sim'
   }
 ]

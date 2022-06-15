@@ -11,7 +11,7 @@ type UnitConversion = {
   observation: string
   delivery: Date
   status: string
-  bought: string
+  buyer: string
   approved: string
 }
 
@@ -23,7 +23,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Arthur',
+    buyer: 'Arthur',
     approved: 'Sim'
   },
   {
@@ -33,7 +33,7 @@ const dataWithoutMonth = [
     observation: 'Não deu certo',
     delivery: '2022-03-29T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Kevin',
+    buyer: 'Kevin',
     approved: 'Não'
   },
   {
@@ -43,7 +43,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-03-30T16:37:45.333Z',
     status: 'Aguardando confirmação',
-    bought: 'Alana',
+    buyer: 'Alana',
     approved: 'Sim'
   },
   {
@@ -53,7 +53,7 @@ const dataWithoutMonth = [
     observation: 'Tá quase dando certo',
     delivery: '2022-03-31T16:37:45.333Z',
     status: 'Confirmado',
-    bought: 'Bruna',
+    buyer: 'Bruna',
     approved: 'Não'
   },
   {
@@ -63,7 +63,7 @@ const dataWithoutMonth = [
     observation: 'Não deu certo',
     delivery: '2022-04-01T16:37:45.333Z',
     status: 'Atrasado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -73,7 +73,7 @@ const dataWithoutMonth = [
     observation: 'Não deu certo',
     delivery: '2022-04-02T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -83,7 +83,7 @@ const dataWithoutMonth = [
     observation: 'Não deu certo',
     delivery: '2022-04-03T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -93,7 +93,7 @@ const dataWithoutMonth = [
     observation: 'Não deu certo',
     delivery: '2022-04-04T16:37:45.333Z',
     status: 'Aguardando confirmação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -103,7 +103,7 @@ const dataWithoutMonth = [
     observation: 'Não deu certo',
     delivery: '2022-04-05T16:37:45.333Z',
     status: 'Confirmado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -113,7 +113,7 @@ const dataWithoutMonth = [
     observation: 'Não deu certo',
     delivery: '2022-04-06T16:37:45.333Z',
     status: 'Atrasado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -123,7 +123,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-07T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -133,7 +133,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-08T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -143,7 +143,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-09T16:37:45.333Z',
     status: 'Aguardando confirmação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -153,7 +153,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-10T16:37:45.333Z',
     status: 'Confirmado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -163,7 +163,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-11T16:37:45.333Z',
     status: 'Atrasado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -173,7 +173,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-12T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -183,7 +183,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-13T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -193,7 +193,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-14T16:37:45.333Z',
     status: 'Aguardando confirmação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -203,7 +203,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-15T16:37:45.333Z',
     status: 'Confirmado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -213,7 +213,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-16T16:37:45.333Z',
     status: 'Atrasado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -223,7 +223,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-17T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -233,7 +233,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-18T16:37:45.333Z',
     status: 'Aguardando envio ao fornecedor',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -243,7 +243,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-19T16:37:45.333Z',
     status: 'Aguardando confirmação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -253,7 +253,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-20T16:37:45.333Z',
     status: 'Confirmado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -263,7 +263,7 @@ const dataWithoutMonth = [
     observation: 'Deu certo',
     delivery: '2022-04-21T16:37:45.333Z',
     status: 'Atrasado',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   },
   {
@@ -273,7 +273,7 @@ const dataWithoutMonth = [
     observation: 'Foiiiii',
     delivery: '2022-04-22T16:37:45.333Z',
     status: 'Aguardando aprovação',
-    bought: 'Ronaldo',
+    buyer: 'Ronaldo',
     approved: 'Sim'
   }
 ]
@@ -343,7 +343,7 @@ const columns: Column<UnitConversion>[] = [
   },
   {
     Header: 'Comprador',
-    accessor: 'bought',
+    accessor: 'buyer',
     aggregate: 'uniqueCount',
     Aggregated: ({ value }) => `${value}  Compradores`
   },

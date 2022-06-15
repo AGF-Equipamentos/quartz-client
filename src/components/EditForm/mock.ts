@@ -28,7 +28,7 @@ const editFormMock = [
     value: 'Confirmado'
   },
   {
-    id: 'bought',
+    id: 'buyer',
     value: 'Ronaldo'
   },
   {

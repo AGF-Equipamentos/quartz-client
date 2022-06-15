@@ -36,7 +36,7 @@ export type FilterFormData = {
   observation: string
   delivery: Date
   status: string
-  bought: string
+  buyer: string
   approved: string
 }
 
@@ -48,7 +48,7 @@ const schema = yup.object().shape({
   observation: yup.string(),
   delivery: yup.string(),
   status: yup.string(),
-  bought: yup.string(),
+  buyer: yup.string(),
   approved: yup.string()
 })
 
@@ -175,7 +175,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Comprador"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    {...register('bought')}
+                    {...register('buyer')}
                   />
                 </Box>
               </Stack>

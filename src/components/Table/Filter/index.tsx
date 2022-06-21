@@ -5,7 +5,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Stack
+  Stack,
+  filter
 } from '@chakra-ui/react'
 
 import { Filters } from 'react-table'
@@ -19,6 +20,7 @@ import Button from 'components/Button'
 import { TagsInput } from 'components/TagsInput'
 import { monthOptions } from 'utils/options/monthOptions'
 import { optionsStatus } from 'utils/options/optionsStatus'
+import { invertScale } from 'framer-motion/types/value/use-inverted-scale'
 
 type FilterModalProps = {
   isOpen: boolean

@@ -38,7 +38,7 @@ describe('<TagsInput />', () => {
     const tagInput = screen.getByPlaceholderText('Adicionar Tag...')
     fireEvent.change(tagInput, { target: { value: 'alana' } })
 
-    fireEvent.keyDown(tagInput, { key: 'Espaço' })
+    fireEvent.keyDown(tagInput, { key: 'Tab' })
     expect(screen.queryByText('alana')).not.toBeInTheDocument()
   })
 

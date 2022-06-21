@@ -53,10 +53,9 @@ describe('<TagsInput />', () => {
     expect(screen.getAllByRole('button')).toHaveLength(3)
   })
 
-  // const tags = ['CE25P', 'MF75P2', 'CE28P']
-
   it('should trigger the "setValue" function', () => {
     const setValue = jest.fn()
+
     // initial tags
     render(<TagsInput setValue={setValue} initialTags={tags} />)
     expect(setValue).toHaveBeenCalledWith('tags', tags.join(';'))
@@ -66,8 +65,15 @@ describe('<TagsInput />', () => {
     fireEvent.change(tagInput, { target: { value: 'bia' } })
 
     fireEvent.keyDown(tagInput, { key: 'Enter' })
-    // expect(setValue).toHaveBeenCalledWith()
+
+    expect(setValue).toHaveBeenCalledWith('tags', 'CE25P;MF75P2;CE28P;bia')
 
     // remove tag
+    const button = screen.getByText('bia').nextSibling
+
+    if (button === null) return
+    fireEvent.click(button)
+
+    expect(setValue).toBeCalledWith('tags', 'CE25P;MF75P2;CE28P')
   })
 })

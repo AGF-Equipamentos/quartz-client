@@ -1,5 +1,5 @@
 import { Column } from 'react-table'
-import { Badge, Tooltip, Container, Flex, Box, VStack } from '@chakra-ui/react'
+import { Badge, Tooltip, Container } from '@chakra-ui/react'
 import Table from 'components/Table'
 import {
   FiSend,

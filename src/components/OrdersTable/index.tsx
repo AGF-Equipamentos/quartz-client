@@ -1,5 +1,5 @@
 import { Column } from 'react-table'
-import { Badge, Tooltip, Container } from '@chakra-ui/react'
+import { Badge, Tooltip, Container, Icon } from '@chakra-ui/react'
 import Table from 'components/Table'
 import {
   FiSend,
@@ -8,7 +8,6 @@ import {
   FiAlertTriangle,
   FiAlertOctagon
 } from 'react-icons/fi'
-import { Icon } from '@chakra-ui/icons'
 
 export type Order = {
   number: string
@@ -16,7 +15,7 @@ export type Order = {
   tags: string
   month: number
   observation: string
-  delivery: string
+  delivery: Date
   status: string
   buyer: string
   approved: string
@@ -124,17 +123,18 @@ function OrdersTable({ orders }: OrdersTableProps) {
       aggregate: 'uniqueCount',
       Aggregated: ({ value }) => `${value} Fornecedores`
     },
+
     {
       Header: 'Tags',
       accessor: 'tags',
       aggregate: 'uniqueCount',
       Aggregated: ({ value }) => `${value} Tags`,
       Cell: ({ cell: { value } }) =>
-        value.split(';').map((value) => (
-          <>
-            <Badge colorScheme="green">{`${value}`}</Badge>
-          </>
-        ))
+        value
+          .split(';')
+          .map((value, index) => (
+            <Badge colorScheme="green" key={index}>{`${value}`}</Badge>
+          ))
     },
     {
       Header: 'Mês',

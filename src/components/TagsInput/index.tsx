@@ -44,9 +44,7 @@ const TagsInputBase: ForwardRefRenderFunction<
 
   useEffect(() => {
     setValue('tags', tags.join(';'))
-    console.log('tags', tags.join(';'))
   }, [tags, setValue])
-  // console.log(tags)
 
   return (
     <Box borderRadius={8} bg="gray.700" p={4}>

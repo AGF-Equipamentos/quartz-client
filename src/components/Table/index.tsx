@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/icons'
 import {
   FiFilter,
   FiMaximize2,
@@ -34,7 +33,8 @@ import {
   Flex,
   Stack,
   Text,
-  Heading
+  Heading,
+  Icon
 } from '@chakra-ui/react'
 
 import {

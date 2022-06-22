@@ -27,6 +27,9 @@ export const theme = extendTheme({
       },
       option: {
         color: 'gray.900'
+      },
+      input: {
+        'color-scheme': 'dark'
       }
     }
   }

@@ -5,8 +5,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Stack,
-  filter
+  Stack
 } from '@chakra-ui/react'
 
 import { Filters } from 'react-table'
@@ -20,7 +19,6 @@ import Button from 'components/Button'
 import { TagsInput } from 'components/TagsInput'
 import { monthOptions } from 'utils/options/monthOptions'
 import { optionsStatus } from 'utils/options/optionsStatus'
-import { invertScale } from 'framer-motion/types/value/use-inverted-scale'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -64,8 +62,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
       resolver: yupResolver(schema)
     })
 
-  //const { errors } = formState
-
   const handleFilterModal: SubmitHandler<FilterFormData> = async (values) => {
     handleFilter(
       Object.keys(values).map((key) => ({
@@ -73,8 +69,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
         value: values[key as keyof FilterFormData]
       }))
     )
-    // console.log(values)
-
     handleClose()
   }
 
@@ -185,12 +179,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
             <ModalFooter>
               <Button
-                bg="gray.500"
+                colorScheme="gray.500"
                 mr={3}
                 text="Fechar "
                 onClick={handleClose}
               />
-
+              {/* <Button colorScheme="teal" text="Limpar" mr={3} /> */}
               <Button
                 type="button"
                 text="Filtrar"

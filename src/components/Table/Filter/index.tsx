@@ -57,7 +57,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   handleClose,
   handleFilter
 }) => {
-  const { register, handleSubmit, formState, setValue, getValues } =
+  const { register, handleSubmit, formState, setValue, getValues, reset } =
     useForm<FilterFormData>({
       resolver: yupResolver(schema)
     })
@@ -69,6 +69,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
         value: values[key as keyof FilterFormData]
       }))
     )
+
     handleClose()
   }
 
@@ -181,10 +182,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
               <Button
                 colorScheme="gray.500"
                 mr={3}
-                text="Fechar "
+                text="Cancelar"
                 onClick={handleClose}
               />
-              {/* <Button colorScheme="teal" text="Limpar" mr={3} /> */}
+              <Button
+                bgColor="gray.500"
+                text="Limpar"
+                mr={3}
+                onClick={() => reset()}
+              />
               <Button
                 type="button"
                 text="Filtrar"

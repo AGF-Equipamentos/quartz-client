@@ -12,6 +12,9 @@ import {
   FiChevronRight
 } from 'react-icons/fi'
 
+// import { RiFilterOffLine } from 'react-icons/ri'
+
+import { TbFilterOff } from 'react-icons/tb'
 /* eslint-disable react/jsx-key */
 import * as React from 'react'
 import {
@@ -97,15 +100,23 @@ export default function Table({ data, columns }: TableProps) {
         handleFilter={setAllFilters}
       />
 
-      <Flex justifyContent="space-between">
+      <Flex justifyContent="space-between" alignItems="center">
         <Heading>Titulo</Heading>
-        <IconButton
-          color="white"
-          variant="link"
-          onClick={handleOpenFilter}
-          aria-label="Filtrar"
-          icon={<Icon as={FiFilter} boxSize="14px" />}
-        />
+        <Box justifyContent="flex-end" mr={3}>
+          <IconButton
+            color="white"
+            variant="link"
+            onClick={handleOpenFilter}
+            aria-label="Filtrar"
+            icon={<Icon as={FiFilter} boxSize="14px" />}
+          />
+          <IconButton
+            color="white"
+            variant="link"
+            aria-label="Tirar Filtro"
+            icon={<Icon as={TbFilterOff} />}
+          />
+        </Box>
       </Flex>
       <ChakraTable colorScheme="whiteAlpha" {...getTableProps()}>
         <Thead>

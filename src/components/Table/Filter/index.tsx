@@ -57,10 +57,18 @@ const FilterModal: React.FC<FilterModalProps> = ({
   handleClose,
   handleFilter
 }) => {
-  const { register, handleSubmit, formState, setValue, getValues, reset } =
-    useForm<FilterFormData>({
-      resolver: yupResolver(schema)
-    })
+  const {
+    register,
+    handleSubmit,
+    formState,
+    setValue,
+    getValues,
+    reset,
+    watch
+  } = useForm<FilterFormData>({
+    resolver: yupResolver(schema)
+  })
+  const watchTags = watch('tags')
 
   const handleFilterModal: SubmitHandler<FilterFormData> = async (values) => {
     handleFilter(
@@ -106,6 +114,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                       getValues('tags') ? getValues('tags')?.split(';') : []
                     }
                     setValue={setValue}
+                    callbackInputValue={watchTags}
                     {...register('tags')}
                   />
                 </Box>

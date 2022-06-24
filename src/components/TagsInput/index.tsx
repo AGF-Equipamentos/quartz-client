@@ -20,15 +20,17 @@ import { UseFormSetValue } from 'react-hook-form'
 export type TagsInputProps = {
   initialTags?: string[]
   setValue: UseFormSetValue<FilterFormData>
+  callbackInputValue?: string
 }
 
 const TagsInputBase: ForwardRefRenderFunction<
   HTMLInputElement,
   TagsInputProps
-> = ({ initialTags = [], setValue }, ref) => {
+> = ({ initialTags = [], setValue, callbackInputValue }, ref) => {
   const [tags, setTags] = useState<string[]>(initialTags)
+  // console.log(initialTags)
 
-  function hanldeCreateTags(
+  function handleCreateTags(
     e: KeyboardEvent<HTMLInputElement> & { target: HTMLInputElement }
   ) {
     if (e.key !== 'Enter') return
@@ -43,8 +45,18 @@ const TagsInputBase: ForwardRefRenderFunction<
   }
 
   useEffect(() => {
+    if (callbackInputValue === undefined) {
+      setTags([])
+    }
+  }, [callbackInputValue])
+
+  useEffect(() => {
     setValue('tags', tags.join(';'))
   }, [tags, setValue])
+
+  useEffect(() => {
+    setTags(initialTags)
+  }, [])
 
   return (
     <Box borderRadius={8} bg="gray.700" p={4}>
@@ -62,7 +74,7 @@ const TagsInputBase: ForwardRefRenderFunction<
           maxW="120px"
           name="tags"
           placeholder="Adicionar Tag..."
-          onKeyDown={hanldeCreateTags}
+          onKeyDown={handleCreateTags}
         />
       </Flex>
     </Box>

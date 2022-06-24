@@ -32,7 +32,7 @@ describe('<TagsInput />', () => {
     expect(screen.getByText('alana')).toBeInTheDocument()
   })
 
-  it('should not be possible to tighten another tacla be to be the "Enter"', () => {
+  it('should not be able ro create a tag by pressing a key other tahn "Enter"', () => {
     render(<TagsInput setValue={() => true} />)
 
     const tagInput = screen.getByPlaceholderText('Adicionar Tag...')
@@ -75,5 +75,12 @@ describe('<TagsInput />', () => {
     fireEvent.click(button)
 
     expect(setValue).toBeCalledWith('tags', 'CE25P;MF75P2;CE28P')
+
+    //limpar tag
+
+    // if (tags === undefined) expect(setValue).toHaveBeenCalledWith('tags', [])
   })
+  // it('should be able to clear the tags', () => {
+  //   render(<TagsInput setValue={() => true}  initialTags={}/>)
+  // })
 })

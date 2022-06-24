@@ -12,8 +12,6 @@ import {
   FiChevronRight
 } from 'react-icons/fi'
 
-// import { RiFilterOffLine } from 'react-icons/ri'
-
 import { TbFilterOff } from 'react-icons/tb'
 /* eslint-disable react/jsx-key */
 import * as React from 'react'
@@ -106,15 +104,16 @@ export default function Table({ data, columns }: TableProps) {
           <IconButton
             color="white"
             variant="link"
-            onClick={handleOpenFilter}
-            aria-label="Filtrar"
-            icon={<Icon as={FiFilter} boxSize="14px" />}
+            aria-label="Limpar Filtro"
+            onClick={() => setAllFilters([])}
+            icon={<Icon as={TbFilterOff} />}
           />
           <IconButton
             color="white"
             variant="link"
-            aria-label="Tirar Filtro"
-            icon={<Icon as={TbFilterOff} />}
+            onClick={handleOpenFilter}
+            aria-label="Filtrar"
+            icon={<Icon as={FiFilter} boxSize="14px" />}
           />
         </Box>
       </Flex>

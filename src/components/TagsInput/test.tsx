@@ -75,12 +75,32 @@ describe('<TagsInput />', () => {
     fireEvent.click(button)
 
     expect(setValue).toBeCalledWith('tags', 'CE25P;MF75P2;CE28P')
-
-    //limpar tag
-
-    // if (tags === undefined) expect(setValue).toHaveBeenCalledWith('tags', [])
   })
-  // it('should be able to clear the tags', () => {
-  //   render(<TagsInput setValue={() => true}  initialTags={}/>)
-  // })
+
+  it('should be able to clear the tags', () => {
+    const { rerender } = render(
+      <TagsInput setValue={() => true} initialTags={tags} />
+    )
+
+    const tagInput = screen.getByPlaceholderText('Adicionar Tag...')
+    fireEvent.change(tagInput, { target: { value: 'bia' } })
+    fireEvent.keyDown(tagInput, { key: 'Enter' })
+
+    rerender(
+      <TagsInput
+        setValue={() => true}
+        initialTags={tags}
+        callbackInputValue="CE25P;MF75P2;CE28P;bia"
+      />
+    )
+    // click button clear
+    rerender(
+      <TagsInput
+        setValue={() => true}
+        initialTags={tags}
+        callbackInputValue={undefined}
+      />
+    )
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
+  })
 })

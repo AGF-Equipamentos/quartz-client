@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import FilterModal from '.'
 
 describe('< FilterModal />', () => {
@@ -12,12 +12,20 @@ describe('< FilterModal />', () => {
         handleFilter={handleFilter}
       />
     )
-    const observationInput = screen.getByLabelText('Número')
-    fireEvent.change(observationInput, { target: { value: '011' } })
+
+    const numberInput = screen.getByLabelText('Número')
+    fireEvent.change(numberInput, { target: { value: '011' } })
 
     const button = screen.getByText('Filtrar')
     fireEvent.click(button)
 
-    // expect(handleFilter).
+    waitFor(() =>
+      expect(handleFilter).toHaveBeenCalledWith([
+        {
+          id: 'number',
+          value: '011'
+        }
+      ])
+    )
   })
 })

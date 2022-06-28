@@ -275,6 +275,16 @@ const dataWithoutMonth = [
     status: 'Aguardando aprovação',
     buyer: 'Ronaldo',
     approved: 'Sim'
+  },
+  {
+    number: '002',
+    provider: 'Ronaldo',
+    tags: 'pedido ce30p',
+    observation: 'Foiiiii',
+    delivery: '2022-04-22T16:37:45.333Z',
+    status: 'Aguardando aprovação',
+    buyer: 'Ronaldo',
+    approved: 'Sim'
   }
 ]
 

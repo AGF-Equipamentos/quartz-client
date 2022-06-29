@@ -1,4 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import FilterModal from '.'
 
 describe('< FilterModal />', () => {
@@ -17,6 +18,49 @@ describe('< FilterModal />', () => {
     fireEvent.change(numberInput, { target: { value: '011' } })
 
     const button = screen.getByText('Filtrar')
+
+    // Input provider
+    const providerInput = screen.getByLabelText('Fornecedor')
+    fireEvent.change(providerInput, { target: { value: 'Ronaldo' } })
+
+    //TagsInput
+    const tagsInput = screen.getByPlaceholderText('Adicionar Tag...')
+    fireEvent.change(tagsInput, { target: { value: 'PEDIDO CE27P' } })
+
+    fireEvent.keyDown(tagsInput, { key: 'Enter' })
+
+    // Input observation
+    const observationInput = screen.getByLabelText('Observação')
+    fireEvent.change(observationInput, { target: { value: 'Deu certo' } })
+
+    // Dropdown month
+    await userEvent.selectOptions(
+      screen.getByRole('combobox', { name: 'Mês' }),
+      screen.getByRole('option', { name: 'Janeiro' })
+    )
+
+    // Dropdown approved
+
+    await userEvent.selectOptions(
+      screen.getByRole('combobox', { name: 'Aprovado' }),
+      screen.getByRole('option', { name: 'Sim' })
+    )
+
+    // Input delivery
+    // const deliveryInput = screen.getByLabelText('Entrega')
+    // fireEvent.change(deliveryInput, { target: { value: '04/04/2022' } })
+
+    // Dropdown Status
+    await userEvent.selectOptions(
+      screen.getByRole('combobox', { name: 'Status' }),
+      screen.getAllByRole('option', { name: 'Confirmado' })
+    )
+
+    // Input buyer
+
+    const buyerInput = screen.getByLabelText('Comprador')
+    fireEvent.change(buyerInput, { target: { value: 'Arthur' } })
+
     fireEvent.click(button)
 
     await waitFor(() =>
@@ -27,122 +71,7 @@ describe('< FilterModal />', () => {
         },
         {
           id: 'provider',
-          value: ''
-        },
-        {
-          id: 'tags',
-          value: ''
-        },
-        {
-          id: 'observation',
-          value: ''
-        },
-        {
-          id: 'month',
-          value: ''
-        },
-        {
-          id: 'approved',
-          value: ''
-        },
-        {
-          id: 'delivery',
-          value: ''
-        },
-        {
-          id: 'status',
-          value: ''
-        },
-        {
-          id: 'buyer',
-          value: ''
-        }
-      ])
-    )
-  })
-  it('should be possible to filter by the provider', async () => {
-    const handleFilter = jest.fn()
-
-    render(
-      <FilterModal
-        isOpen={true}
-        handleClose={() => false}
-        handleFilter={handleFilter}
-      />
-    )
-    const providerInput = screen.getByLabelText('Fornecedor')
-    fireEvent.change(providerInput, { target: { value: 'Ronaldo' } })
-
-    const button = screen.getByText('Filtrar')
-    fireEvent.click(button)
-
-    await waitFor(() =>
-      expect(handleFilter).toHaveBeenCalledWith([
-        {
-          id: 'number',
-          value: ''
-        },
-        {
-          id: 'provider',
           value: 'Ronaldo'
-        },
-        {
-          id: 'tags',
-          value: ''
-        },
-        {
-          id: 'observation',
-          value: ''
-        },
-        {
-          id: 'month',
-          value: ''
-        },
-        {
-          id: 'approved',
-          value: ''
-        },
-        {
-          id: 'delivery',
-          value: ''
-        },
-        {
-          id: 'status',
-          value: ''
-        },
-        {
-          id: 'buyer',
-          value: ''
-        }
-      ])
-    )
-  })
-  it('should be possible to filter by the tags', async () => {
-    const handleFilter = jest.fn()
-    render(
-      <FilterModal
-        isOpen={true}
-        handleClose={() => false}
-        handleFilter={handleFilter}
-      />
-    )
-
-    const tagsInput = screen.getByPlaceholderText('Adicionar Tag...')
-    fireEvent.change(tagsInput, { target: { value: 'PEDIDO CE27P' } })
-
-    fireEvent.keyDown(tagsInput, { key: 'Enter' })
-
-    const button = screen.getByText('Filtrar')
-    fireEvent.click(button)
-    await waitFor(() =>
-      expect(handleFilter).toHaveBeenCalledWith([
-        {
-          id: 'number',
-          value: ''
-        },
-        {
-          id: 'provider',
-          value: ''
         },
         {
           id: 'tags',
@@ -150,15 +79,15 @@ describe('< FilterModal />', () => {
         },
         {
           id: 'observation',
-          value: ''
+          value: 'Deu certo'
         },
         {
           id: 'month',
-          value: ''
+          value: '1'
         },
         {
           id: 'approved',
-          value: ''
+          value: 'Sim'
         },
         {
           id: 'delivery',
@@ -166,11 +95,11 @@ describe('< FilterModal />', () => {
         },
         {
           id: 'status',
-          value: ''
+          value: 'Confirmado'
         },
         {
           id: 'buyer',
-          value: ''
+          value: 'Arthur'
         }
       ])
     )

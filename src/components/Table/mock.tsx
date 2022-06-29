@@ -9,7 +9,7 @@ type UnitConversion = {
   tags: string
   month: string
   observation: string
-  delivery: Date
+  delivery: string
   status: string
   buyer: string
   approved: string

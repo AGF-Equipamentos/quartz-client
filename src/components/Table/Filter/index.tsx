@@ -34,7 +34,7 @@ export type FilterFormData = {
   tags: string
   month: string
   observation: string
-  delivery: Date
+  delivery: string
   status: string
   buyer: string
   approved: string
@@ -71,7 +71,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const watchTags = watch('tags')
 
   const handleFilterModal: SubmitHandler<FilterFormData> = async (values) => {
-    // console.log(values)
+    console.log(values)
     handleFilter(
       Object.keys(values).map((key) => ({
         id: key,

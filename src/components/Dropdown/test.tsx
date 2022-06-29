@@ -48,7 +48,7 @@ describe('<Dropdown />', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('should check the select scan snow and return option ', async () => {
+  it('should check if the selected option is selected', async () => {
     render(<Dropdown name="teste" label="Deu certo" items={items} />)
 
     await userEvent.selectOptions(

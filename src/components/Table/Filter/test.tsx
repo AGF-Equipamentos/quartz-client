@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import FilterModal from '.'
 
 describe('< FilterModal />', () => {
-  it('should be possible to filter by the number', async () => {
+  it('should be possible to filter', async () => {
     const handleFilter = jest.fn()
 
     render(
@@ -47,10 +47,13 @@ describe('< FilterModal />', () => {
     )
 
     // Input delivery
-    // const deliveryInput = screen.getByLabelText('Entrega')
-    // fireEvent.change(deliveryInput, { target: { value: '04/04/2022' } })
 
-    // Dropdown Status
+    const deliveryInput = screen.getByLabelText('Entrega')
+    fireEvent.change(deliveryInput, {
+      target: { value: '2022-04-04' }
+    })
+
+    //Dropdown Status
     await userEvent.selectOptions(
       screen.getByRole('combobox', { name: 'Status' }),
       screen.getAllByRole('option', { name: 'Confirmado' })
@@ -91,7 +94,7 @@ describe('< FilterModal />', () => {
         },
         {
           id: 'delivery',
-          value: ''
+          value: '2022-04-04'
         },
         {
           id: 'status',
@@ -103,5 +106,27 @@ describe('< FilterModal />', () => {
         }
       ])
     )
+  })
+  it('should be possible to clean the filter', () => {
+    render(
+      <FilterModal
+        isOpen={true}
+        handleClose={() => false}
+        handleFilter={() => true}
+      />
+    )
+    // Input number
+    const numberInput = screen.getByLabelText('Número')
+    fireEvent.change(numberInput, { target: { value: '012' } })
+
+    // Input provider
+    const providerInput = screen.getByLabelText('Fornecedor')
+    fireEvent.change(providerInput, { target: { value: 'Ronaldo ' } })
+
+    const button = screen.getByText('Limpar')
+    fireEvent.click(button)
+
+    // expect(screen.queryByDisplayValue('012')).not.toBeInTheDocument()
+    // expect(screen.queryByDisplayValue('Ronaldo')).not.toBeInTheDocument()
   })
 })

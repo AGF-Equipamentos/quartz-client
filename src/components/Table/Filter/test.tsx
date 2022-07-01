@@ -116,17 +116,19 @@ describe('< FilterModal />', () => {
       />
     )
     // Input number
-    const numberInput = screen.getByLabelText('Número')
+    const numberInput = screen.getByLabelText('Número') as HTMLInputElement
     fireEvent.change(numberInput, { target: { value: '012' } })
 
     // Input provider
-    const providerInput = screen.getByLabelText('Fornecedor')
-    fireEvent.change(providerInput, { target: { value: 'Ronaldo ' } })
+    const providerInput = screen.getByLabelText(
+      'Fornecedor'
+    ) as HTMLInputElement
+    fireEvent.change(providerInput, { target: { value: 'Ronaldo' } })
 
     const button = screen.getByText('Limpar')
     fireEvent.click(button)
 
-    // expect(screen.queryByDisplayValue('012')).not.toBeInTheDocument()
-    // expect(screen.queryByDisplayValue('Ronaldo')).not.toBeInTheDocument()
+    expect(numberInput.value).toBe('')
+    expect(providerInput.value).toBe('')
   })
 })

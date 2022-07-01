@@ -45,6 +45,7 @@ const EditForm: React.FC<EditFormProps> = ({ formDefaultValues }) => {
       setValue(defaultValue.id, defaultValue.value)
     })
   }, [formDefaultValues, setValue])
+  // console.log(formDefaultValues)
 
   return (
     <>

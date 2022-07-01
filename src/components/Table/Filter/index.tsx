@@ -32,7 +32,7 @@ export type FilterFormData = {
   number: string
   provider: string
   tags: string
-  month: string
+  month: number
   observation: string
   delivery: string
   status: string

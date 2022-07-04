@@ -44,7 +44,7 @@ const schema = yup.object().shape({
   number: yup.string(),
   provider: yup.string(),
   tags: yup.string(),
-  month: yup.string(),
+  month: yup.number(),
   observation: yup.string(),
   delivery: yup.string(),
   status: yup.string(),

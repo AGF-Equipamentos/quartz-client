@@ -1,7 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import { render, screen } from '@testing-library/react'
 import { Dropdown } from '.'
-// arrumar os valores
 const items = [
   {
     label: 'Janeiro',
@@ -19,7 +18,7 @@ describe('<Dropdown />', () => {
     expect(screen.getByLabelText('foi')).toBeInTheDocument()
   })
 
-  it('should render witch passed value in "name"', () => {
+  it('should render with passed value in "name"', () => {
     render(<Dropdown name="dropdwon1" label="Deu cerrto" items={items} />)
 
     expect(

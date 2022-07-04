@@ -36,7 +36,7 @@ describe('< FilterModal />', () => {
     // Dropdown month
     await userEvent.selectOptions(
       screen.getByRole('combobox', { name: 'Mês' }),
-      screen.getByRole('option', { name: 'Janeiro' })
+      screen.getByRole('option', { name: 'Maio' })
     )
 
     // Dropdown approved
@@ -69,16 +69,20 @@ describe('< FilterModal />', () => {
     await waitFor(() =>
       expect(handleFilter).toHaveBeenCalledWith([
         {
-          id: 'number',
-          value: '011'
+          id: 'approved',
+          value: 'Sim'
         },
         {
-          id: 'provider',
-          value: 'Ronaldo'
+          id: 'buyer',
+          value: 'Arthur'
         },
         {
-          id: 'tags',
-          value: 'PEDIDO CE27P'
+          id: 'status',
+          value: 'Confirmado'
+        },
+        {
+          id: 'delivery',
+          value: '2022-04-04'
         },
         {
           id: 'observation',
@@ -86,23 +90,20 @@ describe('< FilterModal />', () => {
         },
         {
           id: 'month',
-          value: '1'
+          value: 5
         },
         {
-          id: 'approved',
-          value: 'Sim'
+          id: 'tags',
+          value: 'PEDIDO CE27P'
+        },
+
+        {
+          id: 'provider',
+          value: 'Ronaldo'
         },
         {
-          id: 'delivery',
-          value: '2022-04-04'
-        },
-        {
-          id: 'status',
-          value: 'Confirmado'
-        },
-        {
-          id: 'buyer',
-          value: 'Arthur'
+          id: 'number',
+          value: '011'
         }
       ])
     )

@@ -133,9 +133,10 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   <Dropdown
                     label="Mês"
                     size="sm"
-                    placeholder="Selecione uma opção"
                     items={monthOptions}
-                    {...register('month')}
+                    {...register('month', {
+                      setValueAs: (v) => Number(v)
+                    })}
                   />
                 </Box>
               </Stack>

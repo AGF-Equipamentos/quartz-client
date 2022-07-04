@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  getByLabelText
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import FilterModal from '.'
 
@@ -69,20 +75,16 @@ describe('< FilterModal />', () => {
     await waitFor(() =>
       expect(handleFilter).toHaveBeenCalledWith([
         {
-          id: 'approved',
-          value: 'Sim'
+          id: 'number',
+          value: '011'
         },
         {
-          id: 'buyer',
-          value: 'Arthur'
+          id: 'provider',
+          value: 'Ronaldo'
         },
         {
-          id: 'status',
-          value: 'Confirmado'
-        },
-        {
-          id: 'delivery',
-          value: '2022-04-04'
+          id: 'tags',
+          value: 'PEDIDO CE27P'
         },
         {
           id: 'observation',
@@ -93,17 +95,20 @@ describe('< FilterModal />', () => {
           value: 5
         },
         {
-          id: 'tags',
-          value: 'PEDIDO CE27P'
-        },
-
-        {
-          id: 'provider',
-          value: 'Ronaldo'
+          id: 'approved',
+          value: 'Sim'
         },
         {
-          id: 'number',
-          value: '011'
+          id: 'delivery',
+          value: '2022-04-04'
+        },
+        {
+          id: 'status',
+          value: 'Confirmado'
+        },
+        {
+          id: 'buyer',
+          value: 'Arthur'
         }
       ])
     )
@@ -131,5 +136,21 @@ describe('< FilterModal />', () => {
 
     expect(numberInput.value).toBe('')
     expect(providerInput.value).toBe('')
+  })
+
+  it('should be possible to "close" the filter', () => {
+    const handleClose = jest.fn()
+    render(
+      <FilterModal
+        isOpen={true}
+        handleClose={handleClose}
+        handleFilter={() => true}
+      />
+    )
+    // colocar um "not" antes de clicar no botão
+    const button = screen.getByText('Cancelar')
+    fireEvent.click(button)
+
+    expect(handleClose).toHaveBeenCalled()
   })
 })

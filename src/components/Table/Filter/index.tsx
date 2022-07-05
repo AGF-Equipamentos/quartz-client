@@ -71,7 +71,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
   const watchTags = watch('tags')
 
   const handleFilterModal: SubmitHandler<FilterFormData> = async (values) => {
-    // console.log(values)
     handleFilter(
       Object.keys(values).map((key) => ({
         id: key,

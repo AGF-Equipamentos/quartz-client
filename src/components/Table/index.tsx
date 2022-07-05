@@ -14,7 +14,7 @@ import {
 
 import { TbFilterOff } from 'react-icons/tb'
 /* eslint-disable react/jsx-key */
-import * as React from 'react'
+import { useState } from 'react'
 import {
   Table as ChakraTable,
   Thead,
@@ -81,7 +81,7 @@ export default function Table({ data, columns }: TableProps) {
     usePagination
   )
 
-  const [showFilterModal, setShowFilterModal] = React.useState(false)
+  const [showFilterModal, setShowFilterModal] = useState(false)
 
   async function handleOpenFilter() {
     setShowFilterModal(true)

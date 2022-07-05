@@ -1,10 +1,4 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  getByLabelText
-} from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import FilterModal from '.'
 
@@ -147,7 +141,9 @@ describe('< FilterModal />', () => {
         handleFilter={() => true}
       />
     )
-    // colocar um "not" antes de clicar no botão
+
+    expect(handleClose).not.toHaveBeenCalled()
+
     const button = screen.getByText('Cancelar')
     fireEvent.click(button)
 

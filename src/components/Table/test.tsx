@@ -3,9 +3,10 @@ import Table from '.'
 import { data, columns } from 'components/Table/mock'
 
 describe('<Table />', () => {
-  it('should be possible to open the filter', () => {
+  it('should be possible to bring the lines.', async () => {
     render(<Table data={data} columns={columns} />)
 
-    // const button = screen.getByText('Filtrar')
+    // const row = screen.getByRole('cell', { name: '004' }).closest('tr')
+    // expect(row).toBeInTheDocument()
   })
 })

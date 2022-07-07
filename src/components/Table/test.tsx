@@ -8,6 +8,7 @@ describe('<Table />', () => {
 
     expect(screen.getByText('004')).toBeInTheDocument()
     expect(screen.getAllByText('Kevin')).toHaveLength(2)
-    expect(screen.getByText('PEDIDO CE28P')).toBeInTheDocument()
+    expect(screen.getByText(/PEDIDO CE28P/i)).toBeInTheDocument()
+    // expect(screen.getByText('')).toBeInTheDocument()
   })
 })

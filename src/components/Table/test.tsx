@@ -6,7 +6,8 @@ describe('<Table />', () => {
   it('should be possible to bring the lines.', async () => {
     render(<Table data={data} columns={columns} />)
 
-    // const row = screen.getByRole('cell', { name: '004' }).closest('tr')
-    // expect(row).toBeInTheDocument()
+    expect(screen.getByText('004')).toBeInTheDocument()
+    expect(screen.getAllByText('Kevin')).toHaveLength(2)
+    expect(screen.getByText('PEDIDO CE28P')).toBeInTheDocument()
   })
 })

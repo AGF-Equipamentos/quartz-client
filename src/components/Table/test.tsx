@@ -6,9 +6,10 @@ describe('<Table />', () => {
   it('should be possible to bring the lines.', async () => {
     render(<Table data={data} columns={columns} />)
 
-    expect(screen.getByText('004')).toBeInTheDocument()
-    expect(screen.getAllByText('Kevin')).toHaveLength(2)
-    expect(screen.getByText(/PEDIDO CE28P/i)).toBeInTheDocument()
-    // expect(screen.getByText('')).toBeInTheDocument()
+    expect(
+      screen.getByRole('row', {
+        name: '004 Kevin pedido CE28p MAR. Tá quase dando certo 31/03/2022 Confirmado Bruna Não'
+      })
+    ).toBeInTheDocument()
   })
 })

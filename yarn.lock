@@ -4599,12 +4599,17 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@tanstack/react-table@^0.0.1-alpha.0":
-  version "0.0.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-0.0.1-alpha.0.tgz#d22fe4960ac14ad8f291e2a4af5e4ea6dcdcd4f5"
-  integrity sha512-5I0sKKJyboRff4eq2YNDCS0/Zh9dvdn3l9Kzyc/m/eDorblccpJu4DeTitjjolaLu/VY5e2NjSKd2NgDhI+Erw==
+"@tanstack/react-table@^8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.1.4.tgz#84fb62852afbad0fa8a5643207b529530a1c5813"
+  integrity sha512-WpPrZVbwrom2+8wZaM94OkVPfhMyzYvxyxPk2xfyFexjGorKl5erI/EnMme1EXTltsND5Jhsq/wnU6medaOQ9w==
   dependencies:
-    ts-toolbelt "^9.6.0"
+    "@tanstack/table-core" "8.1.4"
+
+"@tanstack/table-core@8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.1.4.tgz#799b2bc4ced5d8c4ee099ece513270c1b73f16a7"
+  integrity sha512-iSlAT2BpkBFayJBgVxqQNXOgnF2S1r8b3aS1QlRGIusc4iZP0lRr0ie0CJ7Jhp0BZ62UH10RBIoBYHVYkg8Ejw==
 
 "@testing-library/dom@^8.0.0":
   version "8.0.0"
@@ -16142,11 +16147,6 @@ ts-pnp@^1.1.6:
   version "1.2.0"
   resolved "https://registry.npmjs.org/ts-pnp/-/ts-pnp-1.2.0.tgz"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
-
-ts-toolbelt@^9.6.0:
-  version "9.6.0"
-  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-9.6.0.tgz#50a25426cfed500d4a09bd1b3afb6f28879edfd5"
-  integrity sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==
 
 tsconfig-paths@^3.12.0:
   version "3.12.0"

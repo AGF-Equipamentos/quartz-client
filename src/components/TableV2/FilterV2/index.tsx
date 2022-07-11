@@ -5,11 +5,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Stack
+  Stack,
+  Box,
+  Divider
 } from '@chakra-ui/react'
-
 import { Filters } from 'react-table'
-import { Box } from '@chakra-ui/react'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -20,15 +20,12 @@ import { TagsInput } from 'components/TagsInput'
 import { monthOptions } from 'utils/options/monthOptions'
 import { optionsStatus } from 'utils/options/optionsStatus'
 
-type FilterModalProps = {
+type FilterModalV2Props = {
   isOpen: boolean
   handleClose(): void
-  handleFilter: (
-    updater: Filters<object> | ((filters: Filters<object>) => Filters<object>)
-  ) => void
 }
 
-export type FilterFormData = {
+export type FilterFormDataV2 = {
   number: string
   provider: string
   tags: string
@@ -49,44 +46,23 @@ const schema = yup.object().shape({
   delivery: yup.string(),
   status: yup.string(),
   buyer: yup.string(),
-  approved: yup.string()
+  apptoved: yup.string()
 })
 
-const FilterModal: React.FC<FilterModalProps> = ({
+const FilterModalV2: React.FC<FilterModalV2Props> = ({
   isOpen,
-  handleClose,
-  handleFilter
+  handleClose
 }) => {
-  const {
-    register,
-    handleSubmit,
-    formState,
-    setValue,
-    getValues,
-    reset,
-    watch
-  } = useForm<FilterFormData>({
+  const { setValue, reset } = useForm<FilterFormDataV2>({
     resolver: yupResolver(schema)
   })
-  const watchTags = watch('tags')
-
-  const handleFilterModal: SubmitHandler<FilterFormData> = async (values) => {
-    handleFilter(
-      Object.keys(values).map((key) => ({
-        id: key,
-        value: values[key as keyof FilterFormData]
-      }))
-    )
-
-    handleClose()
-  }
-
   return (
     <>
       <Modal isOpen={isOpen} onClose={handleClose} size="lg">
         <ModalOverlay />
         <ModalContent bg="gray.900">
           <ModalHeader>Filtro</ModalHeader>
+          <Divider borderColor="gray.600" w="95%" />
           <Box as="form">
             <ModalBody>
               <Stack direction="row" justifyContent="space-evenly">
@@ -95,7 +71,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Número"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    {...register('number')}
+                    name="number"
                   />
                 </Box>
                 <Box w="50%">
@@ -103,19 +79,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Fornecedor"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    {...register('provider')}
+                    name="provider"
                   />
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="100%">
                   <TagsInput
-                    initialTags={
-                      getValues('tags') ? getValues('tags')?.split(';') : []
-                    }
+                    // initialTags={
+                    //   // getValues('tags') ? getValues('tags')?.split(';')
+                    // }
                     setValue={setValue}
-                    callbackInputValue={watchTags}
-                    {...register('tags')}
                   />
                 </Box>
               </Stack>
@@ -125,7 +99,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Observação"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    {...register('observation')}
+                    name="observation"
                   />
                 </Box>
                 <Box w="50%">
@@ -133,9 +107,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Mês"
                     size="sm"
                     items={monthOptions}
-                    {...register('month', {
-                      setValueAs: (v) => Number(v)
-                    })}
+                    name="month"
                   />
                 </Box>
               </Stack>
@@ -155,7 +127,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                         value: 'Não'
                       }
                     ]}
-                    {...register('approved')}
+                    name="approved"
                   />
                 </Box>
                 <Box w="50%">
@@ -163,7 +135,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Entrega"
                     type="date"
                     size="sm"
-                    {...register('delivery')}
+                    name="delivery"
                   />
                 </Box>
               </Stack>
@@ -172,9 +144,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
                   <Dropdown
                     placeholder="Selecione uma opção"
                     label="Status"
-                    size="sm"
                     items={optionsStatus}
-                    {...register('status')}
+                    name="status"
                   />
                 </Box>
                 <Box w="50%">
@@ -182,7 +153,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                     label="Comprador"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    {...register('buyer')}
+                    name="buyer"
                   />
                 </Box>
               </Stack>
@@ -202,13 +173,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
                 mr={3}
                 onClick={() => reset()}
               />
-              <Button
-                type="button"
-                text="Filtrar"
-                colorScheme="yellow"
-                isLoading={formState.isSubmitting}
-                onClick={handleSubmit(handleFilterModal)}
-              />
+              <Button type="button" text="Filtrar" colorScheme="yellow" />
             </ModalFooter>
           </Box>
         </ModalContent>
@@ -216,4 +181,4 @@ const FilterModal: React.FC<FilterModalProps> = ({
     </>
   )
 }
-export default FilterModal
+export default FilterModalV2

@@ -88,6 +88,86 @@ const orders = [
     status: 'Confirmado',
     buyer: 'Alana',
     approved: 'Sim'
+  },
+  {
+    number: '010',
+    provider: 'Bruna',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-01T16:37:45.333Z',
+    status: 'Atrasado',
+    buyer: 'Ronaldo',
+    approved: 'Sim'
+  },
+  {
+    number: '011',
+    provider: 'Isabela',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-02T16:37:45.333Z',
+    status: 'Aguardando aprovação',
+    buyer: 'Ronaldo',
+    approved: 'Não'
+  },
+  {
+    number: '012',
+    provider: 'Gustavo',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-03T16:37:45.333Z',
+    status: 'Aguardando envio ao fornecedor',
+    buyer: 'Ronaldo',
+    approved: 'Sim'
+  },
+  {
+    number: '013',
+    provider: 'Ana Laura',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-04T16:37:45.333Z',
+    status: 'Aguardando confirmação',
+    buyer: 'Ronaldo',
+    approved: 'Não'
+  },
+  {
+    number: '014',
+    provider: 'Bruna',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-01T16:37:45.333Z',
+    status: 'Atrasado',
+    buyer: 'Ronaldo',
+    approved: 'Sim'
+  },
+  {
+    number: '015',
+    provider: 'Isabela',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-02T16:37:45.333Z',
+    status: 'Aguardando aprovação',
+    buyer: 'Ronaldo',
+    approved: 'Não'
+  },
+  {
+    number: '016',
+    provider: 'Gustavo',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-03T16:37:45.333Z',
+    status: 'Aguardando envio ao fornecedor',
+    buyer: 'Ronaldo',
+    approved: 'Sim'
+  },
+  {
+    number: '017',
+    provider: 'Ana Laura',
+    tags: 'pedido CE29p;pedidoMF75P2',
+    observation: 'Não deu certo',
+    delivery: '2022-04-04T16:37:45.333Z',
+    status: 'Aguardando confirmação',
+    buyer: 'Ronaldo',
+    approved: 'Não'
   }
 ]
 

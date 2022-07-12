@@ -115,7 +115,7 @@ function OrdersTable({ orders }: OrdersTableProps) {
       Header: 'Número',
       accessor: 'number',
       aggregate: 'uniqueCount',
-      Aggregated: ({ value }) => `${value} Número`
+      Aggregated: ({ value }) => `${value} Números`
     },
     {
       Header: 'Fornecedor',
@@ -194,7 +194,7 @@ function OrdersTable({ orders }: OrdersTableProps) {
       // )
     }
   ]
-  // console.log(data)
+  // console.log(columns)
 
   return <Table data={ordersFormatted} columns={columns} />
 }

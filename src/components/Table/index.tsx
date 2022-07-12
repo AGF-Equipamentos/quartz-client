@@ -203,9 +203,17 @@ export default function Table({ data, columns }: TableProps) {
                             {...row.getToggleRowExpandedProps()}
                           >
                             {row.isExpanded ? (
-                              <Icon as={FiArrowDown} pr="2px" />
+                              <Icon
+                                as={FiArrowDown}
+                                pr="2px"
+                                aria-label="Minimizar linha"
+                              />
                             ) : (
-                              <Icon as={FiArrowRight} pr="2px" />
+                              <Icon
+                                as={FiArrowRight}
+                                pr="2px"
+                                aria-label="Expandir linha"
+                              />
                             )}
                           </chakra.span>
                           {cell.render('Cell')} ({row.subRows.length})

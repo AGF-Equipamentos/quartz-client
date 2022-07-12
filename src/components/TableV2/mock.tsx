@@ -1,4 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table'
+import { Badge } from '@chakra-ui/react'
 
 export type OrderV2 = {
   number: string
@@ -164,7 +165,7 @@ const dataWithoutMonthV2 = [
     approved: 'Sim'
   },
   {
-    number: '016',
+    number: '001',
     provider: 'Bruno',
     tags: 'pedido CE39p',
     month: 'ABR.',
@@ -194,6 +195,7 @@ const columns: ColumnDef<OrderV2>[] = [
   },
   {
     accessorKey: 'tags',
+    cell: (info) => <Badge colorScheme="green">{info.getValue()}</Badge>,
     header: 'Tags',
     footer: (props) => props.column.id
   },
@@ -210,6 +212,12 @@ const columns: ColumnDef<OrderV2>[] = [
   },
   {
     accessorKey: 'delivery',
+    // cell: (info) =>
+    //   new Date(info).toLocaleDateString('pt-BR', {
+    //     day: '2-digit',
+    //     month: '2-digit',
+    //     year: 'numeric'
+    //   }),
     header: 'Entrega',
     footer: (props) => props.column.id
   },

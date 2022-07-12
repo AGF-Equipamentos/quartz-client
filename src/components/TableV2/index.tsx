@@ -3,7 +3,8 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  ColumnFiltersState
+  getFilteredRowModel,
+  getPaginationRowModel
 } from '@tanstack/react-table'
 import {
   Table as ChakraTable,
@@ -19,7 +20,6 @@ import {
   Icon
 } from '@chakra-ui/react'
 import { FiFilter } from 'react-icons/fi'
-
 import { dataV2, columns } from 'components/TableV2/mock'
 import { useState } from 'react'
 import FilterModalV2 from './FilterV2'
@@ -38,29 +38,14 @@ export type TablePropsV2 = {
 
 function TableV2() {
   const [data, setData] = React.useState(() => [...dataV2])
-  const rerender = React.useReducer(() => ({}), {})[1]
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [globalFilter, setGlobalFilter] = React.useState('')
 
-  // const Table = useReactTable({
-  //   data,
-  //   columns,
-  //   state: {
-  //     columnFilter,
-  //     globalFilter
-  //   },
-
-  // })
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    state: { columnFilters, globalFilter },
-    onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setGlobalFilter
-    // globalFilterFn: fuzzyFilter
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    debugTable: true
   })
 
   const [showFilterModalV2, setShowFilterModalV2] = useState(false)
@@ -77,6 +62,7 @@ function TableV2() {
       <FilterModalV2
         isOpen={showFilterModalV2}
         handleClose={handleCloseFilter}
+        // handleFilter={table.setColumnFilters}
       />
       <Flex justifyContent="space-between" alignItems="center">
         <Heading>Titulo</Heading>
@@ -91,33 +77,50 @@ function TableV2() {
         </Box>
       </Flex>
       <div className="p-2">
+        <div className="h-2" />
         <ChakraTable>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <Th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </Th>
-                ))}
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <Th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <div>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                          {/* {header.column.getCanFilter() ? (
+                            <div>
+                              <Filter column={header.column} table={table}/>
+                            </div>
+                          ) : null} */}
+                        </div>
+                      )}
+                    </Th>
+                  )
+                })}
               </Tr>
             ))}
           </Thead>
           <Tbody>
-            {table.getRowModel().rows.map((row) => (
-              <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <Td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Td>
-                ))}
-              </Tr>
-            ))}
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <Tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <Td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </Td>
+                    )
+                  })}
+                </Tr>
+              )
+            })}
           </Tbody>
         </ChakraTable>
       </div>

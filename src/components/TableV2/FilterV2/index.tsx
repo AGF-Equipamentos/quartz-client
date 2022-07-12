@@ -19,10 +19,12 @@ import Button from 'components/Button'
 import { TagsInput } from 'components/TagsInput'
 import { monthOptions } from 'utils/options/monthOptions'
 import { optionsStatus } from 'utils/options/optionsStatus'
+import { ColumnOrderState, Updater } from '@tanstack/react-table'
 
 type FilterModalV2Props = {
   isOpen: boolean
   handleClose(): void
+  handleFilter?: (updater: Updater<ColumnOrderState>) => void
 }
 
 export type FilterFormDataV2 = {
@@ -51,11 +53,26 @@ const schema = yup.object().shape({
 
 const FilterModalV2: React.FC<FilterModalV2Props> = ({
   isOpen,
-  handleClose
+  handleClose,
+  handleFilter
 }) => {
-  const { setValue, reset } = useForm<FilterFormDataV2>({
-    resolver: yupResolver(schema)
-  })
+  const { setValue, reset, handleSubmit, formState, register, getValues } =
+    useForm<FilterFormDataV2>({
+      resolver: yupResolver(schema)
+    })
+
+  const handleFilterModalV2: SubmitHandler<FilterFormDataV2> = async (
+    values
+  ) => {
+    // handleFilter(
+    //   Object.keys(values).map((key) => ({
+    //     id: key,
+    //     value: values[key as keyof FilterFormDataV2]
+    //   }))
+    //)
+    handleClose()
+  }
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={handleClose} size="lg">
@@ -71,7 +88,7 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Número"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    name="number"
+                    {...register('number')}
                   />
                 </Box>
                 <Box w="50%">
@@ -79,7 +96,7 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Fornecedor"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    name="provider"
+                    {...register('provider')}
                   />
                 </Box>
               </Stack>
@@ -87,9 +104,10 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                 <Box w="100%">
                   <TagsInput
                     // initialTags={
-                    //   // getValues('tags') ? getValues('tags')?.split(';')
+                    //   getValues('tags') ? getValues('tags')?.split(';')
                     // }
                     setValue={setValue}
+                    {...register('tags')}
                   />
                 </Box>
               </Stack>
@@ -99,7 +117,7 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Observação"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    name="observation"
+                    {...register('observation')}
                   />
                 </Box>
                 <Box w="50%">
@@ -107,7 +125,7 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Mês"
                     size="sm"
                     items={monthOptions}
-                    name="month"
+                    {...register('month')}
                   />
                 </Box>
               </Stack>
@@ -127,7 +145,7 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                         value: 'Não'
                       }
                     ]}
-                    name="approved"
+                    {...register('approved')}
                   />
                 </Box>
                 <Box w="50%">
@@ -135,17 +153,18 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Entrega"
                     type="date"
                     size="sm"
-                    name="delivery"
+                    {...register('delivery')}
                   />
                 </Box>
               </Stack>
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="50%">
                   <Dropdown
+                    size="sm"
                     placeholder="Selecione uma opção"
                     label="Status"
                     items={optionsStatus}
-                    name="status"
+                    {...register('status')}
                   />
                 </Box>
                 <Box w="50%">
@@ -153,7 +172,7 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Comprador"
                     focusBorderColor="yellow.500"
                     size="sm"
-                    name="buyer"
+                    {...register('buyer')}
                   />
                 </Box>
               </Stack>
@@ -161,7 +180,6 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
 
             <ModalFooter>
               <Button
-                // colorScheme="gray.500"
                 bgColor="gray.600"
                 mr={3}
                 text="Cancelar"
@@ -173,7 +191,13 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                 mr={3}
                 onClick={() => reset()}
               />
-              <Button type="button" text="Filtrar" colorScheme="yellow" />
+              <Button
+                type="button"
+                text="Filtrar"
+                colorScheme="yellow"
+                isLoading={formState.isSubmitting}
+                onClick={handleSubmit(handleFilterModalV2)}
+              />
             </ModalFooter>
           </Box>
         </ModalContent>

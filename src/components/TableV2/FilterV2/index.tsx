@@ -9,7 +9,6 @@ import {
   Box,
   Divider
 } from '@chakra-ui/react'
-import { Filters } from 'react-table'
 import * as yup from 'yup'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -19,12 +18,12 @@ import Button from 'components/Button'
 import { TagsInput } from 'components/TagsInput'
 import { monthOptions } from 'utils/options/monthOptions'
 import { optionsStatus } from 'utils/options/optionsStatus'
-import { ColumnOrderState, Updater } from '@tanstack/react-table'
+import { ColumnFiltersState, Updater } from '@tanstack/react-table'
 
-type FilterModalV2Props = {
+export type FilterModalV2Props = {
   isOpen: boolean
   handleClose(): void
-  handleFilter?: (updater: Updater<ColumnOrderState>) => void
+  handleFilter: (updater: Updater<ColumnFiltersState>) => void
 }
 
 export type FilterFormDataV2 = {
@@ -56,20 +55,29 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
   handleClose,
   handleFilter
 }) => {
-  const { setValue, reset, handleSubmit, formState, register, getValues } =
-    useForm<FilterFormDataV2>({
-      resolver: yupResolver(schema)
-    })
+  const {
+    setValue,
+    reset,
+    handleSubmit,
+    formState,
+    register,
+    getValues,
+    watch
+  } = useForm<FilterFormDataV2>({
+    resolver: yupResolver(schema)
+  })
+  const watchTags = watch('tags')
 
   const handleFilterModalV2: SubmitHandler<FilterFormDataV2> = async (
     values
   ) => {
-    // handleFilter(
-    //   Object.keys(values).map((key) => ({
-    //     id: key,
-    //     value: values[key as keyof FilterFormDataV2]
-    //   }))
-    //)
+    handleFilter(
+      Object.keys(values).map((key) => ({
+        id: key,
+        value: values[key as keyof FilterFormDataV2]
+      }))
+    )
+    // console.log(values)
     handleClose()
   }
 
@@ -103,10 +111,11 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
               <Stack direction="row" mt={4} justifyContent="space-evenly">
                 <Box w="100%">
                   <TagsInput
-                    // initialTags={
-                    //   getValues('tags') ? getValues('tags')?.split(';')
-                    // }
+                    initialTags={
+                      getValues('tags') ? getValues('tags')?.split(';') : []
+                    }
                     setValue={setValue}
+                    callbackInputValue={watchTags}
                     {...register('tags')}
                   />
                 </Box>
@@ -125,7 +134,9 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Mês"
                     size="sm"
                     items={monthOptions}
-                    {...register('month')}
+                    {...register('month', {
+                      setValueAs: (v) => Number(v)
+                    })}
                   />
                 </Box>
               </Stack>

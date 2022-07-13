@@ -4,7 +4,8 @@ import {
   getCoreRowModel,
   useReactTable,
   getFilteredRowModel,
-  getPaginationRowModel
+  // getPaginationRowModel,
+  ColumnDef
 } from '@tanstack/react-table'
 import {
   Table as ChakraTable,
@@ -20,31 +21,24 @@ import {
   Icon
 } from '@chakra-ui/react'
 import { FiFilter } from 'react-icons/fi'
-import { dataV2, columns } from 'components/TableV2/mock'
+// import { dataV2, columns } from 'components/TableV2/mock'
 import { useState } from 'react'
 import FilterModalV2 from './FilterV2'
+import { OrderV2 } from 'components/OrdersTableV2'
+import { TbFilterOff } from 'react-icons/tb'
 
 export type TablePropsV2 = {
-  number: string
-  provider: string
-  tags: string
-  month: number
-  observation: string
-  delivery: string
-  status: string
-  buyer: string
-  approved: string
+  data: OrderV2[]
+  columns: ColumnDef<OrderV2>[]
 }
 
-function TableV2() {
-  const [data, setData] = React.useState(() => [...dataV2])
-
+export default function TableV2({ data, columns }: TablePropsV2) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
     debugTable: true
   })
 
@@ -62,11 +56,18 @@ function TableV2() {
       <FilterModalV2
         isOpen={showFilterModalV2}
         handleClose={handleCloseFilter}
-        // handleFilter={table.setColumnFilters}
+        handleFilter={table.setColumnFilters}
       />
       <Flex justifyContent="space-between" alignItems="center">
         <Heading>Titulo</Heading>
         <Box justifyContent="flex-end" mr={3}>
+          <IconButton
+            color="white"
+            variant="link"
+            aria-label="Limpar Filtro"
+            onClick={() => table.setColumnFilters([])}
+            icon={<Icon as={TbFilterOff} boxSize="14px" />}
+          />
           <IconButton
             color="white"
             variant="link"
@@ -91,11 +92,6 @@ function TableV2() {
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-                          {/* {header.column.getCanFilter() ? (
-                            <div>
-                              <Filter column={header.column} table={table}/>
-                            </div>
-                          ) : null} */}
                         </div>
                       )}
                     </Th>
@@ -127,5 +123,3 @@ function TableV2() {
     </>
   )
 }
-
-export default TableV2

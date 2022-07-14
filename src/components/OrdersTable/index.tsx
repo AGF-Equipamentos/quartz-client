@@ -1,6 +1,7 @@
 import { Column } from 'react-table'
-import { Badge, Tooltip, Container, Icon } from '@chakra-ui/react'
 import Table from 'components/Table'
+import { Badge, Tooltip, Container, Icon } from '@chakra-ui/react'
+
 import {
   FiSend,
   FiClock,

@@ -42,7 +42,7 @@ const schema = yup.object().shape({
   number: yup.string(),
   provider: yup.string(),
   tags: yup.string(),
-  month: yup.number(),
+  month: yup.string(),
   observation: yup.string(),
   delivery: yup.string(),
   status: yup.string(),
@@ -77,7 +77,12 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
         value: values[key as keyof FilterFormDataV2]
       }))
     )
-    // console.log(values)
+    console.log(
+      Object.keys(values).map((key) => ({
+        id: key,
+        value: values[key as keyof FilterFormDataV2]
+      }))
+    )
     handleClose()
   }
 
@@ -134,9 +139,7 @@ const FilterModalV2: React.FC<FilterModalV2Props> = ({
                     label="Mês"
                     size="sm"
                     items={monthOptions}
-                    {...register('month', {
-                      setValueAs: (v) => Number(v)
-                    })}
+                    {...register('month')}
                   />
                 </Box>
               </Stack>

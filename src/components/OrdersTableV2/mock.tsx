@@ -2,7 +2,7 @@ const orders = [
   {
     number: '001',
     provider: 'Arthur',
-    tags: 'pedido CE20p',
+    tags: 'pedido CE28p;pedidoMF75P2',
     observation: 'deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
     status: 'Aguardando aprovação',

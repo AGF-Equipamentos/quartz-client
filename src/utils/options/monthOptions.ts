@@ -1,7 +1,7 @@
 export const monthOptions = [
   {
     label: 'Selecione uma opção',
-    value: 0
+    value: ''
   },
   {
     label: 'Janeiro',

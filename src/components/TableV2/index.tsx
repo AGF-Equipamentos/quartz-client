@@ -4,7 +4,7 @@ import {
   getCoreRowModel,
   useReactTable,
   getFilteredRowModel,
-  // getPaginationRowModel,
+  getPaginationRowModel,
   ColumnDef
 } from '@tanstack/react-table'
 import {
@@ -18,10 +18,25 @@ import {
   Heading,
   Box,
   IconButton,
-  Icon
+  Icon,
+  Stack,
+  Text,
+  Input,
+  Select
 } from '@chakra-ui/react'
-import { FiFilter } from 'react-icons/fi'
-// import { dataV2, columns } from 'components/TableV2/mock'
+import {
+  FiFilter,
+  // FiMaximize2,
+  // FiMinimize2,
+  // FiChevronDown,
+  // FiChevronUp,
+  // FiArrowDown,
+  // FiArrowRight,
+  FiChevronsLeft,
+  FiChevronsRight,
+  FiChevronLeft,
+  FiChevronRight
+} from 'react-icons/fi'
 import { useState } from 'react'
 import FilterModalV2 from './FilterV2'
 import { OrderV2 } from 'components/OrdersTableV2'
@@ -38,7 +53,7 @@ export default function TableV2({ data, columns }: TablePropsV2) {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    // getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     debugTable: true
   })
 
@@ -79,7 +94,7 @@ export default function TableV2({ data, columns }: TablePropsV2) {
       </Flex>
       <div className="p-2">
         <div className="h-2" />
-        <ChakraTable>
+        <ChakraTable colorScheme="whiteAlpha">
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -119,6 +134,102 @@ export default function TableV2({ data, columns }: TablePropsV2) {
             })}
           </Tbody>
         </ChakraTable>
+        <Flex
+          direction={['column', 'column', 'row']}
+          alignItems="center"
+          justifyContent="space-between"
+          gap={['4', '4', '0']}
+          mt="8"
+        >
+          <Stack direction="row" alignItems="center">
+            <IconButton
+              colorScheme="gray"
+              variant="outline"
+              aria-label="Primeira página"
+              onClick={() => table.setPageIndex(0)}
+              disabled={!table.getCanPreviousPage()}
+              size="xs"
+              _hover={{
+                bg: 'gray.500'
+              }}
+              icon={<Icon as={FiChevronsLeft} boxSize={4} />}
+            />
+            <IconButton
+              colorScheme="gray"
+              variant="outline"
+              aria-label="Página anterior"
+              size="xs"
+              _hover={{
+                bg: 'gray.500'
+              }}
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              icon={<Icon as={FiChevronLeft} boxSize={4} />}
+            />
+            <IconButton
+              colorScheme="gray"
+              variant="outline"
+              aria-label="Próxima página"
+              size="xs"
+              _hover={{
+                bg: 'gray.500'
+              }}
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              icon={<Icon as={FiChevronRight} boxSize={4} />}
+            />
+            <IconButton
+              colorScheme="gray"
+              variant="outline"
+              aria-label="Última página"
+              size="xs"
+              _hover={{
+                bg: 'gray.500'
+              }}
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+              disabled={!table.getCanNextPage()}
+              icon={<Icon as={FiChevronsRight} boxSize={4} />}
+            />
+            <Box>
+              Página{''}
+              <strong>
+                {table.getState().pagination.pageIndex + 1} of {''}
+                {table.getPageCount()}
+              </strong>
+            </Box>
+          </Stack>
+          <Stack direction="row" alignItems="center">
+            <Text> Ir para a página: </Text>
+            <Input
+              variant="flushed"
+              focusBorderColor="yellow.500"
+              min={1}
+              size="sm"
+              w="24"
+              type="number"
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                table.setPageIndex(page)
+              }}
+            />
+            <Select
+              size="sm"
+              w="24"
+              minW="24"
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value))
+              }}
+            >
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  {pageSize} Itens
+                </option>
+              ))}
+            </Select>
+          </Stack>
+        </Flex>
       </div>
     </>
   )

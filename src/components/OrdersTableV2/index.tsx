@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import TableV2 from 'components/TableV2'
-import { Badge, Tooltip, Icon, Container } from '@chakra-ui/react'
+import { Badge, Tooltip, Icon, Container, HStack } from '@chakra-ui/react'
 import {
   FiSend,
   FiClock,
@@ -8,7 +8,6 @@ import {
   FiAlertTriangle,
   FiAlertOctagon
 } from 'react-icons/fi'
-import { info } from 'console'
 
 export type OrderV2 = {
   number: string
@@ -46,6 +45,7 @@ const BadgeApproved = ({ approved }: BadgAprrovedProps) => {
       </Badge>
     )
 }
+
 const IconStatus = ({ status }: IconStatusPorps) => {
   switch (status) {
     case 'Aguardando envio ao fornecedor':
@@ -119,17 +119,27 @@ function OrdersTableV2({ orders }: OrdersTableProps) {
     },
     {
       accessorKey: 'tags',
-      // cell: (info) =>
-      //   info.split(';').map((info, index) => (
-      //     <Badge colorScheme="green" key={index}>
-      //       {info.getValue}
-      //     </Badge>
-      //   )),
+      cell: ({ getValue }: { getValue: () => string }) => (
+        <HStack>
+          {getValue()
+            .split(';')
+            .map((info, index) => (
+              <Badge colorScheme="green" key={index}>{`${info}`}</Badge>
+            ))}
+        </HStack>
+      ),
       header: 'Tags',
       footer: (props) => props.column.id
     },
     {
       accessorKey: 'month',
+      filterFn: 'weakEquals',
+      cell: (info) =>
+        new Date(new Date().getFullYear(), Number(info.getValue()) - 1)
+          .toLocaleDateString('pt-BR', {
+            month: 'short'
+          })
+          .toUpperCase(),
       header: 'Mês',
       footer: (props) => props.column.id
     },
@@ -140,6 +150,12 @@ function OrdersTableV2({ orders }: OrdersTableProps) {
     },
     {
       accessorKey: 'delivery',
+      cell: (info) =>
+        new Date(info.getValue()).toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }),
       header: 'Entrega',
       footer: (props) => props.column.id
     },

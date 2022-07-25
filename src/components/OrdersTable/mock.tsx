@@ -1,7 +1,7 @@
 const orders = [
   {
     number: '001',
-    provider: 'Ronaldo',
+    provider: 'Alana',
     tags: 'pedido CE26p;pedidoMF75P2',
     observation: 'Deu certo',
     delivery: '2022-03-28T16:37:45.333Z',
@@ -51,7 +51,7 @@ const orders = [
   },
   {
     number: '006',
-    provider: 'Isabela',
+    provider: 'Alana',
     tags: 'pedido CE29p;pedidoMF75P2',
     observation: 'Não deu certo',
     delivery: '2022-04-02T16:37:45.333Z',

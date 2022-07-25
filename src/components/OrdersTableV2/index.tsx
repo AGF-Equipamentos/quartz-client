@@ -1,6 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import TableV2 from 'components/TableV2'
-import { Badge, Tooltip, Icon, Container, HStack } from '@chakra-ui/react'
+import { Badge, Tooltip, Icon, Container, HStack, Box } from '@chakra-ui/react'
 import {
   FiSend,
   FiClock,
@@ -105,16 +105,22 @@ function OrdersTableV2({ orders }: OrdersTableProps) {
         </Container>
       ),
       header: 'Status',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Status`,
       footer: (props) => props.column.id
     },
     {
       accessorKey: 'number',
       header: 'Número',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Número`,
       footer: (props) => props.column.id
     },
     {
       accessorKey: 'provider',
       header: 'Fornecedor',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Fornecedor`,
       footer: (props) => props.column.id
     },
     {
@@ -129,6 +135,8 @@ function OrdersTableV2({ orders }: OrdersTableProps) {
         </HStack>
       ),
       header: 'Tags',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Tags`,
       footer: (props) => props.column.id
     },
     {
@@ -141,11 +149,15 @@ function OrdersTableV2({ orders }: OrdersTableProps) {
           })
           .toUpperCase(),
       header: 'Mês',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Mês`,
       footer: (props) => props.column.id
     },
     {
       accessorKey: 'observation',
       header: 'Observação',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Observação`,
       footer: (props) => props.column.id
     },
     {
@@ -157,17 +169,23 @@ function OrdersTableV2({ orders }: OrdersTableProps) {
           year: 'numeric'
         }),
       header: 'Entrega',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Entrega`,
       footer: (props) => props.column.id
     },
     {
       accessorKey: 'buyer',
       header: 'Comprador',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Comprador`,
       footer: (props) => props.column.id
     },
     {
       accessorKey: 'approved',
       cell: (info) => <BadgeApproved approved={info.getValue()} />,
       header: 'Aprovado',
+      aggregationFn: 'uniqueCount',
+      aggregatedCell: (info) => `${info.getValue()} Aprovado`,
       footer: (props) => props.column.id
     },
     {

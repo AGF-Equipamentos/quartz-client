@@ -5,7 +5,12 @@ import {
   useReactTable,
   getFilteredRowModel,
   getPaginationRowModel,
-  ColumnDef
+  ColumnDef,
+  GroupingState,
+  getGroupedRowModel,
+  getExpandedRowModel,
+  getSortedRowModel,
+  SortingState
 } from '@tanstack/react-table'
 import {
   Table as ChakraTable,
@@ -22,16 +27,21 @@ import {
   Stack,
   Text,
   Input,
-  Select
+  Select,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper
 } from '@chakra-ui/react'
 import {
   FiFilter,
-  // FiMaximize2,
-  // FiMinimize2,
+  FiMaximize2,
+  FiMinimize2,
   // FiChevronDown,
   // FiChevronUp,
-  // FiArrowDown,
-  // FiArrowRight,
+  FiArrowDown,
+  FiArrowRight,
   FiChevronsLeft,
   FiChevronsRight,
   FiChevronLeft,
@@ -48,12 +58,23 @@ export type TablePropsV2 = {
 }
 
 export default function TableV2({ data, columns }: TablePropsV2) {
+  const [grouping, setGrouping] = React.useState<GroupingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const table = useReactTable({
     data,
     columns,
+    state: {
+      grouping,
+      sorting
+    },
+    onGroupingChange: setGrouping,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getGroupedRowModel: getGroupedRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     debugTable: true
   })
 
@@ -103,10 +124,45 @@ export default function TableV2({ data, columns }: TablePropsV2) {
                     <Th key={header.id} colSpan={header.colSpan}>
                       {header.isPlaceholder ? null : (
                         <div>
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          <Box h="10" display="flex" alignItems="center">
+                            {header.column.getCanGroup() ? (
+                              <button
+                                {...{
+                                  onClick:
+                                    header.column.getToggleGroupingHandler(),
+                                  style: {
+                                    cursor: 'pointer'
+                                  }
+                                }}
+                              >
+                                {header.column.getIsGrouped() ? (
+                                  <IconButton
+                                    aria-label="Expandir"
+                                    variant="link"
+                                    icon={
+                                      <Icon as={FiMaximize2} boxSize="14px" />
+                                    }
+                                    size="xs"
+                                    color="white"
+                                  />
+                                ) : (
+                                  <IconButton
+                                    aria-label="Minimizar"
+                                    variant="link"
+                                    size="xs"
+                                    icon={
+                                      <Icon as={FiMinimize2} boxSize="14px" />
+                                    }
+                                  />
+                                )}
+                              </button>
+                            ) : null}
+                            {''}
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                          </Box>
                         </div>
                       )}
                     </Th>
@@ -121,10 +177,54 @@ export default function TableV2({ data, columns }: TablePropsV2) {
                 <Tr key={row.id}>
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <Td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
+                      <Td
+                        key={cell.id}
+                        bg={
+                          cell.getIsGrouped()
+                            ? 'gray.700'
+                            : cell.getIsAggregated()
+                            ? 'gray.800'
+                            : cell.getIsPlaceholder()
+                            ? 'gray.900'
+                            : ''
+                        }
+                      >
+                        {cell.getIsGrouped() ? (
+                          <>
+                            <button
+                              {...{
+                                onClick: row.getToggleExpandedHandler(),
+                                style: {
+                                  cursor: row.getCanExpand()
+                                    ? 'pointer'
+                                    : 'normal'
+                                }
+                              }}
+                            >
+                              {row.getIsExpanded() ? (
+                                <Icon as={FiArrowDown} pr="2px" />
+                              ) : (
+                                <Icon as={FiArrowRight} pr="2px" />
+                              )}
+                              {''}
+                              {flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )}
+                              {''}({row.subRows.length})
+                            </button>
+                          </>
+                        ) : cell.getIsAggregated() ? (
+                          flexRender(
+                            cell.column.columnDef.aggregatedCell ??
+                              cell.column.columnDef.cell,
+                            cell.getContext()
+                          )
+                        ) : cell.getIsPlaceholder() ? null : (
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )
                         )}
                       </Td>
                     )
@@ -200,19 +300,25 @@ export default function TableV2({ data, columns }: TablePropsV2) {
           </Stack>
           <Stack direction="row" alignItems="center">
             <Text> Ir para a página: </Text>
-            <Input
-              variant="flushed"
+            <NumberInput
+              // type="number"
               focusBorderColor="yellow.500"
               min={1}
               size="sm"
               w="24"
-              type="number"
               defaultValue={table.getState().pagination.pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                table.setPageIndex(page)
-              }}
-            />
+            >
+              <NumberInputField
+                onChange={(e) => {
+                  const page = e.target.value ? Number(e.target.value) - 1 : 0
+                  table.setPageIndex(page)
+                }}
+              />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <Select
               size="sm"
               w="24"
@@ -221,6 +327,7 @@ export default function TableV2({ data, columns }: TablePropsV2) {
               onChange={(e) => {
                 table.setPageSize(Number(e.target.value))
               }}
+              focusBorderColor="yellow.500"
             >
               {[10, 20, 30, 40, 50].map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
